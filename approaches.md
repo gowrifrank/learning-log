@@ -1,0 +1,182 @@
+# 💡 Approaches & Insights
+> There's always more than one way to solve a problem. This file compares the ways I found (or could have found), explains what makes each one good or bad, and names the **patterns** I'll keep reusing.
+>
+> 🏷 Pattern names are in **bold caps**. Learn to spot them, because they show up in almost every program.
+
+## 🧰 Pattern library (so far)
+| Pattern | Idea | Where I used it |
+|---|---|---|
+| **ACCUMULATOR** | Start empty (`0`, `""`, `[]`) and add on every loop round | Sum 1–100, vowel counter, Print Function, even filter |
+| **FILTER** | Loop and keep only the items that pass an `if` | Even filter |
+| **TWO POINTERS** | One position from the front, one from the back, moving towards each other | Palindrome method 2 |
+| **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass) |
+| **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards) |
+| **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
+| **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
+| **USE A BUILT-IN** | Before writing a loop, ask "Does Python already have a tool for this?" | Palindrome `[::-1]`, `sum()`, `max()` |
+
+## ⚖️ How to judge an approach
+1. **Correct?** Does it handle the tricky inputs (duplicates, uppercase, empty, the smallest and largest values)?
+2. **Readable?** Could someone else (or me in a month) understand it quickly?
+3. **Efficient?** How much work does it do? Going through the list **once** beats **sorting** it, and sorting beats going through it **many times**. This only matters for big data, but it's good to start noticing.
+
+Usually: **correct first, readable second, fast third.**
+
+---
+
+## 🥈 Second-highest score (Day 05 bonus / HackerRank Runner-Up)
+The trap: `[95, 95, 88]` should give **88**, not 95.
+
+### A. Sort, take position `-2` ❌
+```python
+scores.sort()
+second = scores[-2]
+```
+Short, but **wrong with duplicates** of the max. My first version.
+
+### B. Sort, walk backwards, stop where the value changes ✅ (my idea)
+```python
+scores.sort()
+second_best = max(scores)
+for i in range(len(scores) - 1, 0, -1):
+    if scores[i] > scores[i - 1]:
+        second_best = scores[i - 1]
+        break
+```
+**Why it's smart:** after sorting, all copies of the max **sit next to each other** at the end. So the first place (from the back) where a value is **bigger than its left neighbour** is exactly where the max ends, and that neighbour is the answer. It uses a **property of sorted data** instead of brute force. That's **NEIGHBOUR COMPARE** + **EARLY EXIT**.
+
+**Subtle catch I found 🔍:** with `range(len(scores) - 1, -1, -1)` the loop reaches `i = 0`, and `scores[0 - 1]` = `scores[-1]` = the **last** item. Python wraps around silently instead of crashing! It happened to be harmless here, but stopping at `0` (`range(len(scores) - 1, 0, -1)`) is safer, because `i - 1` is then always a real position.
+
+**Cost:** sorting is the expensive part.
+
+### C. Remove the max, then take max of the rest ✅ (FILTER)
+```python
+top = max(scores)
+rest = []
+for s in scores:
+    if s != top:
+        rest.append(s)
+second = max(rest)
+```
+**Easiest to read**: it says exactly what it means. It goes through the list 3 times (`max`, the loop, `max` again), but that's still fine.
+
+### D. One pass, track the top two ✅ (BEST SO FAR), the "pro" answer
+```python
+best = None
+second = None
+for s in scores:
+    if best is None or s > best:
+        second = best       # old best gets pushed down to second
+        best = s
+    elif s != best and (second is None or s > second):
+        second = s
+```
+**Most efficient:** it looks at each score **once**, with no sorting. This is the classic interview answer. It's harder to get right, though: notice `second = best` must happen **before** `best = s`.
+
+### E. Remove duplicates with `set` ✅ (coming soon)
+```python
+second = sorted(set(scores))[-2]
+```
+A `set` keeps only unique values: `set([95, 95, 88])` → `{88, 95}`. It's one line, and you'll learn it in a later lesson.
+
+### 🏁 Verdict
+| | Correct | Readable | Efficient |
+|---|---|---|---|
+| A. sort + `[-2]` | ❌ | ⭐⭐⭐ | ⭐⭐ |
+| B. sort + backwards (mine) | ✅ | ⭐⭐ | ⭐⭐ |
+| C. filter out max | ✅ | ⭐⭐⭐ | ⭐⭐ |
+| D. one pass, top two | ✅ | ⭐ | ⭐⭐⭐ |
+| E. `set` | ✅ | ⭐⭐⭐ | ⭐⭐ |
+
+**For HackerRank:** any of B, C, D or E passes. **For interviews:** know D.
+
+---
+
+## 🔁 Palindrome (Day 04)
+### A. Compare with reverse ✅ (USE A BUILT-IN)
+```python
+word = word.lower()
+is_palindrome = word == word[::-1]
+```
+One line, very readable. It builds a whole reversed copy, which is fine.
+
+### B. TWO POINTERS ✅ (my idea, fixed)
+```python
+n = -1
+count = 0
+for i in range(len(inp)):
+    if inp[i] != inp[n]:
+        count += 1
+    n -= 1
+```
+**Why it's a real technique:** this is how it's done in languages without `[::-1]`, and it's the basis of many interview problems.
+**Improvements I could make:**
+- Only check **half** the word, `range(len(inp) // 2)`, because the second half repeats the same comparisons in reverse.
+- **EARLY EXIT:** `break` at the first mismatch. One mismatch already means "not a palindrome".
+- Use `inp[-1 - i]` instead of a separate `n` variable.
+
+---
+
+## 🔤 Vowel counter (Day 04)
+### A. ACCUMULATOR + `in` ✅
+```python
+total = 0
+for ch in sentence.lower():
+    if ch in "aeiou":
+        total += 1
+```
+### B. `.count()` for each vowel ✅
+```python
+s = sentence.lower()
+total = s.count("a") + s.count("e") + s.count("i") + s.count("o") + s.count("u")
+```
+Works, but goes through the sentence 5 times and repeats itself. **A is better.**
+
+**Insight:** `ch in "aeiou"` replaces 5 `or` checks. **Membership checks (`in`)** are one of Python's superpowers.
+
+---
+
+## 🖨 Print Function (HackerRank)
+| Approach | Code idea | Verdict |
+|---|---|---|
+| `end=""` | `print(i, end="")` in a loop | ✅ Simplest. No variable needed |
+| String ACCUMULATOR (mine) | `result += str(i)` then print | ✅ Useful when you need the text later |
+| Maths | `number = number * 10 + i` | ❌ Breaks at 10 (two digits) |
+| `join` (coming soon) | `"".join(str(i) for i in range(1, n + 1))` | ✅ One line. The "Pythonic" way |
+
+**Insight:** testing the maths idea against **n ≥ 10** caught the bug. Always test the boundary where things change (one digit → two digits).
+
+---
+
+## ➕ Sum of 1 to 100 (Day 03 bonus)
+| Approach | Code | Work done |
+|---|---|---|
+| ACCUMULATOR loop | `total += i` for i in 1–100 | 100 additions |
+| Built-in | `sum(range(1, 101))` | Same work, one line |
+| **Maths formula** 🤯 | `n * (n + 1) // 2` | **1 calculation**, for any n! |
+
+**The story:** young Carl Friedrich Gauss supposedly worked this out at school. Pair 1 with 100, 2 with 99, 3 with 98... and each pair makes 101. There are 50 pairs, so 50 × 101 = **5050**.
+**Insight:** sometimes the best "algorithm" is **thinking** instead of looping. With n = 1 billion, the loop takes ages but the formula is instant.
+
+---
+
+## 🔢 Even filter (Day 03 and Day 05)
+| Approach | Code | When |
+|---|---|---|
+| `range` with step | `range(2, 21, 2)` | ✅ When you're **generating** evens yourself |
+| FILTER with `%` | `if num % 2 == 0: even.append(num)` | ✅ When the numbers **come from somewhere else** (a list or input) |
+| List comprehension (coming soon) | `[n for n in numbers if n % 2 == 0]` | ✅ The one-line Pythonic FILTER |
+
+**Insight:** if you control the data, **generate only what you need** rather than generating everything and filtering.
+
+---
+
+## 🌗 Python If-Else (HackerRank)
+**Nested** `if` inside `else` → **FLATTEN WITH ELIF**. Use the problem's own numbers (`2 <= n <= 5`) so the code reads like the problem statement.
+**Insight:** `elif` only runs when everything above it was False, so later checks can **assume** the earlier ones failed (e.g. "it's even" after handling odd).
+
+---
+
+## 🔁 Loops (HackerRank)
+`range(0, n + 1)` gives n+1 items, but `range(n)` gives exactly n.
+**Insight:** for "do something n times", **`range(n)` is the default**. Only change the start or stop when the problem says so.
