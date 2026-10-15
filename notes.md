@@ -62,8 +62,122 @@ print(total)                 # 5050
 - `+=` `-=` `*=` are shortcuts: `x += 1` means `x = x + 1`.
 - Use clear variable names (`total`, not reusing `count`) and keep comments matching the code.
 
+## Day 04: Strings
+```python
+robot = "Optimus"
+len(robot)        # 7, number of characters
+robot[0]          # "O", first letter (index starts at 0)
+robot[-1]         # "s", negative index counts from the end
+robot[0:3]        # "Opt", slice [start:stop], stops BEFORE stop (like range)
+robot[3:]         # "imus", missing stop = until the end
+robot[::-1]       # "sumitpO", step -1 = reversed
+```
+```
+ O  p  t  i  m  u  s
+ 0  1  2  3  4  5  6
+-7 -6 -5 -4 -3 -2 -1
+```
+**String methods**: they return a NEW string and never change the original (save it: `name = name.strip()`)
+| Method | Example → result |
+|---|---|
+| `.upper()` / `.lower()` | `"Hi".upper()` → `"HI"` |
+| `.strip()` | `"  hi  ".strip()` → `"hi"` (removes spaces at both ends) |
+| `.replace(old, new)` | `"Sankar".replace("a", "@")` → `"S@nk@r"` |
+| `.count(x)` | `"Sankar".count("a")` → `2` |
+| `x in text` | `"ank" in "Sankar"` → `True` |
+
+**Comparing strings**
+- `==` / `!=` work on strings, **case-sensitive**: `"Racecar" == "racecaR"` → `False`
+- Fix: `.lower()` both sides before comparing
+- Palindrome: `word.lower() == word.lower()[::-1]`
+
+**Looping: letters vs positions**
+| Loop | Gives you | Use it as |
+|---|---|---|
+| `for ch in word:` | letters | `ch` |
+| `for i in range(len(word)):` | positions | `word[i]` |
+
+**Joining strings**
+```python
+"ab" + "cd"          # "abcd", + joins text
+str(5)               # "5", number → text (the opposite of int())
+"12" + 3             # ❌ TypeError: convert first with str(3)
+result = ""          # build text in a loop, like total = 0
+for i in range(1, 4):
+    result += str(i) # "1" → "12" → "123"
+```
+
+**print tricks**
+```python
+print("A", "B", sep="-")   # A-B   (sep = what goes between items, default is a space)
+print("Hi", end="")        # no newline at the end
+```
+- The commas inside `print(a, b)` are code, not output. Only what's inside quotes gets printed.
+
+**⚠️ Traps I fell into**
+- `|` is NOT "or". Use the word `or`.
+- `ch == "a" or "e"` is ❌ always True. Write `ch in "aeiou"` instead.
+- `word[ch]` when `ch` is already a letter crashes: "string indices must be integers"
+- `.index` is a method, so call it with `( )` not `[ ]`
+
+## Day 05: Lists
+```python
+robots = ["Optimus", "Atlas", "ASIMO"]   # many values in one variable
+robots[0]          # "Optimus", indexing and slicing work like strings
+robots[-1]         # "ASIMO"
+len(robots)        # 3
+```
+**Changing a list** (lists CAN be changed, strings can't)
+| Code | Does |
+|---|---|
+| `robots.append("Spot")` | add to the end |
+| `robots.insert(0, "Figure")` | add at a position |
+| `robots.remove("Atlas")` | remove by **value** |
+| `robots.pop(1)` | remove by **position** (and give it back). `pop()` = last item |
+| `robots[1] = "Gen 3"` | replace an item |
+
+**Functions vs methods**
+| Functions go AROUND | Methods go AFTER the dot |
+|---|---|
+| `len(x)` `sum(x)` `max(x)` `min(x)` `sorted(x)` | `x.sort()` `x.append()` `x.remove()` `x.pop()` |
+- ❌ `scores.max()` crashes. ✅ `max(scores)`
+- Average = `sum(scores) / len(scores)`
+
+**`sorted()` vs `.sort()`**
+| | `sorted(scores)` | `scores.sort()` |
+|---|---|---|
+| Original | unchanged | changed |
+| Gives back | new sorted list | `None`! (never write `x = scores.sort()`) |
+- Largest first: `sorted(scores, reverse=True)`
+
+**Looping**
+```python
+for robot in robots:               # ITEMS: use robot directly
+for i in range(len(robots)):       # POSITIONS: use robots[i]
+for score in scores[::-1]:         # backwards (or reversed(scores))
+for i in range(len(x) - 1, -1, -1):  # positions backwards: 4, 3, 2, 1, 0
+```
+- 🔑 Name the loop variable after what it IS: `num`, `robot` = item. `i` = position.
+- `break` stops the loop immediately.
+
+**Building a list**
+```python
+even = []                 # start empty
+for num in numbers:
+    if num % 2 == 0:
+        even.append(num)
+```
+**Strings ↔ lists**
+```python
+"I love robots".split()        # ['I', 'love', 'robots']
+" ".join(["I", "love", "robots"])  # "I love robots"
+```
+
+**Second-highest with duplicates** (`[95, 95, 88]` → 88): skip every value equal to `max`, or sort and walk backwards until the value changes.
+
 ## 🔥 HackerRank solved
 - Python If-Else
 - Arithmetic Operators
 - Python: Division
 - Loops
+- Print Function ⭐⭐
