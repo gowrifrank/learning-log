@@ -40,3 +40,14 @@ sentence = input("Enter the sentence to be evaluated: ")
 words = sentence.split()
 print(f"The number of words in the sentence are: {len(words)}")
 
+# BONUS : Second - Highest Score
+
+scores = [72, 95, 88, 61, 79]
+scores.sort()
+second_best = max(scores)
+for i in range(len(scores) - 1, 0, -1):
+    if scores[i] > scores[i-1]:
+        second_best = scores[i-1]
+        break
+print(f"The Second-Highest score is: {second_best}")
+# print(f"The Second-Highest score is: {scores[len(scores)-2]}") #It won't work for a list with 2 or more max identical numbers.
