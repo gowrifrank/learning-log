@@ -34,3 +34,9 @@ for num in numbers:
         even.append(num)
 print(f"Even Numbers: {even}")
 
+# Part 04 : Word Counter
+
+sentence = input("Enter the sentence to be evaluated: ")
+words = sentence.split()
+print(f"The number of words in the sentence are: {len(words)}")
+
