@@ -2,13 +2,14 @@
 > Every mistake I've made, why it happened and how I fixed it. Read the **Focus areas** and **Daily checklist** every day before coding.
 
 ## 🎯 Focus areas (my patterns so far)
-1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **4 times** (palindrome, vowel counter, even filter...)!
+1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **5 times** (palindrome, vowel counter, even filter, quiz Q1...)!
 2. **Off-by-one with `range`.** `range` stops **before** the stop value. Count the items for a small input before submitting.
 3. **`=` replaces, `+=` adds on.** When building a total or a string across a loop, I need `+=`.
 4. **Text vs numbers.** `input()` gives text, `int()` converts to a number, and `str()` converts back. I can't mix them with `+`.
 5. **Case-sensitivity.** `"R" != "r"`. Use `.lower()` before comparing or checking letters.
 6. **Not testing tricky inputs.** Test duplicates, uppercase, empty input, and check the output uses my new variable.
-7. **Jumping straight to code.** When I'm confused, I should solve it by hand first, then write the steps in English, then translate to Python.
+7. **`print` instead of `return` in functions.** Functions should return the answer, and the caller prints it.
+8. **Jumping straight to code.** When I'm confused, I should solve it by hand first, then write the steps in English, then translate to Python.
 
 ## ✅ Daily checklist (before I click Run or Submit)
 - [ ] Did I solve a small example **by hand** first?
@@ -21,6 +22,8 @@
 - [ ] Do my comments match what the code actually does?
 - [ ] Did I test a **tricky** input (duplicates, uppercase, edge values)?
 - [ ] Function or method? `max(x)` goes around, `x.sort()` goes after the dot
+- [ ] Want the **first** match in a loop? Did I add `break`?
+- [ ] Does my function **return** (not print)? Did I test the **boundary values** (e.g. exactly 90)?
 
 ---
 
@@ -143,3 +146,53 @@ for num in numbers:
 **Lesson:** after writing new logic, check that the output actually **uses** it. Test with the tricky input (`[95, 95, 88, 61]` → 88), not just the easy one, because both versions give 88 for the easy list.
 
 **What I figured out myself 💡:** after sorting, walk backwards and stop at the first spot where `scores[i] > scores[i-1]`. That skips all duplicates of the max. Tested: `[95, 95, 88, 61]` → 88 ✅, `[61, 95, 95, 95]` → 61 ✅.
+
+### 2026-10-15: HackerRank, Find the Runner-Up Score! ❌ → ✅ Submitted!
+**Problem 1:** `AttributeError: 'map' object has no attribute 'sort'`
+```python
+arr = map(int, input().split())
+arr.sort()                       # ❌ arr is a "map", not a list
+```
+**Why:** `map(int, ...)` doesn't build a list. It's a "recipe" that makes the numbers one at a time when asked, and a recipe has no `.sort()`.
+**Fix:** wrap it in `list()`: `arr = list(map(int, input().split()))`, or use `sorted(arr)`, which accepts anything loopable and returns a list.
+
+**Problem 2:** forgot `break` in the backwards loop.
+```python
+for i in range(len(arr) - 1, 0, -1):
+    if arr[i-1] < arr[i]:
+        runner_up = arr[i-1]     # keeps overwriting all the way down!
+```
+**Why:** without `break`, the loop carries on to the start of the list, and every later "step down" overwrites the answer. `[2, 3, 6, 6, 5]` → sorted `[2, 3, 5, 6, 6]` → it ends with **2**, not 5.
+**Fix:** add `break` straight after `runner_up = arr[i-1]` (EARLY EXIT).
+**Lesson:** when I want the **first** match, I need `break`. Otherwise I get the **last** match. Trace a tricky input by hand before submitting.
+
+**What went right ✅:** used `range(len(arr) - 1, 0, -1)` (stops at 1, so no wrap-around with `arr[-1]`). That was applied straight from approaches.md!
+
+### 2026-10-15: Day 06, Functions (VS Code) 🟡
+**Problem 1: `print` instead of `return`** in `count_vowels`, `second_highest` and `average`.
+They *show* the answer but give back `None`, so `x = average(scores)` would store `None`. The functions can't be reused in other code.
+**Fix:** `return total` / `return second_best` / `return sum(numbers) / len(numbers)`, and do the printing **outside**, where the function is called.
+**Lesson:** a function should **calculate and return**. The caller decides what to do with the answer (print it, compare it, store it).
+
+**Problem 2: forgot "ignore case".** `is_palindrome("Racecar")` → False, and `count_vowels("OPTIMUS")` → 0. (Case-sensitivity again! Focus area #5.)
+**Fix:** `word = word.lower()` at the start of the function.
+
+**Problem 3: `second_highest` changed the caller's list.** `scores.sort()` inside the function also sorts the list that was passed in, which is a surprise **side effect**.
+**Fix:** `scores = sorted(scores)` makes a sorted *copy* and leaves the original alone.
+
+**Problem 4: bonus `grade()` returned False.**
+```python
+return grade == "A"     # ❌ == COMPARES ("is grade equal to A?" → False)
+```
+**Why:** `==` asks a question and gives True/False. `=` stores a value. Here I didn't need either: just `return "A"`.
+**Also:** `score > 90` excludes 90 itself (the task said 90+, so `>= 90`), and `91 > score > 75` excludes 75. With early returns, upper limits aren't needed, because the earlier `return` already handled the higher scores.
+**Lesson:** check the **boundary values** (90, 75, 50) exactly. "90+" means `>= 90`.
+
+### 2026-10-16: Day 06, fix round 2 (VS Code) ✅ mostly
+**Fixed:** all functions now `return`, `grade` boundaries use `>=`, `average` returns `79.0`.
+**Bugs found while fixing:**
+- **`break` got deleted** during editing, so `second_highest` returned 61 instead of 88 (last step-down instead of first). Lesson: after editing, **re-run the tricky tests**.
+- **`{sum(numbers)/len(numbers)}`** left over from an f-string: `return {x}` returns a **set** `{79.0}`, not a number. Curly braces only mean "insert value" **inside f-strings**.
+- **`break` after `return`** never runs, because `return` already ended the function (dead code).
+- **No `return` after the loop:** `second_highest([5, 5])` → `None`, because the loop never hits `return` and the function "falls off the end". Fix: put `return second_best` **after** the loop as well.
+- **Edge case:** `average([])` → `ZeroDivisionError`. Think about empty input.

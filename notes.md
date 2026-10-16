@@ -173,7 +173,39 @@ for num in numbers:
 " ".join(["I", "love", "robots"])  # "I love robots"
 ```
 
+**Reading many numbers from one line (HackerRank)**
+```python
+arr = list(map(int, input().split()))
+# "2 3 6 6 5" → split() → ["2","3","6","6","5"] → map(int, ...) → list → [2, 3, 6, 6, 5]
+```
+- `map(func, items)` applies `func` to every item, but gives a lazy "recipe", **not a list**.
+- ❌ `map(...).sort()` crashes. Wrap it: `list(map(...))`
+
+**Literals and chaining**
+- Values work directly without a variable: `[10, 20, 30][0]` → 10, `"Robot"[0]` → "R"
+- Methods chain **left to right**: `"Robot"[::-1].lower()` → `"toboR"` → `"tobor"`
+
 **Second-highest with duplicates** (`[95, 95, 88]` → 88): skip every value equal to `max`, or sort and walk backwards until the value changes.
+
+## Day 06: Functions
+```python
+def square(n):            # def name(parameters):
+    return n * n          # return hands the value back
+
+result = square(5)        # 25
+def power(base, exp=2):   # default value
+    return base ** exp
+```
+**`break` vs `return`**
+| | `break` | `return` |
+|---|---|---|
+| Exits | the nearest **loop** (`for`/`while`), NOT the `if` | the **whole function** (loops included) |
+| Code after it | rest of the function still runs | **nothing** after it runs |
+- Inside a function, `return` inside a loop does the job of `break` + return, so you don't need both.
+- A function that never reaches `return` gives back **`None`** ("falls off the end").
+- `print` inside a function only SHOWS. Use `return` so the caller can use the value.
+- `{x}` means "insert value" ONLY inside f-strings. `return {x}` returns a set!
+- Variables made inside a function stay inside.
 
 ## 🔥 HackerRank solved
 - Python If-Else
@@ -181,3 +213,4 @@ for num in numbers:
 - Python: Division
 - Loops
 - Print Function ⭐⭐
+- Find the Runner-Up Score!

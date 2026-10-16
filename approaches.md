@@ -13,6 +13,8 @@
 | **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards) |
 | **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
 | **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
+| **GUARD CLAUSE** | Handle bad/empty input first with an early `return` | `average([])` |
+| **DRY** | Don't repeat yourself: compute once, reuse | `is_palindrome` |
 | **USE A BUILT-IN** | Before writing a loop, ask "Does Python already have a tool for this?" | Palindrome `[::-1]`, `sum()`, `max()` |
 
 ## ⚖️ How to judge an approach
@@ -89,6 +91,38 @@ A `set` keeps only unique values: `set([95, 95, 88])` → `{88, 95}`. It's one l
 | E. `set` | ✅ | ⭐⭐⭐ | ⭐⭐ |
 
 **For HackerRank:** any of B, C, D or E passes. **For interviews:** know D.
+
+### ✅ My HackerRank submission (2026-10-15), approach B
+```python
+arr = list(map(int, input().split()))
+arr.sort()
+runner_up = max(arr)
+for i in range(len(arr) - 1, 0, -1):   # stops at 1, so arr[i-1] never wraps around
+    if arr[i-1] < arr[i]:
+        runner_up = arr[i-1]
+        break                            # EARLY EXIT: first step-down from the right
+print(runner_up)
+```
+**Insight:** forgetting `break` turned "first match" into "**last** match" (`[2, 3, 5, 6, 6]` gave 2 instead of 5). **`break` is part of the logic, not an optional speed-up.**
+
+---
+
+## 🧩 Day 06 functions: shorter and safer versions
+| Function | Mine | Better / alternative | Why |
+|---|---|---|---|
+| `is_even` | `if ...: return True` / `return False` | `return n % 2 == 0` | the comparison already **is** True/False |
+| `is_palindrome` | `word.lower() == word[::-1].lower()` | `w = word.lower()` then `return w == w[::-1]` | lowercase once and reuse it (**DON'T REPEAT YOURSELF**) |
+| `count_vowels` | ACCUMULATOR loop ✅ | `sum(1 for ch in text.lower() if ch in "aeiou")` (coming soon) | one-liner, same idea |
+| `second_highest` | sort + walk back + `return` inside the loop | add `scores = sorted(scores)` + `return` **after** the loop too | no side effect on the caller's list, and it handles `[5, 5]` |
+| `average` | `return sum(numbers) / len(numbers)` ✅ | `if not numbers: return 0` first | **GUARD CLAUSE**: handle empty input before it crashes |
+| `grade` | early returns with `>=` ✅ | drop the `91 >=` (earlier returns already handled 90+) | each `if` can **assume** the earlier ones failed |
+
+**New patterns:**
+- **GUARD CLAUSE:** check bad or edge input at the **top** of a function and `return` early (`if not numbers: return 0`).
+- **DON'T REPEAT YOURSELF (DRY):** if you write the same thing twice (`.lower()` twice), store it once.
+- **NO SURPRISE SIDE EFFECTS:** a function shouldn't change the caller's data unless that's its job. Use `sorted()` (a copy) rather than `.sort()` on a parameter.
+
+**`return` inside a loop = EARLY EXIT for functions.** It stops the loop *and* the function in one go, so `break` after it is dead code.
 
 ---
 
