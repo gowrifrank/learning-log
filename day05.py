@@ -24,3 +24,13 @@ print(f"The HIGHEST of the scores is: {max(scores)}")
 print(f"The LOWEST of the scores is: {min(scores)}")
 print(f"The AVERAGE of the scores is: {sum(scores)/len(scores)}")
 
+# Part 03 : Even Filter
+
+numbers = [3, 8, 15, 22, 7, 4]
+even = []
+
+for num in numbers:
+    if num%2 == 0:
+        even.append(num)
+print(f"Even Numbers: {even}")
+
