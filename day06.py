@@ -49,3 +49,12 @@ inp_scores = [72, 95, 88, 61, 79]
 sec_high_score_res = second_highest(inp_scores)
 print(f"The Second-Highest score is: {sec_high_score_res}")
 
+# Part 05 : Average
+
+def average(numbers):
+    return sum(numbers)/len(numbers)
+
+ip_scores = [72, 95, 88, 61, 79]
+avg = average(ip_scores)
+print(f"The average of all the above {len(ip_scores)} scores is: {avg}")
+
