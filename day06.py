@@ -34,3 +34,18 @@ ip_word = input("Enter the word to check the vowel count: ")
 result = count_vowels(ip_word)
 print(f"The total number of vowels : {result}")
 
+# Part 04 : Second Highest Score
+
+def second_highest(scores):
+    scores.sort()
+    second_best = max(scores)
+    for i in range(len(scores) - 1, 0, -1):
+        if scores[i] > scores[i-1]:
+            second_best = scores[i-1]
+            break
+    return second_best
+
+inp_scores = [72, 95, 88, 61, 79]
+sec_high_score_res = second_highest(inp_scores)
+print(f"The Second-Highest score is: {sec_high_score_res}")
+
