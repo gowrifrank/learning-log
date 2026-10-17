@@ -126,6 +126,39 @@ print(runner_up)
 
 ---
 
+## 📅 Leap year (HackerRank: Write a function)
+Rules: divisible by 4 → leap, **unless** divisible by 100 → not, **unless** divisible by 400 → leap.
+
+### A. Mine (submitted from my phone ✅)
+```python
+if year % 100 == 0 and year % 400 != 0:
+    return leap                    # False: centuries like 1900
+elif year % 4 == 0 or year % 400 == 0:
+    leap = True
+return leap
+```
+Handles the special case **first** (a GUARD CLAUSE), smart! Small things: `or year % 400 == 0` is extra, because anything divisible by 400 is also divisible by 4. And it mixes two styles (early `return` + setting `leap`).
+
+### B. Most specific rule first, early returns only
+```python
+if year % 400 == 0:
+    return True
+if year % 100 == 0:
+    return False
+return year % 4 == 0
+```
+Reads exactly like the rules, from the most specific to the most general.
+
+### C. One line of boolean logic
+```python
+return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+```
+Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
+
+**Insight:** when rules have exceptions ("unless..."), check the **most specific exception first**. Always test the tricky years: **2000** (400 rule), **1900** and **2100** (100 rule).
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python
