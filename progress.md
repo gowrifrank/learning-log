@@ -4,10 +4,8 @@
 ## ⏳ Pending commits
 | Commit on | What | Commit message |
 |---|---|---|
-| 2026-10-16 | `progress.md` | `Update progress: Day 05 done` |
-| 2026-10-16 | `notes.md` + `mistakes-journal.md` + `approaches.md` | `Notes: map(), Runner-Up Score insights` |
-| 2026-10-16 | `quiz-log.md` | `Add quiz log` |
-| 2026-10-16 | `lessons/day06-functions.md` | `Add Day 06 lesson: functions` |
+| 2026-10-18 | `day07.py` (one commit per part) | `Day 07: ...` |
+| 2026-10-18 | `progress.md` | `Update progress` |
 
 
 > Once something is committed, move it to the **Lessons** table below.
@@ -20,7 +18,8 @@
 | 03 | loops: for, range, while | 2026-10-13 | ✅ 2026-10-14 |
 | 04 | strings: index, slice, methods, compare | 2026-10-14 | ✅ Part 1 on 2026-10-14, rest + all docs on 2026-10-15 |
 | 05 | lists, sort vs sorted, break | 2026-10-14 | ✅ 2026-10-16 (5 commits, one per part) |
-| 06 | functions, return vs print, break vs return | 2026-10-15 | ⏳ pending |
+| 06 | functions, return vs print, break vs return | 2026-10-15 | ✅ 2026-10-17 (6 commits, one per part) |
+| 07 | dictionaries | 2026-10-17 | ⏳ |
 
 ## 🔥 HackerRank
 | Date | Problem | Result |
@@ -31,6 +30,7 @@
 | 2026-10-13 | Loops | ✅ (after an off-by-one fix) |
 | 2026-10-14 | Print Function | ✅ ⭐⭐ 2nd star |
 | 2026-10-15 | Find the Runner-Up Score! | ✅ (after fixing `map` → `list(map(...))` and adding `break`) |
+| 2026-10-16 | Write a function (leap year) | ✅ solved on my phone 📱 (90/110 pts, 20 to ⭐⭐⭐) |
 
 ## 📆 Sunday review (every week)
 Go through everything from the week, about 30–45 min:
