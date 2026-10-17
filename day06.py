@@ -58,3 +58,24 @@ ip_scores = [72, 95, 88, 61, 79]
 avg = average(ip_scores)
 print(f"The average of all the above {len(ip_scores)} scores is: {avg}")
 
+# BONUS: Grade
+
+def grade(score):
+    if score >= 90:
+        return "A"
+    if 91 >= score >= 75:
+        return "B"
+    if score >= 50:
+        return "C"
+    return "F"
+
+input_score = int(input("Enter the score from 0 to 100 : "))
+res = str(grade(input_score))
+print(f"The Grade for {input_score} is {res}")
+
+
+
+
+
+
+
