@@ -22,3 +22,15 @@ inp_wd = input("Enter the word to check for a palindrome: ")
 pal = is_palindrome(inp_wd)
 print(f"Is the entered word a Palindrome? : {pal}")
 
+# Part 03 : Count Vowels
+
+def count_vowels(text):
+    total = 0
+    for ch in text.lower():
+        if ch in "aeiou":
+            total += 1
+    return total
+ip_word = input("Enter the word to check the vowel count: ")
+result = count_vowels(ip_word)
+print(f"The total number of vowels : {result}")
+
