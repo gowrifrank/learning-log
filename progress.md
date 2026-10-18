@@ -4,8 +4,9 @@
 ## ⏳ Pending commits
 | Commit on | What | Commit message |
 |---|---|---|
-| 2026-10-18 | `day07.py` (one commit per part) | `Day 07: ...` |
-| 2026-10-18 | `progress.md` | `Update progress` |
+| 2026-10-19 | `day07.py` Parts 3, 4, bonus (one commit each) | `Day 07: letter counter...` etc. |
+| 2026-10-19 | `day08.py` (one commit per part) | `Day 08: ...` |
+| 2026-10-19 | `progress.md` | `Update progress` |
 
 
 > Once something is committed, move it to the **Lessons** table below.
@@ -19,7 +20,7 @@
 | 04 | strings: index, slice, methods, compare | 2026-10-14 | ✅ Part 1 on 2026-10-14, rest + all docs on 2026-10-15 |
 | 05 | lists, sort vs sorted, break | 2026-10-14 | ✅ 2026-10-16 (5 commits, one per part) |
 | 06 | functions, return vs print, break vs return | 2026-10-15 | ✅ 2026-10-17 (6 commits, one per part) |
-| 07 | dictionaries | 2026-10-17 (lesson), exercise carried to 2026-10-18/19 | ⏳ |
+| 07 | dictionaries | 2026-10-17 (lesson), Parts 1–2 on 2026-10-18 | 🟡 Parts 1–2 ✅ 2026-10-18 · Parts 3–4 + bonus on 2026-10-19 |
 
 ## 🔥 HackerRank
 | Date | Problem | Result |
@@ -40,7 +41,7 @@
 | 2026-10-17 | 2235. Add Two Integers | ✅ Day 1 🔥 (profile: active days 1, max streak 1) |
 | 2026-10-18 | 1929. Concatenation of Array | ✅ Day 2 🔥 (after fixing items vs positions + append) |
 
-**Beginner queue (in order):** 1480 Running Sum → 344 Reverse String → 1108 Defanging an IP → 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
+**Queue:** see dated list in [schedule.md](schedule.md). Order: 1480 Running Sum → 344 Reverse String → 1108 Defanging an IP → 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
 ## 📆 Sunday review (every week)
 Go through everything from the week, about 30–45 min:
@@ -57,6 +58,9 @@ Go through everything from the week, about 30–45 min:
 
 ## ⭐ Weak spot to focus on
 **Navigating data: lists, dicts, parsing input.** Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before each problem. Extra quiz questions on it in every Sunday review.
+
+## 🏝 Vacation 3–15 Nov
+Full plan: **[schedule.md](schedule.md)**: lessons Day 07–20 before 3 Nov, then a phone-only vacation pack (1 LeetCode + 1 HackerRank + 1 GitHub commit per day).
 
 ## 🎯 Long-term goals
 - ⭐⭐⭐ Next HackerRank Python star

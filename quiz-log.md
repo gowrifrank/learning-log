@@ -7,7 +7,7 @@
 | 2026-10-14 | 3/3 ✅ | `//` and `%`, `input()` + `int()`, `range` with step |
 | 2026-10-15 | 1/3 | items vs positions, `.sort()` returns None, chaining on literals |
 | 2026-10-18 🗓 Sunday review | 7/10 | retries + data navigation, parsing, slicing |
-| 2026-10-18 quick checks | 2/2 ✅ | append vs index on empty list, nested pair access |
+| 2026-10-18 quick checks | 3/3 ✅ | append vs index on empty list, nested pair access, `.get()` vs `[]` on a missing key |
 
 ## 🔁 To retry on Sunday
 - [ ] 2026-10-15 Q1: items vs positions with a list literal (❌ again on 10-18, retry next Sunday)
@@ -105,3 +105,4 @@ for n in [1, 2, 3, 4]:
 ## 2026-10-18 quick checks (2/2 ✅)
 **QC1.** Fix `names = []` / `names[0] = "Tina"` → `names.append("Tina")` ✅
 **QC2.** `for student in [["Tina", 37.2], ["Harsh", 39.0]]`: first `student`? → `["Tina", 37.2]`, and the score is `student[1]` ✅
+**QC3.** After `del robot["height"]`: `robot.get("height")` → `None` ✅, `robot["height"]` → crashes (`KeyError`) ✅
