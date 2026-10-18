@@ -43,6 +43,8 @@ for key, value in robot.items():    # BOTH at once ⭐ the most useful
 ```
 
 ## 5. The COUNTING pattern ⭐ (you'll use this constantly)
+**Think of a tally sheet ✏️.** Read one letter at a time. If the letter isn't on the sheet, write it down with 1. If it's already there, add 1 to its number. The dictionary is the tally sheet: **keys = letters, values = counts**.
+
 ```python
 word = "banana"
 counts = {}                         # start empty (ACCUMULATOR!)
@@ -53,11 +55,31 @@ for ch in word:
         counts[ch] = 1              # first time: start at 1
 print(counts)                       # {'b': 1, 'a': 3, 'n': 2}
 ```
+**Watch the sheet change:**
+| Round | `ch` | On sheet? | What happens | `counts` after |
+|---|---|---|---|---|
+| 1 | b | no | `counts["b"] = 1` | `{'b': 1}` |
+| 2 | a | no | `counts["a"] = 1` | `{'b': 1, 'a': 1}` |
+| 3 | n | no | `counts["n"] = 1` | `{'b': 1, 'a': 1, 'n': 1}` |
+| 4 | a | **yes** | `counts["a"] += 1` | `{'b': 1, 'a': 2, 'n': 1}` |
+| 5 | n | **yes** | `counts["n"] += 1` | `{'b': 1, 'a': 2, 'n': 2}` |
+| 6 | a | **yes** | `counts["a"] += 1` | `{'b': 1, 'a': 3, 'n': 2}` |
+
+**Why the `if`?** `counts["a"] += 1` means "add 1 to the number next to `a`". If `a` isn't on the sheet yet, there's no number, so it crashes with `KeyError`. The first time, you must write it down with 1.
+
 Shorter, using `.get()` with a default:
 ```python
 for ch in word:
     counts[ch] = counts.get(ch, 0) + 1
 ```
+Read it **right side first**:
+1. `counts.get(ch, 0)`: "what number is next to this letter? If it's not there, pretend it's **0**"
+2. `+ 1`: add one
+3. `counts[ch] = ...`: write the new number back
+
+Round 1 (`b`, not there): 0 + 1 = **1**. Round 4 (`a`, already 1): 1 + 1 = **2**. It's the same as the `if/else` version, with the `0` replacing the "not there yet" case.
+
+**See it yourself:** add `print(ch, "→", counts)` inside the loop and watch the sheet grow.
 
 ## 6. Lists inside dictionaries
 ```python
