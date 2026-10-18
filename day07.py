@@ -24,3 +24,13 @@ robot_dic = {
 }
 update_robot(robot_dic)
 
+# Part 02 : Phonebook
+
+contact = {
+    "gowri": "9500262191",
+    "freddy": "7708793409",
+    "pons": "8807182853",
+    "prax": "9500799001"
+}
+name = input("Whose number? ")
+print(contact.get(name, "Not Found"))
