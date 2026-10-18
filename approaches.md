@@ -159,6 +159,30 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🟠 LeetCode 1929: Concatenation of Array
+| Version | Code | Notes |
+|---|---|---|
+| Mine ✅ (BUILD A LIST) | `while count < 2:` → `for i in nums: ans.append(i)` | clear; good list practice |
+| Join with `+` | `return nums + nums` | one built-in operation, faster in practice |
+| Repeat with `*` | `return nums * 2` | `[1, 2] * 2` → `[1, 2, 1, 2]` |
+
+**Insights:**
+- LeetCode's "Beats X%" for 0 ms vs 1 ms is **timer noise**. Resubmitting can change it. Don't chase it on tiny problems.
+- All three are **O(n)**: the work grows in proportion to the list size. Real speed-ups come from doing *less work* (like Gauss's formula), not from shaving milliseconds.
+- **USE A BUILT-IN** again: Python's `+`/`*` on lists run inside Python's fast core, while a loop runs step by step.
+
+---
+
+## 🥉 Nested Lists (HackerRank): second-lowest with names
+**Mine ✅ (5 STEPS):** build `[name, score]` pairs → sorted scores → the first score bigger than the lowest (NEIGHBOUR idea, EARLY EXIT) → FILTER the names with that score → sort and print.
+**Alternatives (coming soon):**
+- `second = sorted(set(scores))[1]`: `set` removes duplicates, then take position 1
+- a list comprehension for the FILTER: `names = sorted([n for n, s in students if s == second])`
+
+**Insight:** the hard part wasn't the logic, it was **translating** it. Splitting into STEP comments and checking each step's data shape with `print()` turned panic into 5 small wins.
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python

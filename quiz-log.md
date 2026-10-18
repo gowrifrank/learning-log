@@ -6,13 +6,18 @@
 |---|---|---|
 | 2026-10-14 | 3/3 ✅ | `//` and `%`, `input()` + `int()`, `range` with step |
 | 2026-10-15 | 1/3 | items vs positions, `.sort()` returns None, chaining on literals |
+| 2026-10-18 🗓 Sunday review | 7/10 | retries + data navigation, parsing, slicing |
+| 2026-10-18 quick checks | 2/2 ✅ | append vs index on empty list, nested pair access |
 
 ## 🔁 To retry on Sunday
-- [ ] 2026-10-15 Q1: items vs positions with a list literal
-- [ ] 2026-10-15 Q2: `x = [3, 1, 2].sort()`
-- [ ] 2026-10-16 concept: does `break` exit the `if` or the loop?
-- [ ] 2026-10-16 concept: does code after `return` run?
-- [ ] 2026-10-16 concept: what does a function return if it never reaches `return`?
+- [ ] 2026-10-15 Q1: items vs positions with a list literal (❌ again on 10-18, retry next Sunday)
+- [x] 2026-10-15 Q2: `x = [3, 1, 2].sort()` (✅ 10-18, but it's `None` in Python, not `null`)
+- [ ] 2026-10-16 concept: does `break` exit the `if` or the loop? (½ on 10-18: right answer, wrong reason. `break` stops the loop completely)
+- [x] 2026-10-16 concept: does code after `return` run? (✅ 10-18)
+- [x] 2026-10-16 concept: what does a function return if it never reaches `return`? (✅ 10-18)
+- [x] 2026-10-17 concept: trace the COUNTING pattern for "apple" (✅ 10-18)
+- [ ] 2026-10-18 Q8a: what does `.split()` give? (a LIST of strings)
+- [ ] 2026-10-18 Q9: `pass` + loop variable after the loop
 
 ---
 
@@ -54,3 +59,49 @@ for i in [10, 20, 30]:
   1. `"Robot"[::-1]` → `"toboR"` (slicing works on a string literal, no variable needed)
   2. `"toboR".lower()` → `"tobor"`
 - **Lesson: method chaining.** Python works **left to right**, and each step's result feeds into the next. `"  Hi  ".strip().upper()` → `"HI"`.
+
+---
+
+## 2026-10-18 🗓 Sunday review (7/10)
+**Q1.** `for i in [10, 20, 30]: print([10, 20, 30][i])`
+- My answer: prints 10, 20, 30 → ❌
+- **Real answer:** `IndexError`. `i` is `10` (an ITEM), so `[10, 20, 30][10]` doesn't exist. **Items vs positions, 6th time.** My answer is what `print(i)` would do.
+
+**Q2.** `x = [3, 1, 2].sort()` → I said `null` → ✅ idea, but Python calls it **`None`** (`null` is the word in other languages like Java/JavaScript).
+
+**Q3.** `break` inside `if` inside `for` → I said "for, but the loop still continues with the next items" → ½
+- **Real answer:** `break` exits the **for loop completely**. No more items are processed.
+- What I described (skip to the next item) is a different keyword: **`continue`**.
+```python
+for n in [1, 2, 3, 4]:
+    if n == 2:
+        continue     # skip 2, carry on with 3
+    if n == 4:
+        break        # stop the whole loop
+    print(n)         # prints 1, 3
+```
+
+**Q4.** Code after `return` → No ✅
+
+**Q5.** No `return` reached → `None` ✅ (I wrote `null`)
+
+**Q6.** Counting `"apple"` → `{'a': 1, 'p': 2, 'l': 1, 'e': 1}` ✅
+
+**Q7.** `d["Harsh"][-1]` → `28.0` ✅, `len(d)` → `2` ✅ (counts pairs)
+
+**Q8.** Input `4 8 15`
+- (a) `input().split()`: I said `4 8 15` → ❌. It's a **list of strings**: `['4', '8', '15']`
+- (b) `list(map(int, ...))` → `[4, 8, 15]` ✅
+- **Lesson:** `.split()` always turns ONE string into a LIST. The quotes show they're still text.
+
+**Q9.** `for name in [...]: pass` then `print(name)`
+- My answer: Atlas, ASIMO, Optimus → ❌
+- **Real answer:** just **`Optimus`**. `pass` means "do nothing" (a placeholder so the loop isn't empty), so the loop prints nothing. After it ends, `name` keeps its **last** value.
+
+**Q10.** `"banana".count("a")` → `3` ✅, `"banana"[1:4]` → `"ana"` ✅
+
+---
+
+## 2026-10-18 quick checks (2/2 ✅)
+**QC1.** Fix `names = []` / `names[0] = "Tina"` → `names.append("Tina")` ✅
+**QC2.** `for student in [["Tina", 37.2], ["Harsh", 39.0]]`: first `student`? → `["Tina", 37.2]`, and the score is `student[1]` ✅

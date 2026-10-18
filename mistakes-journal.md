@@ -2,7 +2,8 @@
 > Every mistake I've made, why it happened and how I fixed it. Read the **Focus areas** and **Daily checklist** every day before coding.
 
 ## 🎯 Focus areas (my patterns so far)
-1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **5 times** (palindrome, vowel counter, even filter, quiz Q1...)!
+0. ⭐ **Navigating data (lists, dicts, parsing input).** My biggest weak spot. Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before every problem until it feels natural.
+1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **7 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929...)!
 2. **Off-by-one with `range`.** `range` stops **before** the stop value. Count the items for a small input before submitting.
 3. **`=` replaces, `+=` adds on.** When building a total or a string across a loop, I need `+=`.
 4. **Text vs numbers.** `input()` gives text, `int()` converts to a number, and `str()` converts back. I can't mix them with `+`.
@@ -10,6 +11,18 @@
 6. **Not testing tricky inputs.** Test duplicates, uppercase, empty input, and check the output uses my new variable.
 7. **`print` instead of `return` in functions.** Functions should return the answer, and the caller prints it.
 8. **Jumping straight to code.** When I'm confused, I should solve it by hand first, then write the steps in English, then translate to Python.
+
+## 🛠 Syntax I'm still building (practise these!)
+| Skill | Status | Correct form |
+|---|---|---|
+| Grow a list | 🟢 quick check ✅ 10-18 | `x = []` then `x.append(item)`, never `x[0] = item` on an empty list |
+| Items vs positions | 🔴 7 slips | `for item in x:` → use `item`. `for i in range(len(x)):` → use `x[i]` |
+| Function vs method | 🟡 | `sorted(x)`, `len(x)`, `max(x)` (around) · `x.sort()`, `x.append()` (after the dot) |
+| `=` vs `==` | 🟡 | `=` stores, `==` compares |
+| `return` vs `print` | 🟡 | `return` only inside `def`. HackerRank main code → `print` |
+| Nested data `[name, score]` | 🟢 got it 10-18 (Nested Lists + quick check ✅) | `pair[0]` = name, `pair[1]` = score |
+| Parsing input | 🟡 | `list(map(int, input().split()))` |
+| Naming | 🟡 | name variables after what they hold *right now* (`lowest`, not `second_low`) |
 
 ## ✅ Daily checklist (before I click Run or Submit)
 - [ ] Did I solve a small example **by hand** first?
@@ -196,3 +209,44 @@ return grade == "A"     # ❌ == COMPARES ("is grade equal to A?" → False)
 - **`break` after `return`** never runs, because `return` already ended the function (dead code).
 - **No `return` after the loop:** `second_highest([5, 5])` → `None`, because the loop never hits `return` and the function "falls off the end". Fix: put `return second_best` **after** the loop as well.
 - **Edge case:** `average([])` → `ZeroDivisionError`. Think about empty input.
+
+### 2026-10-17: HackerRank, Finding the percentage ❌ → ✅
+**Problem:** printed Anurag's average (28.00) instead of Harsh's (26.50).
+```python
+for _ in range(n):
+    name, *line = input().split()
+    ...
+avg = sum(student_marks[name]) / len(student_marks[name])   # ❌ `name` = LAST student read
+print(f"{avg:.2f}")
+query_name = input()                                        # ❌ read AFTER using it
+```
+**Why:**
+1. After a loop ends, the loop variable keeps its **last** value. `name` was "Anurag", not the student we were asked about.
+2. The average was calculated **before** `query_name` was even read. Order of lines matters.
+3. Test case 0 passed by **luck**, because the asked student happened to be the last one.
+
+**Fix:** put the average **after** `query_name = input()` and look up `student_marks[query_name]`.
+**Also:** the floats were already converted on line 6 (`list(map(float, line))`), so no second conversion was needed.
+**Lesson:** use the variable that holds **what the question asks for**. When one test passes and another fails, ask "what's different about the failing input?"
+
+### 2026-10-18: LeetCode 1929, Concatenation of Array ❌ → ✅ Accepted 92/92
+```python
+n = len(list)            # ❌ `list` is Python's TYPE name, not my data → "object of type 'type' has no len()"
+...
+for i in nums:           # ❌ i = ITEMS again (7th time!), but used as positions in ans[i]
+    ans[i] == nums[i]    # ❌ == compares, it doesn't store (same as grade() on Day 06). And `ans` was never created
+...
+print(ans)               # ❌ LeetCode needs `return`, not print
+```
+**Lessons:**
+- Use the **parameter's name** (`nums`), never the type (`list`). Same for `str`, `dict`, `int`: never name your own variables these either.
+- An empty list `[]` has no positions to fill, so `ans[0] = 5` → IndexError. **Grow a list with `.append()`**.
+- `=` stores, `==` compares.
+- LeetCode/functions: **return** the answer.
+- `+` on two lists **joins** them: `[1, 2] + [1, 2]` → `[1, 2, 1, 2]`.
+**2nd try bug:** `ans.append(nums[i])` with `for i in nums` gave `[2, 1, 2, 2, 1, 2]` for `[1, 2, 1]`. `i` was the item (1, 2, 1), so `nums[i]` fetched position 1, 2, 1 → 2, 1, 2. **Fix:** `ans.append(i)`, since `i` already IS the number. Tracing it in a table made the bug obvious.
+
+### 2026-10-18: HackerRank, Nested Lists 😰 → ✅
+**Problem:** I had the right logic but froze writing the code: an uncreated list filled by index, `list.sorted()`, comparing positions instead of values, `return` outside a function.
+**What fixed it:** the **STEP-comments method** ([lessons/problem-solving-method.md](lessons/problem-solving-method.md)). I split it into 5 steps, coded one at a time, and checked each with `print()`. Steps 3–5 I wrote **myself** ✅
+**Small improvement:** `second_low = scores[0]` holds the **lowest** at first, so the name is misleading. Better: `lowest = scores[0]`, then `second = score` inside the loop.

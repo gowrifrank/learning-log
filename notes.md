@@ -167,6 +167,17 @@ for num in numbers:
     if num % 2 == 0:
         even.append(num)
 ```
+**Joining and repeating lists**
+```python
+[1, 2] + [3, 4]    # [1, 2, 3, 4]
+[1, 2] * 2         # [1, 2, 1, 2]
+ans = []
+ans[0] = 5         # ❌ IndexError: an empty list has no slot 0
+ans.append(5)      # ✅ append creates a new slot
+```
+- `x[i] = ...` only REPLACES an existing slot. To GROW a list, use `.append()`.
+- Never name a variable `list`, `str`, `dict` or `int` (those are Python's type names).
+
 **Strings ↔ lists**
 ```python
 "I love robots".split()        # ['I', 'love', 'robots']
@@ -207,6 +218,35 @@ def power(base, exp=2):   # default value
 - `{x}` means "insert value" ONLY inside f-strings. `return {x}` returns a set!
 - Variables made inside a function stay inside.
 
+## Loop keywords: `break`, `continue`, `pass`
+| Keyword | Does |
+|---|---|
+| `break` | stops the **whole loop** right now |
+| `continue` | skips the **rest of this round**, then goes to the next item |
+| `pass` | does **nothing** (a placeholder so a block isn't empty) |
+- `None` is Python's word for "nothing" (other languages say `null`)
+
+## Day 07: Dictionaries (in progress)
+> ⭐ Weak spot: see the full guide **[lessons/data-structures-guide.md](lessons/data-structures-guide.md)** (containers, nested data, looping, parsing input, printing).
+
+```python
+robot = {"name": "Optimus", "year": 2022}   # key: value pairs
+robot["name"]              # "Optimus", look up by KEY
+robot.get("price", 0)      # 0 if missing (no KeyError crash)
+robot["price"] = 20000     # add or change
+del robot["year"]          # delete
+for key, value in robot.items():   # loop over both
+```
+**COUNTING pattern = a tally sheet ✏️**
+```python
+counts = {}
+for ch in "banana":
+    counts[ch] = counts.get(ch, 0) + 1   # "current number (or 0) + 1"
+# {'b': 1, 'a': 3, 'n': 2}
+```
+- Long form: `if ch in counts: counts[ch] += 1` / `else: counts[ch] = 1`
+- `counts[ch] += 1` on a missing key → **KeyError**. That's why we need `if` or `.get(ch, 0)`.
+
 ## 🔥 HackerRank solved
 - Python If-Else
 - Arithmetic Operators
@@ -215,3 +255,5 @@ def power(base, exp=2):   # default value
 - Print Function ⭐⭐
 - Find the Runner-Up Score!
 - Write a function (leap year)
+- Finding the percentage
+- Nested Lists
