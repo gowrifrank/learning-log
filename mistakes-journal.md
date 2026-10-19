@@ -3,7 +3,7 @@
 
 ## 🎯 Focus areas (my patterns so far)
 0. ⭐ **Navigating data (lists, dicts, parsing input).** My biggest weak spot. Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before every problem until it feels natural.
-1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **7 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929...)!
+1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **8 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929, LeetCode 1480...)!
 2. **Off-by-one with `range`.** `range` stops **before** the stop value. Count the items for a small input before submitting.
 3. **`=` replaces, `+=` adds on.** When building a total or a string across a loop, I need `+=`.
 4. **Text vs numbers.** `input()` gives text, `int()` converts to a number, and `str()` converts back. I can't mix them with `+`.
@@ -250,3 +250,13 @@ print(ans)               # ❌ LeetCode needs `return`, not print
 **Problem:** I had the right logic but froze writing the code: an uncreated list filled by index, `list.sorted()`, comparing positions instead of values, `return` outside a function.
 **What fixed it:** the **STEP-comments method** ([lessons/problem-solving-method.md](lessons/problem-solving-method.md)). I split it into 5 steps, coded one at a time, and checked each with `print()`. Steps 3–5 I wrote **myself** ✅
 **Small improvement:** `second_low = scores[0]` holds the **lowest** at first, so the name is misleading. Better: `lowest = scores[0]`, then `second = score` inside the loop.
+
+### 2026-10-19: LeetCode 1480, Running Sum ❌ → ✅ Accepted 54/54
+```python
+for value in nums:
+    ...
+    output.append(output[value - 1] + value)   # ❌ value is an ITEM, used as a POSITION
+```
+**Why:** with `nums = [1, 2, 3, 4]`, round 2 has `value = 2`, so `output[1]`, but `output` only has 1 item (`[1]`) → IndexError. **Items vs positions, 8th time.**
+**What I meant:** "the **last** running total so far" = `output[-1]` (negative index from Day 04!).
+**Even simpler:** keep a `total` ACCUMULATOR and append it. Then there's no need to look back into the list or treat the first item specially.
