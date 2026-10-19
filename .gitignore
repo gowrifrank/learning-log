@@ -1,0 +1,6 @@
+# Private project brief: stays on this machine, never pushed to the public repo
+CLAUDE.md
+
+# Python cache
+__pycache__/
+*.pyc
