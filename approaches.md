@@ -183,6 +183,24 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🟠 LeetCode 1480: Running Sum of 1d Array
+⚓ *Port: containers loaded per hour `[3, 1, 2, 10, 1]` → running total `[3, 4, 6, 16, 17]`.*
+
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | `total` + `if len(output) == 0: total = value` / `else: total += value` | works! But the `if` isn't needed: `total` starts at 0, so `0 + value` already handles round 1 |
+| **Cleanest (ACCUMULATOR)** | `total = 0` → `for value in nums: total += value; output.append(total)` | no special first case, 4 lines |
+| Look back | `output.append(output[-1] + value)` (after the first item) | uses `[-1]` = "last item so far" |
+| **In place** | `for i in range(1, len(nums)): nums[i] += nums[i - 1]` | changes `nums` itself, so no extra list (less memory). Positions are actually needed here! |
+| Built-in (coming soon) | `list(itertools.accumulate(nums))` | Python already has it |
+
+**Insights:**
+- If a special case (`if first round`) does the same thing the general case would do, **delete it**. Choosing a good starting value (`total = 0`) removes special cases.
+- The in-place version is the first time **positions** are the right tool: you need `nums[i - 1]`, the item *before* this one.
+- All versions are **O(n)**. The in-place one uses less extra memory.
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python
