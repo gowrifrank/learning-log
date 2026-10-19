@@ -7,6 +7,7 @@
 | 2026-10-14 | 3/3 ✅ | `//` and `%`, `input()` + `int()`, `range` with step |
 | 2026-10-15 | 1/3 | items vs positions, `.sort()` returns None, chaining on literals |
 | 2026-10-18 🗓 Sunday review | 7/10 | retries + data navigation, parsing, slicing |
+| 2026-10-19 quick check | ½ | positions loop: `range(nums)` → needs `range(len(nums))` |
 | 2026-10-18 quick checks | 3/3 ✅ | append vs index on empty list, nested pair access, `.get()` vs `[]` on a missing key |
 
 ## 🔁 To retry on Sunday
@@ -18,6 +19,7 @@
 - [x] 2026-10-17 concept: trace the COUNTING pattern for "apple" (✅ 10-18)
 - [ ] 2026-10-18 Q8a: what does `.split()` give? (a LIST of strings)
 - [ ] 2026-10-18 Q9: `pass` + loop variable after the loop
+- [ ] 2026-10-19 QC: write a loop over POSITIONS of a list (`range(len(x))`, not `range(x)`)
 
 ---
 
@@ -106,3 +108,8 @@ for n in [1, 2, 3, 4]:
 **QC1.** Fix `names = []` / `names[0] = "Tina"` → `names.append("Tina")` ✅
 **QC2.** `for student in [["Tina", 37.2], ["Harsh", 39.0]]`: first `student`? → `["Tina", 37.2]`, and the score is `student[1]` ✅
 **QC3.** After `del robot["height"]`: `robot.get("height")` → `None` ✅, `robot["height"]` → crashes (`KeyError`) ✅
+
+---
+
+## 2026-10-19 quick check (½)
+**QC.** In `for value in nums:` is `value` a position or an item, and how do you loop over positions? → I wrote `for value in range(nums)` → ½. `range()` needs a NUMBER: `for i in range(len(nums)):` → `i` = 0, 1, 2... and `nums[i]` = the item. (`value` itself is an **item**.)
