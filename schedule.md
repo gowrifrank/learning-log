@@ -24,7 +24,7 @@
 > If a lesson spills over, use the Sunday or 2 Nov buffer. **Day 21 starts Mon 16 Nov**, after the vacation.
 
 ## 🟠 LeetCode before the vacation (1 per day)
-19 Oct 1480 Running Sum · 20 Oct 344 Reverse String · 21 Oct 1108 Defanging an IP Address · 22 Oct 1672 Richest Customer Wealth · 23 Oct 412 Fizz Buzz · 24 Oct 1342 Number of Steps to Reduce a Number to Zero · 25 Oct 9 Palindrome Number · 26 Oct 58 Length of Last Word · 27 Oct 1512 Number of Good Pairs · 28 Oct 1 Two Sum · 29 Oct 1920 Build Array from Permutation · 30 Oct 771 Jewels and Stones · 31 Oct 217 Contains Duplicate · 1 Nov 242 Valid Anagram · 2 Nov 1748 Sum of Unique Elements
+19 Oct 1480 Running Sum · 20 Oct 1108 Defanging an IP Address ✅ · 21 Oct 344 Reverse String · 22 Oct 1672 Richest Customer Wealth · 23 Oct 412 Fizz Buzz · 24 Oct 1342 Number of Steps to Reduce a Number to Zero · 25 Oct 9 Palindrome Number · 26 Oct 58 Length of Last Word · 27 Oct 1512 Number of Good Pairs · 28 Oct 1 Two Sum · 29 Oct 1920 Build Array from Permutation · 30 Oct 771 Jewels and Stones · 31 Oct 217 Contains Duplicate · 1 Nov 242 Valid Anagram · 2 Nov 1748 Sum of Unique Elements
 
 ## 🔥 HackerRank before the vacation (Python track, in order)
 19 Oct Lists · 20 Oct Tuples · 21 Oct sWAP cASE · 22 Oct String Split and Join · 23 Oct What's Your Name? · 24 Oct Mutations · 25 Oct Find a string · 26 Oct String Validators · 27 Oct Text Wrap · 28 Oct Capitalize! · 29 Oct Introduction to Sets · 30 Oct Set .add() · 31 Oct Symmetric Difference · 1 Nov Set .union() Operation · 2 Nov Set .intersection() Operation
