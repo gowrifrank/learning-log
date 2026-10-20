@@ -201,6 +201,23 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🟠 LeetCode 1108: Defanging an IP Address
+⚓ *Port: write a crane controller's address `"192.168.1.10"` safely as `"192[.]168[.]1[.]10"`.*
+
+| Version | Code | Notes |
+|---|---|---|
+| Mine ✅ (string ACCUMULATOR) | loop over `ch`, add `"[.]"` or `ch` to `output` | built from scratch, great practice! |
+| **Built-in (best)** | `return address.replace(".", "[.]")` | one line, the method made for this (Day 04 **USE A BUILT-IN**) |
+| Split + join | `return "[.]".join(address.split("."))` | split on dots → `["192", "168", "1", "10"]` → glue back with `"[.]"` |
+| List + join (pro habit) | collect pieces in a list, then `"".join(pieces)` | faster for very long strings: `+` on strings makes a brand-new string every round |
+
+**Insights:**
+- Strings **can't be changed**, so `output = output + ch` creates a *new* string each round. Fine for an IP address; for huge texts, building a list and `"".join()`-ing it once is the faster habit.
+- `.split(x)` and `x.join(...)` are **opposites**: one cuts at `x`, the other glues with `x`.
+- Saved to `leetcode/2026-10-20_1108_defanging_ip.py`, the first file in the solution library 📚
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python
