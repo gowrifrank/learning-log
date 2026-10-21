@@ -27,10 +27,10 @@
 | Week | Dates | Weekday h | Weekend h (bonus) | Topics covered | Backlog |
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
-| 2 | 19–25 Oct | Mon: ? | 0 | Mon: roadmap 2027, LeetCode 1480 | Day 07 parts 3–4, Day 08, HackerRank Lists (Mon → Tue → Wed) | 
-| | | Tue: ? | | Tue: LeetCode 1108 | |
+| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h | 0 | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 | Day 07 parts 3–4, Day 08, HackerRank Lists (no rush, variable pace) |
 
-> At the end of each session, I tell Claude roughly how long I studied, and it gets added here. Head start goal: finish each week's lessons by **Thursday**, so Friday + weekend become buffer/ahead time.
+> ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
+> 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
 
 ## 🔥 HackerRank
 | Date | Problem | Result |

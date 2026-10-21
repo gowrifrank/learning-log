@@ -1,5 +1,7 @@
 # 🗓 Schedule: until the vacation (3–15 Nov 2026) and back
-> **Goal:** finish the core Python lessons **before 3 Nov**, so the vacation only needs: 🟠 1 LeetCode + 🔥 1 HackerRank + 🟩 1 commit per day, all doable **on my phone**.
+> 🌿 **Update 20 Oct: variable pace.** Lessons follow life, not dates. The table below is a *guide*, not a deadline. Whatever isn't done by 3 Nov simply continues after 16 Nov. **Daily minimum = 1 LeetCode + 1 commit.**
+>
+> **Original goal:** finish the core Python lessons **before 3 Nov**, so the vacation only needs: 🟠 1 LeetCode + 🔥 1 HackerRank + 🟩 1 commit per day, all doable **on my phone**.
 
 ## 📘 Lessons before the vacation (18 Oct → 2 Nov)
 | Date | Day | Lesson | Notes |
