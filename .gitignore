@@ -7,3 +7,4 @@ __pycache__/
 
 # Generated cheat sheet HTML (the PDF + source are committed)
 cheatsheet/cheatsheet.html
+cheatsheet/cheatsheet-phone.html
