@@ -4,3 +4,6 @@ CLAUDE.md
 # Python cache
 __pycache__/
 *.pyc
+
+# Generated cheat sheet HTML (the PDF + source are committed)
+cheatsheet/cheatsheet.html

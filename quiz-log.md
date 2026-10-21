@@ -7,6 +7,7 @@
 | 2026-10-14 | 3/3 ✅ | `//` and `%`, `input()` + `int()`, `range` with step |
 | 2026-10-15 | 1/3 | items vs positions, `.sort()` returns None, chaining on literals |
 | 2026-10-18 🗓 Sunday review | 7/10 | retries + data navigation, parsing, slicing |
+| 2026-10-21 explain-back | 2/2 ✅ | why `int(parts[1])`, why methods change a list in place |
 | 2026-10-19 quick check | ½ | positions loop: `range(nums)` → needs `range(len(nums))` |
 | 2026-10-18 quick checks | 3/3 ✅ | append vs index on empty list, nested pair access, `.get()` vs `[]` on a missing key |
 
@@ -113,3 +114,9 @@ for n in [1, 2, 3, 4]:
 
 ## 2026-10-19 quick check (½)
 **QC.** In `for value in nums:` is `value` a position or an item, and how do you loop over positions? → I wrote `for value in range(nums)` → ½. `range()` needs a NUMBER: `for i in range(len(nums)):` → `i` = 0, 1, 2... and `nums[i]` = the item. (`value` itself is an **item**.)
+
+---
+
+## 2026-10-21 explain-back (HackerRank Lists) 2/2 ✅
+**1.** Why `int(parts[1])`? → "it's a continuous string" ✅ More precisely: `.split()` always gives **text** (`"5"`), and `int()` turns it into the number `5`.
+**2.** Why does `final_list.append(x)` work without `final_list = ...`? → "it affects the list directly" ✅ The method changes the list **in place** (the same object), so there's nothing to reassign.

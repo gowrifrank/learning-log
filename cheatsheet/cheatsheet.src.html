@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python Cheat Sheet: Gowri</title>
+<style>
+  :root {
+    --bg: #0b0f1a; --panel: #121829; --panel2: #182038; --line: #273152;
+    --text: #e6e9f5; --muted: #9aa3c0;
+    --cyan: #22d3ee; --pink: #f472b6; --lime: #a3e635; --amber: #fbbf24;
+    --violet: #a78bfa; --orange: #fb923c; --red: #f87171; --green: #4ade80; --blue: #60a5fa;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { background: var(--bg); color: var(--text); margin: 0; }
+  body { font: 10pt/1.5 "Segoe UI", "Inter", Arial, sans-serif; padding: 12mm 13mm; }
+  a { color: var(--cyan); text-decoration: none; }
+  h1, h2, h3 { margin: 0; line-height: 1.25; }
+  code, pre { font-family: "Cascadia Code", Consolas, "Courier New", monospace; }
+  code { background: #1d2540; color: #ffd580; padding: 0 4px; border-radius: 4px; font-size: 9pt; }
+
+  /* cover */
+  .cover { min-height: 270mm; display: flex; flex-direction: column; justify-content: center; break-after: page;
+           background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, transparent 55%), radial-gradient(circle at 85% 75%, #083344 0%, transparent 55%);
+           border-radius: 18px; padding: 18mm; }
+  .cover .tag { color: var(--lime); letter-spacing: 3px; font-size: 9pt; font-weight: 700; }
+  .cover h1 { display: inline-block; font-size: 40pt; margin: 6mm 0 3mm; background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+              -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cover p { color: var(--muted); font-size: 12pt; max-width: 140mm; }
+  .stats { display: flex; gap: 6mm; margin-top: 10mm; flex-wrap: wrap; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 4mm 6mm; min-width: 38mm; }
+  .stat b { display: block; font-size: 20pt; }
+  .stat span { color: var(--muted); font-size: 8.5pt; }
+
+  /* toc */
+  .toc { break-after: page; }
+  .toc h2 { font-size: 20pt; margin-bottom: 5mm; color: var(--cyan); }
+  .toc ol { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 8mm; }
+  .toc li { break-inside: avoid; margin-bottom: 2.5mm; }
+  .toc a { display: block; background: var(--panel); border: 1px solid var(--line); border-left: 5px solid var(--c, var(--cyan));
+           border-radius: 8px; padding: 2.5mm 4mm; color: var(--text); font-weight: 600; }
+  .toc a small { display: block; color: var(--muted); font-weight: 400; font-size: 8pt; }
+
+  /* sections */
+  section { break-before: page; }
+  .sec-head { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--c, var(--cyan)); padding-bottom: 2mm; margin-bottom: 4mm; }
+  .sec-head h2 { font-size: 18pt; color: var(--c, var(--cyan)); }
+  .top { font-size: 8pt; color: var(--muted); border: 1px solid var(--line); border-radius: 20px; padding: 1mm 3mm; }
+  h3 { font-size: 11.5pt; color: var(--c, var(--cyan)); margin: 4mm 0 2mm; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3mm 4mm; margin: 0 0 3mm; break-inside: avoid; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  p { margin: 1mm 0 2mm; }
+  ul { margin: 1mm 0 2mm; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+
+  pre { background: #0a0e1a; border: 1px solid var(--line); border-radius: 8px; padding: 2.5mm 3.5mm; margin: 1.5mm 0 2mm;
+        font-size: 8.6pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; color: #d6dcf5; }
+  .k { color: var(--pink); font-weight: 600; } .b { color: var(--cyan); } .s { color: var(--lime); }
+  .n { color: var(--orange); } .c { color: #6b7699; font-style: italic; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5mm 0 3mm; font-size: 8.8pt; break-inside: avoid; }
+  th { text-align: left; background: var(--panel2); color: var(--c, var(--cyan)); padding: 1.6mm 2.5mm; border-bottom: 1px solid var(--line); }
+  td { padding: 1.6mm 2.5mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #0f1424; }
+
+  .trap { border-left: 4px solid var(--red); background: #1f1220; }
+  .trap h4, .tip h4, .key h4 { margin: 0 0 1mm; font-size: 9.5pt; }
+  .trap h4 { color: var(--red); }
+  .tip { border-left: 4px solid var(--green); background: #0f1f19; }
+  .tip h4 { color: var(--green); }
+  .key { border-left: 4px solid var(--amber); background: #221b0c; }
+  .key h4 { color: var(--amber); }
+  .wr { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .wrong .lbl { color: var(--red); font-weight: 700; font-size: 8.5pt; }
+  .right .lbl { color: var(--green); font-weight: 700; font-size: 8.5pt; }
+  .pill { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 0.4mm 2mm; border-radius: 10px; margin-right: 1mm; }
+  .p-red { background: #3b1018; color: var(--red); } .p-amb { background: #3a2c08; color: var(--amber); } .p-grn { background: #0c2e1c; color: var(--green); }
+  .footer { color: var(--muted); font-size: 8pt; text-align: center; margin-top: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<div class="cover" id="top">
+  <div class="tag">PYTHON · FROM ZERO · LEARNING LOG</div>
+  <h1>Python Cheat Sheet</h1>
+  <p>Everything I've learned so far, in one place: each topic with examples, the exact traps I fell into, and how to avoid them. <b>Revise one section a day.</b></p>
+  <div class="stats">
+    <div class="stat"><b style="color:var(--cyan)">{{LESSONS}}</b><span>lessons done</span></div>
+    <div class="stat"><b style="color:var(--orange)">{{LEETCODE}}</b><span>LeetCode solved</span></div>
+    <div class="stat"><b style="color:var(--lime)">{{HACKERRANK}}</b><span>HackerRank solved</span></div>
+    <div class="stat"><b style="color:var(--pink)">{{UPDATED}}</b><span>last updated</span></div>
+  </div>
+</div>
+
+<!-- ===================== TOC ===================== -->
+<div class="toc" id="toc">
+  <h2>📚 Contents</h2>
+  <ol>
+    <li><a href="#s0" style="--c:var(--green)">0 · How to revise &amp; solve<small>daily routine, problem-solving method, checklist</small></a></li>
+    <li><a href="#s1" style="--c:var(--cyan)">1 · print, variables, f-strings<small>sep, end, :.2f</small></a></li>
+    <li><a href="#s2" style="--c:var(--blue)">2 · Types &amp; input<small>int, float, str, None, input() is text</small></a></li>
+    <li><a href="#s3" style="--c:var(--violet)">3 · Operators &amp; conditions<small>// % **, = vs ==, and/or, in, if/elif</small></a></li>
+    <li><a href="#s4" style="--c:var(--pink)">4 · Loops ⭐<small>range, while, break/continue/pass, items vs positions</small></a></li>
+    <li><a href="#s5" style="--c:var(--lime)">5 · Strings<small>index, slice, methods, compare, split/join</small></a></li>
+    <li><a href="#s6" style="--c:var(--orange)">6 · Lists ⭐<small>append, sort vs sorted, in place, nested</small></a></li>
+    <li><a href="#s7" style="--c:var(--amber)">7 · Functions<small>return vs print, None, defaults, scope</small></a></li>
+    <li><a href="#s8" style="--c:var(--cyan)">8 · Dictionaries<small>get, items, counting pattern</small></a></li>
+    <li><a href="#s9" style="--c:var(--violet)">9 · Parsing input ⭐<small>split, map, name + numbers, many lines</small></a></li>
+    <li><a href="#s10" style="--c:var(--pink)">10 · Pattern library<small>accumulator, filter, best so far, two pointers…</small></a></li>
+    <li><a href="#s11" style="--c:var(--red)">11 · Error decoder<small>what each error message really means</small></a></li>
+    <li><a href="#s12" style="--c:var(--orange)">12 · LeetCode &amp; HackerRank format<small>class Solution, in place, timer noise</small></a></li>
+    <li><a href="#s13" style="--c:var(--green)">13 · Git daily commands<small>stage, commit, push, partial staging</small></a></li>
+    <li><a href="#s14" style="--c:var(--lime)">14 · Problems solved<small>links to every problem</small></a></li>
+  </ol>
+</div>
+
+<!-- ===================== 0 ===================== -->
+<section id="s0" style="--c:var(--green)">
+  <div class="sec-head"><h2>0 · How to revise &amp; solve</h2><a class="top" href="#toc">↑ contents</a></div>
+  <div class="grid">
+    <div class="card tip"><h4>📆 Daily routine (about 10 min)</h4>
+      <ul><li>Read <b>one section</b> of this sheet, top to bottom</li>
+      <li>Cover the ✅ boxes and predict the answer to each ❌ box</li>
+      <li>Then: 1 LeetCode + 1 commit (the streak minimum)</li></ul></div>
+    <div class="card key"><h4>🧘 When panic hits</h4>
+      <ul><li>Stop typing. Solve the sample <b>by hand</b> first</li>
+      <li>Comment out broken code with <code>#</code>, don't delete it</li>
+      <li>Fix the <b>first</b> red squiggle only, then re-run</li></ul></div>
+  </div>
+  <h3>The 6-step method</h3>
+  <table>
+    <tr><th>#</th><th>Step</th><th>What it looks like</th></tr>
+    <tr><td>1</td><td>Solve the sample by hand</td><td>paper, no code</td></tr>
+    <tr><td>2</td><td>Write the steps as <code># STEP</code> comments</td><td>a big problem becomes 4–5 small ones</td></tr>
+    <tr><td>3</td><td>Write each step's data shape</td><td><code># students = [["Harry", 37.21], ...]</code></td></tr>
+    <tr><td>4</td><td>Code ONE step, <code>print()</code>, run</td><td>check the shape matches, then the next step</td></tr>
+    <tr><td>5</td><td>Translate with the phrasebook (below)</td><td>English → Python</td></tr>
+    <tr><td>6</td><td>Remove debug prints, test tricky inputs, submit</td><td>duplicates, uppercase, empty, boundaries</td></tr>
+  </table>
+  <h3>Phrasebook: English → Python</h3>
+  <table>
+    <tr><th>I want to…</th><th>Python</th></tr>
+    <tr><td>start an empty list / dict / text / total</td><td><code>x = []</code> · <code>d = {}</code> · <code>s = ""</code> · <code>total = 0</code></td></tr>
+    <tr><td>add to a list</td><td><code>x.append(item)</code></td></tr>
+    <tr><td>go through every item</td><td><code>for item in x:</code></td></tr>
+    <tr><td>go through every position</td><td><code>for i in range(len(x)):</code> → <code>x[i]</code></td></tr>
+    <tr><td>keep only some items</td><td><code>if condition:</code> then <code>append</code></td></tr>
+    <tr><td>first / last item</td><td><code>x[0]</code> / <code>x[-1]</code></td></tr>
+    <tr><td>stop at the first match</td><td><code>break</code> (or <code>return</code> in a function)</td></tr>
+    <tr><td>count things</td><td><code>counts[k] = counts.get(k, 0) + 1</code></td></tr>
+    <tr><td>swap two items</td><td><code>x[a], x[b] = x[b], x[a]</code></td></tr>
+  </table>
+  <h3>✅ Checklist before Run / Submit</h3>
+  <div class="card">
+    <ul>
+      <li>Is the loop variable an <b>item</b> or a <b>position</b>? Did I name it after what it is?</li>
+      <li>Does my <code>range</code> give exactly the right first and last values?</li>
+      <li>Am I <b>replacing</b> (<code>=</code>) or <b>adding on</b> (<code>+=</code>)?</li>
+      <li>Text or number? Do I need <code>int()</code> / <code>float()</code> / <code>str()</code>?</li>
+      <li>Could uppercase break it? Use <code>.lower()</code></li>
+      <li>Want the first match? Did I <code>break</code>?</li>
+      <li>Does every <code>while</code> change something so it can stop?</li>
+      <li>Does my function <b>return</b> (not print)?</li>
+      <li>Did I test a tricky input (duplicates, boundaries like exactly 90, empty)?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 1 ===================== -->
+<section id="s1" style="--c:var(--cyan)">
+  <div class="sec-head"><h2>1 · print, variables, f-strings</h2><a class="top" href="#toc">↑ contents</a></div>
+<pre>name = "Gowri"            # a variable is a labelled box holding a value
+age = 31
+print("My name is", name)  # My name is Gowri    (commas → a SPACE)
+print(f"Next year: {age + 1}")   # Next year: 32  (f-string: {} is replaced)
+print("A", "B", "C", sep="-")    # A-B-C          (sep = what goes between)
+print("Hi", end="")              # no newline, the next print continues here
+print("!")                       # Hi!
+avg = 26.5
+print(f"{avg:.2f}")              # 26.50          (2 decimal places)</pre>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ What I did</div>
+<pre>print("age", age "next", age+1)   # SyntaxError
+print(f"{robot} is{robot_age}")   # Optimus is2</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>print("age", age, "next", age + 1)
+print(f"{robot} is {robot_age}")  # spaces print as typed</pre></div>
+  </div>
+  <div class="card key"><h4>🔑 Remember</h4>
+    <ul><li>The commas in <code>print(a, b)</code> are <b>code</b>: Python prints a <b>space</b>. Only text inside quotes (or <code>sep=</code>) appears on screen.</li>
+    <li><code>{x}</code> means "insert value" <b>only inside f-strings</b>.</li></ul></div>
+</section>
+
+<!-- ===================== 2 ===================== -->
+<section id="s2" style="--c:var(--blue)">
+  <div class="sec-head"><h2>2 · Types &amp; input</h2><a class="top" href="#toc">↑ contents</a></div>
+  <table>
+    <tr><th>Type</th><th>Example</th><th>Convert with</th></tr>
+    <tr><td>int (whole number)</td><td><code>31</code></td><td><code>int("31")</code> → <code>31</code></td></tr>
+    <tr><td>float (decimal)</td><td><code>37.21</code></td><td><code>float("37.21")</code></td></tr>
+    <tr><td>str (text)</td><td><code>"Gowri"</code></td><td><code>str(5)</code> → <code>"5"</code></td></tr>
+    <tr><td>bool</td><td><code>True</code> / <code>False</code></td><td>comparisons give these</td></tr>
+    <tr><td>None ("nothing")</td><td><code>None</code></td><td>what a function without <code>return</code> gives (other languages call it <code>null</code>)</td></tr>
+  </table>
+<pre>age = int(input("Age? "))   # input() ALWAYS returns TEXT, so convert it
+print(type(age))             # &lt;class 'int'&gt;   (type() shows what you're holding)</pre>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ Trap</div>
+<pre>age = input("Age? ")
+print(age + 1)       # TypeError: text + number
+"12" + 3             # TypeError</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>age = int(input("Age? "))
+print(age + 1)
+"12" + str(3)        # "123"</pre></div>
+  </div>
+</section>
+
+<!-- ===================== 3 ===================== -->
+<section id="s3" style="--c:var(--violet)">
+  <div class="sec-head"><h2>3 · Operators &amp; conditions</h2><a class="top" href="#toc">↑ contents</a></div>
+  <table>
+    <tr><th>Op</th><th>Example</th><th>Result</th><th>Meaning</th></tr>
+    <tr><td><code>/</code></td><td><code>7 / 2</code></td><td>3.5</td><td>float division, always a decimal (<code>8 / 2</code> → 4.0)</td></tr>
+    <tr><td><code>//</code></td><td><code>7 // 2</code></td><td>3</td><td>integer division, drops the decimal</td></tr>
+    <tr><td><code>%</code></td><td><code>7 % 2</code></td><td>1</td><td>remainder. <code>n % 2 == 0</code> → even</td></tr>
+    <tr><td><code>**</code></td><td><code>3 ** 2</code></td><td>9</td><td>power</td></tr>
+    <tr><td><code>+= -= *=</code></td><td><code>x += 1</code></td><td></td><td>shortcut for <code>x = x + 1</code></td></tr>
+  </table>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">= vs ==</h3>
+<pre>x = 5        # STORE 5 in x
+x == 5       # ASK "is x 5?" → True</pre></div>
+    <div class="card"><h3 style="margin-top:0">Combining conditions</h3>
+<pre>if 2 &lt;= n &lt;= 5:          # range check in one go
+if x &gt; 0 and x &lt; 10:     # both true
+if ch in "aeiou":        # one of these?</pre></div>
+  </div>
+  <h3>Flat if / elif / else</h3>
+<pre>if n % 2 == 1:
+    print("Weird")
+elif 2 &lt;= n &lt;= 5:        # only checked if everything above was False
+    print("Not Weird")
+elif 6 &lt;= n &lt;= 20:
+    print("Weird")
+else:
+    print("Not Weird")</pre>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ Traps I fell into</div>
+<pre>if ch == 'a' | 'e':        # | is NOT "or"
+if ch == 'a' or 'e':       # ALWAYS True!
+return grade == "A"        # returns False, == compares
+if score &gt; 90:             # 90 itself excluded</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>if ch in "aeiou":
+if ch == 'a' or ch == 'e':
+return "A"
+if score &gt;= 90:            # "90+" includes 90</pre></div>
+  </div>
+</section>
+
+<!-- ===================== 4 ===================== -->
+<section id="s4" style="--c:var(--pink)">
+  <div class="sec-head"><h2>4 · Loops ⭐</h2><a class="top" href="#toc">↑ contents</a></div>
+  <div class="card key"><h4>🔴 My #1 mistake (8 times!): items vs positions</h4>
+  <table>
+    <tr><th>Loop</th><th>Gives you</th><th>Use it as</th></tr>
+    <tr><td><code>for num in nums:</code></td><td><b>items</b>: 1, 2, 1</td><td><code>num</code> directly</td></tr>
+    <tr><td><code>for i in range(len(nums)):</code></td><td><b>positions</b>: 0, 1, 2</td><td><code>nums[i]</code></td></tr>
+  </table>
+  <p>Before writing <code>x[something]</code>, ask: <b>"is <code>something</code> a position or an item?"</b> If it came from <code>for something in x</code>, it's an item. <b>Name loop variables after what they are</b> (<code>num</code>, <code>name</code> = item · <code>i</code> = position).</p></div>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ What I did (LeetCode 1929)</div>
+<pre>nums = [1, 2, 1]
+for i in nums:
+    ans.append(nums[i])   # nums[1], nums[2], nums[1]
+# → [2, 1, 2]  wrong!</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>for num in nums:
+    ans.append(num)
+# → [1, 2, 1]</pre></div>
+  </div>
+  <h3>range()</h3>
+  <table>
+    <tr><th>Code</th><th>Gives</th></tr>
+    <tr><td><code>range(5)</code></td><td>0, 1, 2, 3, 4 (stops <b>before</b> 5)</td></tr>
+    <tr><td><code>range(1, 6)</code></td><td>1, 2, 3, 4, 5</td></tr>
+    <tr><td><code>range(2, 21, 2)</code></td><td>2, 4, … 20 (step)</td></tr>
+    <tr><td><code>range(len(x) - 1, -1, -1)</code></td><td>positions backwards: 4, 3, 2, 1, 0</td></tr>
+    <tr><td><code>range(nums)</code> ❌</td><td>TypeError: range needs a <b>number</b> → <code>range(len(nums))</code></td></tr>
+  </table>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">while</h3>
+<pre>count = 3
+while count &gt; 0:
+    print(count)
+    count -= 1      # MUST change, or it runs forever
+print("Liftoff!")</pre>
+    <p><span class="pill p-red">TLE</span> "Time Limit Exceeded" usually means an endless <code>while</code>.</p></div>
+    <div class="card"><h3 style="margin-top:0">break · continue · pass</h3>
+<pre>for n in [1, 2, 3, 4]:
+    if n == 2:
+        continue    # skip this round
+    if n == 4:
+        break       # stop the WHOLE loop
+    print(n)        # 1, 3
+# pass = do nothing (placeholder)</pre></div>
+  </div>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ Other loop traps</div>
+<pre>for name in ["A", "B", "C"]:
+    pass
+print(name)      # "C": keeps the LAST value!
+
+for letter in s:           # loop never needed
+    while first &lt; last: …  # reverses len(s) times</pre></div>
+    <div class="card tip"><div class="lbl">✅ Remember</div>
+<ul><li>Use the variable that holds <b>what the question asks for</b>, not a leftover loop variable.</li>
+<li>Off-by-one: <code>range(0, n + 1)</code> gives n+1 items. <code>range(n)</code> gives exactly n.</li>
+<li><code>for _ in range(n):</code> → "repeat n times, I don't need the counter".</li>
+<li>Loop variable never used? Ask "do I need this loop at all?"</li></ul></div>
+  </div>
+</section>
+
+<!-- ===================== 5 ===================== -->
+<section id="s5" style="--c:var(--lime)">
+  <div class="sec-head"><h2>5 · Strings</h2><a class="top" href="#toc">↑ contents</a></div>
+<pre>robot = "Optimus"
+#  O  p  t  i  m  u  s
+#  0  1  2  3  4  5  6
+# -7 -6 -5 -4 -3 -2 -1
+len(robot)      # 7
+robot[0]        # "O"        robot[-1]   # "s"
+robot[0:3]      # "Opt"      (stops BEFORE 3, like range)
+robot[3:]       # "imus"     robot[::-1] # "sumitpO" (reversed)</pre>
+  <table>
+    <tr><th>Method</th><th>Example → result</th></tr>
+    <tr><td><code>.upper()</code> / <code>.lower()</code></td><td><code>"Hi".upper()</code> → <code>"HI"</code></td></tr>
+    <tr><td><code>.strip()</code></td><td><code>"  hi  ".strip()</code> → <code>"hi"</code></td></tr>
+    <tr><td><code>.replace(old, new)</code></td><td><code>"1.2.3".replace(".", "[.]")</code> → <code>"1[.]2[.]3"</code></td></tr>
+    <tr><td><code>.count(x)</code></td><td><code>"banana".count("a")</code> → <code>3</code></td></tr>
+    <tr><td><code>.split()</code></td><td><code>"I love code".split()</code> → <code>['I', 'love', 'code']</code> (a <b>list of strings</b>)</td></tr>
+    <tr><td><code>"sep".join(list)</code></td><td><code>" ".join(['I', 'love'])</code> → <code>"I love"</code></td></tr>
+    <tr><td><code>x in text</code></td><td><code>"ank" in "Sankar"</code> → <code>True</code></td></tr>
+  </table>
+  <div class="grid">
+    <div class="card key"><h4>🔑 Strings can't change</h4><p>Methods return a <b>new</b> string. Save it: <code>name = name.strip()</code>. Building text with <code>s = s + ch</code> in a loop makes a new string every round, so for huge texts collect a list and <code>"".join()</code> once.</p></div>
+    <div class="card key"><h4>🔑 Comparing is case-sensitive</h4>
+<pre>"Racecar" == "racecaR"   # False
+w = word.lower()
+w == w[::-1]             # palindrome ✅</pre></div>
+  </div>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ What I did</div>
+<pre>for ch in word:
+    word[ch]          # ch is a LETTER → TypeError
+i.index[i]            # methods use ( ) not [ ]</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>for ch in word:
+    print(ch)         # use the letter directly
+"Robot"[::-1].lower() # chaining: left → right → "tobor"</pre></div>
+  </div>
+</section>
+
+<!-- ===================== 6 ===================== -->
+<section id="s6" style="--c:var(--orange)">
+  <div class="sec-head"><h2>6 · Lists ⭐</h2><a class="top" href="#toc">↑ contents</a></div>
+  <table>
+    <tr><th>Code</th><th>Does</th></tr>
+    <tr><td><code>x.append(v)</code></td><td>add to the end (the ONLY way to grow an empty list)</td></tr>
+    <tr><td><code>x.insert(i, v)</code></td><td>add at position <code>i</code></td></tr>
+    <tr><td><code>x.remove(v)</code></td><td>remove the first item equal to <code>v</code> (by <b>value</b>)</td></tr>
+    <tr><td><code>x.pop()</code> / <code>x.pop(i)</code></td><td>remove last / at position (and give it back)</td></tr>
+    <tr><td><code>x[i] = v</code></td><td>replace an EXISTING slot</td></tr>
+    <tr><td><code>x.sort()</code> / <code>x.reverse()</code></td><td>change the list itself, return <code>None</code></td></tr>
+    <tr><td><code>sorted(x)</code></td><td>NEW sorted list, original unchanged</td></tr>
+    <tr><td><code>[1, 2] + [3]</code> · <code>[1, 2] * 2</code></td><td><code>[1, 2, 3]</code> · <code>[1, 2, 1, 2]</code></td></tr>
+    <tr><td><code>len(x) sum(x) max(x) min(x)</code></td><td>functions go AROUND the list</td></tr>
+  </table>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ What I did</div>
+<pre>ans = []
+ans[0] = 5            # IndexError: no slot 0
+x = [3, 1, 2].sort()  # x is None!
+scores.max()          # AttributeError
+s = s[::-1]           # LeetCode's list unchanged
+list_ns.sorted()      # sorted goes AROUND</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>ans = []
+ans.append(5)
+x = sorted([3, 1, 2]) # [1, 2, 3]
+max(scores)
+s[:] = s[::-1]        # or s.reverse()
+sorted(list_ns)</pre></div>
+  </div>
+  <div class="grid">
+    <div class="card key"><h4>📚 In place vs new (the bookshelf)</h4><p><code>.sort()</code>, <code>.append()</code>, <code>.reverse()</code>, <code>s[i] = …</code> <b>rearrange the same shelf</b>. <code>sorted()</code>, <code>s[::-1]</code>, <code>+</code> make a <b>new shelf</b>. <code>s = …</code> only moves the <i>label</i> to a new shelf.</p></div>
+    <div class="card"><h3 style="margin-top:0">Nested lists</h3>
+<pre>students = [["Harry", 37.21], ["Tina", 37.2]]
+students[0]        # ["Harry", 37.21]
+students[0][1]     # 37.21
+for name, score in students:
+    print(name, score)</pre></div>
+  </div>
+  <div class="card trap"><h4>⚠️ Never call a variable <code>list</code>, <code>str</code>, <code>dict</code>, <code>int</code></h4><p><code>len(list)</code> → "object of type 'type' has no len()". Those names belong to Python. Use the parameter name (<code>nums</code>).</p></div>
+</section>
+
+<!-- ===================== 7 ===================== -->
+<section id="s7" style="--c:var(--amber)">
+  <div class="sec-head"><h2>7 · Functions</h2><a class="top" href="#toc">↑ contents</a></div>
+<pre>def power(base, exp=2):    # parameters, with a default value
+    return base ** exp     # return HANDS BACK the value
+
+result = power(3)          # 9
+print(power(2, 5))         # 32</pre>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ print instead of return</div>
+<pre>def average(nums):
+    print(sum(nums) / len(nums))
+
+avg = average([1, 2, 3])   # shows 2.0
+print(avg)                 # None 😱</pre></div>
+    <div class="card tip"><div class="lbl">✅ Calculate and return, print outside</div>
+<pre>def average(nums):
+    if not nums:           # GUARD CLAUSE
+        return 0
+    return sum(nums) / len(nums)
+
+print(average([1, 2, 3]))  # 2.0</pre></div>
+  </div>
+  <table>
+    <tr><th></th><th><code>break</code></th><th><code>return</code></th></tr>
+    <tr><td>Exits</td><td>the nearest <b>loop</b> (not the <code>if</code>)</td><td>the <b>whole function</b>, loops included</td></tr>
+    <tr><td>Code after it</td><td>the rest of the function runs</td><td>nothing runs (a <code>break</code> after <code>return</code> is dead code)</td></tr>
+  </table>
+  <div class="grid">
+    <div class="card key"><h4>🔑 Rules</h4><ul>
+      <li>No <code>return</code> reached → the function gives <code>None</code> ("falls off the end")</li>
+      <li>Variables made inside stay inside → use <code>return</code></li>
+      <li><code>return</code> only works inside <code>def</code></li>
+      <li>Early returns replace <code>elif</code> chains: each <code>if</code> can assume the earlier ones failed</li></ul></div>
+    <div class="card trap"><h4>⚠️ Side effects</h4><p><code>scores.sort()</code> inside a function also sorts the <b>caller's</b> list. Use <code>scores = sorted(scores)</code> unless changing it is the job.</p></div>
+  </div>
+<pre>def grade(score):           # early returns, no elif needed
+    if score &gt;= 90:
+        return "A"
+    if score &gt;= 75:
+        return "B"
+    if score &gt;= 50:
+        return "C"
+    return "F"</pre>
+</section>
+
+<!-- ===================== 8 ===================== -->
+<section id="s8" style="--c:var(--cyan)">
+  <div class="sec-head"><h2>8 · Dictionaries</h2><a class="top" href="#toc">↑ contents</a></div>
+<pre>robot = {"name": "Optimus", "year": 2022}   # key: value pairs
+robot["name"]              # "Optimus"   (look up by KEY)
+robot["price"] = 20000     # add (or change, same syntax)
+del robot["year"]          # delete
+"name" in robot            # True        (checks KEYS)
+len(robot)                 # number of pairs
+for key, value in robot.items():
+    print(f"{key}: {value}")</pre>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ Missing key crashes</div>
+<pre>robot["height"]    # KeyError: 'height'
+for k in robot:    # gives KEYS only
+    print(k)</pre></div>
+    <div class="card tip"><div class="lbl">✅ Safe</div>
+<pre>robot.get("height")          # None
+robot.get("height", "n/a")   # your default
+for k, v in robot.items():   # both</pre></div>
+  </div>
+  <h3>⭐ The COUNTING pattern = a tally sheet ✏️</h3>
+<pre>counts = {}
+for ch in "banana":
+    counts[ch] = counts.get(ch, 0) + 1   # "current number (or 0) + 1"
+print(counts)                            # {'b': 1, 'a': 3, 'n': 2}</pre>
+  <table>
+    <tr><th>Round</th><th>ch</th><th>On sheet?</th><th>counts after</th></tr>
+    <tr><td>1</td><td>b</td><td>no → 0 + 1</td><td><code>{'b': 1}</code></td></tr>
+    <tr><td>2</td><td>a</td><td>no → 0 + 1</td><td><code>{'b': 1, 'a': 1}</code></td></tr>
+    <tr><td>4</td><td>a</td><td><b>yes</b> → 1 + 1</td><td><code>{'b': 1, 'a': 2, 'n': 1}</code></td></tr>
+    <tr><td>6</td><td>a</td><td><b>yes</b> → 2 + 1</td><td><code>{'b': 1, 'a': 3, 'n': 2}</code></td></tr>
+  </table>
+  <div class="card key"><h4>🔑 Lists vs dictionaries</h4><p>List = find by <b>position</b> (<code>x[0]</code>), for a sequence of similar things. Dict = find by <b>key</b> (<code>d["name"]</code>), for labelled data, lookups and counting. Phone numbers stay <b>text</b> (<code>"9500262191"</code>): they're labels, not quantities.</p></div>
+</section>
+
+<!-- ===================== 9 ===================== -->
+<section id="s9" style="--c:var(--violet)">
+  <div class="sec-head"><h2>9 · Parsing input ⭐</h2><a class="top" href="#toc">↑ contents</a></div>
+  <p>Input always arrives as <b>text</b>. Parsing = turning it into numbers and containers.</p>
+  <table>
+    <tr><th>Input</th><th>Code</th><th>Result</th></tr>
+    <tr><td><code>3</code></td><td><code>n = int(input())</code></td><td><code>3</code></td></tr>
+    <tr><td><code>2 3 6</code></td><td><code>input().split()</code></td><td><code>['2', '3', '6']</code> (still text!)</td></tr>
+    <tr><td><code>2 3 6</code></td><td><code>list(map(int, input().split()))</code></td><td><code>[2, 3, 6]</code></td></tr>
+    <tr><td><code>Harsh 25 26.5</code></td><td><code>name, *rest = input().split()</code></td><td><code>"Harsh"</code>, <code>['25', '26.5']</code></td></tr>
+    <tr><td><code>insert 0 5</code></td><td><code>parts = input().split()</code></td><td><code>parts[0]</code> = command, <code>int(parts[1])</code></td></tr>
+  </table>
+  <div class="card"><h3 style="margin-top:0">Read inside → out: <code>list(map(int, input().split()))</code></h3>
+    <p><code>input()</code> → <code>"2 3 6"</code> · <code>.split()</code> → <code>["2", "3", "6"]</code> · <code>map(int, …)</code> → a lazy "recipe" · <code>list(…)</code> → <code>[2, 3, 6]</code></p></div>
+<pre>student_marks = {}
+for _ in range(n):                     # many lines → a dictionary
+    name, *line = input().split()
+    student_marks[name] = list(map(float, line))
+query_name = input()
+marks = student_marks[query_name]      # use the ASKED name, after reading it
+print(f"{sum(marks) / len(marks):.2f}")</pre>
+  <div class="wr">
+    <div class="card trap"><div class="lbl">❌ What I did</div>
+<pre>arr = map(int, input().split())
+arr.sort()           # 'map' object has no attribute 'sort'
+parts = input.split()  # missing () → AttributeError
+lst = ""             # a string, not a list</pre></div>
+    <div class="card tip"><div class="lbl">✅ Right</div>
+<pre>arr = list(map(int, input().split()))
+arr.sort()
+parts = input().split()
+lst = []</pre></div>
+  </div>
+  <div class="card tip"><h4>🔍 "What am I holding?"</h4><p>When confused: <code>print(x)</code> and <code>print(type(x))</code>. Read nested data one step at a time: <code>d["Harsh"]</code> → the list → <code>d["Harsh"][1]</code> → one number.</p></div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section id="s10" style="--c:var(--pink)">
+  <div class="sec-head"><h2>10 · Pattern library</h2><a class="top" href="#toc">↑ contents</a></div>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">ACCUMULATOR</h3>
+<pre>total = 0
+for num in nums:
+    total += num</pre><p>Running Sum, sum 1–100, vowel counter</p></div>
+    <div class="card"><h3 style="margin-top:0">BUILD A LIST / FILTER</h3>
+<pre>even = []
+for num in nums:
+    if num % 2 == 0:
+        even.append(num)</pre><p>Even filter, Concatenation of Array</p></div>
+    <div class="card"><h3 style="margin-top:0">COUNTING</h3>
+<pre>counts = {}
+for x in items:
+    counts[x] = counts.get(x, 0) + 1</pre><p>Letter counter, word frequency</p></div>
+    <div class="card"><h3 style="margin-top:0">BEST SO FAR</h3>
+<pre>best = None
+for x in items:
+    if best is None or x &gt; best:
+        best = x</pre><p>Most common letter, second-highest</p></div>
+    <div class="card"><h3 style="margin-top:0">TWO POINTERS</h3>
+<pre>left, right = 0, len(s) - 1
+while left &lt; right:
+    s[left], s[right] = s[right], s[left]
+    left += 1
+    right -= 1</pre><p>Reverse String, palindrome</p></div>
+    <div class="card"><h3 style="margin-top:0">EARLY EXIT · GUARD CLAUSE</h3>
+<pre>for x in sorted_scores:
+    if x &gt; lowest:
+        second = x
+        break          # first match only
+# guard: if not nums: return 0</pre><p>Runner-Up, Nested Lists, average([])</p></div>
+  </div>
+  <table>
+    <tr><th>Principle</th><th>Meaning</th></tr>
+    <tr><td><b>USE A BUILT-IN</b></td><td>before writing a loop, ask "does Python have this?" (<code>[::-1]</code>, <code>.replace</code>, <code>.insert</code>, <code>sum</code>)</td></tr>
+    <tr><td><b>DRY</b></td><td>don't repeat yourself: compute once (<code>w = word.lower()</code>) and reuse it</td></tr>
+    <tr><td><b>Good starting value</b></td><td><code>total = 0</code> removes "first round" special cases</td></tr>
+    <tr><td><b>Correct → readable → efficient</b></td><td>efficient = less work as the input grows (O(n)), not milliseconds. Gauss: <code>n * (n + 1) // 2</code></td></tr>
+  </table>
+</section>
+
+<!-- ===================== 11 ===================== -->
+<section id="s11" style="--c:var(--red)">
+  <div class="sec-head"><h2>11 · Error decoder</h2><a class="top" href="#toc">↑ contents</a></div>
+  <p>Read the <b>last line</b> of a traceback first (the error), then the line number above it.</p>
+  <table>
+    <tr><th>Error message</th><th>What it really means</th><th>Usual fix</th></tr>
+    <tr><td><code>SyntaxError</code></td><td>Python can't read the line</td><td>missing comma, bracket or colon</td></tr>
+    <tr><td><code>IndexError: list index out of range</code></td><td>position doesn't exist</td><td>item used as a position? empty list? use <code>append</code></td></tr>
+    <tr><td><code>IndexError: list assignment index out of range</code></td><td><code>x[i] = …</code> on a slot that doesn't exist</td><td><code>x.append(…)</code></td></tr>
+    <tr><td><code>KeyError: 'price'</code></td><td>key not in the dictionary</td><td><code>.get(key, default)</code> or <code>if key in d</code></td></tr>
+    <tr><td><code>TypeError: string indices must be integers</code></td><td>used a letter as a position</td><td>use the letter directly</td></tr>
+    <tr><td><code>TypeError: can only concatenate str…</code></td><td>text + number</td><td><code>int()</code> or <code>str()</code></td></tr>
+    <tr><td><code>TypeError: 'list' object cannot be interpreted as an integer</code></td><td><code>range(nums)</code></td><td><code>range(len(nums))</code></td></tr>
+    <tr><td><code>TypeError: object of type 'type' has no len()</code></td><td><code>len(list)</code>: used Python's type name</td><td>use your variable (<code>nums</code>)</td></tr>
+    <tr><td><code>TypeError: 'builtin_function_or_method' object is not subscriptable</code></td><td><code>[ ]</code> on a function or method</td><td>call methods with <code>( )</code></td></tr>
+    <tr><td><code>AttributeError: 'map' object has no attribute 'sort'</code></td><td><code>map()</code> isn't a list</td><td><code>list(map(…))</code></td></tr>
+    <tr><td><code>AttributeError: 'list' object has no attribute 'max'</code></td><td><code>max</code> is a function</td><td><code>max(x)</code></td></tr>
+    <tr><td><code>AttributeError: … has no attribute 'split'</code> on input</td><td><code>input.split()</code></td><td><code>input().split()</code></td></tr>
+    <tr><td><code>NameError: name 'x' is not defined</code></td><td>variable doesn't exist here (typo, or made inside a function)</td><td>check spelling / <code>return</code> it</td></tr>
+    <tr><td><code>ZeroDivisionError</code></td><td>divided by 0 (e.g. <code>len([])</code>)</td><td>guard clause</td></tr>
+    <tr><td><code>EOFError</code></td><td><code>input()</code> had nothing to read</td><td>provide input / custom test input</td></tr>
+    <tr><td>Time Limit Exceeded</td><td>code never finishes</td><td><code>while</code> condition never becomes False</td></tr>
+    <tr><td>Wrong Answer, 1 test passes</td><td>passed by luck</td><td>ask "what's different about the failing input?"</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 12 ===================== -->
+<section id="s12" style="--c:var(--orange)">
+  <div class="sec-head"><h2>12 · LeetCode &amp; HackerRank format</h2><a class="top" href="#toc">↑ contents</a></div>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">🟠 LeetCode</h3>
+<pre>class Solution:
+    def runningSum(self, nums: list[int]) -&gt; list[int]:
+        ...            # just write logic here
+        return output  # RETURN, don't print</pre>
+      <ul><li>Ignore <code>class</code>, <code>self</code>, <code>-&gt; int</code> for now</li>
+      <li><b>"In place"</b> → change the given list, return nothing</li>
+      <li>"Beats X%" on tiny problems = timer noise. Resubmitting changes it</li>
+      <li>Streak = <b>profile "Max streak"</b> (any accepted problem). The 🔥 top-bar counter = Daily Question only</li></ul></div>
+    <div class="card"><h3 style="margin-top:0">🔥 HackerRank</h3>
+<pre>if __name__ == '__main__':
+    n = int(input())   # keep their lines
+    ...                # write BELOW them
+    print(answer)      # PRINT (no return here)</pre>
+      <ul><li>Output must match <b>exactly</b> (case, spaces)</li>
+      <li>Scroll the output box: lines can be hidden</li>
+      <li>Run Code first, then Submit Code</li>
+      <li>Language: <b>Python 3</b></li></ul></div>
+  </div>
+</section>
+
+<!-- ===================== 13 ===================== -->
+<section id="s13" style="--c:var(--green)">
+  <div class="sec-head"><h2>13 · Git daily commands</h2><a class="top" href="#toc">↑ contents</a></div>
+  <table>
+    <tr><th>Goal</th><th>VS Code</th><th>Terminal</th></tr>
+    <tr><td>stage one file</td><td>hover the file row → its own <b>+</b></td><td><code>git add file.py</code></td></tr>
+    <tr><td>commit</td><td>message box (<b>Ctrl+A, Delete</b> first!) → <b>✓ Commit</b></td><td><code>git commit -m "msg"</code></td></tr>
+    <tr><td>push</td><td><b>🔄 0↓ N↑</b> in the status bar</td><td><code>git push</code></td></tr>
+    <tr><td>check status</td><td>Source Control panel</td><td><code>git status</code></td></tr>
+    <tr><td>stage part of a file</td><td>select lines → <b>Ctrl+Shift+P → Git: Stage Selected Ranges</b></td><td>(new files: ask Claude)</td></tr>
+  </table>
+  <div class="grid">
+    <div class="card key"><h4>🔑 Commit ≠ push</h4><p><b>Commit</b> saves to the laptop. <b>Push/Sync</b> sends to GitHub. Only pushed commits make the square green, and the graph can take a while to update.</p></div>
+    <div class="card tip"><h4>🟩 Good commits</h4><p>One logical change per commit, with a clear message: <code>Day 05: word counter with split()</code>. Never fake or back-date commits.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 14 ===================== -->
+<section id="s14" style="--c:var(--lime)">
+  <div class="sec-head"><h2>14 · Problems solved</h2><a class="top" href="#toc">↑ contents</a></div>
+  <h3>🟠 LeetCode</h3>
+  <table>
+    <tr><th>Date</th><th>Problem</th><th>Pattern / lesson</th></tr>
+{{LEETCODE_ROWS}}
+  </table>
+  <h3>🔥 HackerRank</h3>
+  <table>
+    <tr><th>Date</th><th>Problem</th><th>Pattern / lesson</th></tr>
+{{HACKERRANK_ROWS}}
+  </table>
+  <div class="footer">Generated from <code>cheatsheet/cheatsheet.src.html</code> · updated {{UPDATED}} · <a href="#top">↑ back to cover</a></div>
+</section>
+
+</body>
+</html>
