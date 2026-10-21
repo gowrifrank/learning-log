@@ -283,3 +283,11 @@ for letter in s:         # ❌ repeats the WHOLE reversal once per letter
 **Lessons:**
 - Every `while` loop needs something inside it that moves it towards stopping.
 - If a loop variable is never used, ask "do I need this loop at all?"
+
+### 2026-10-21: HackerRank, Lists (first draft review)
+- `input.split()` ❌ is missing the `()`. `input` is the function itself, `input()` *calls* it → `AttributeError`
+- `Final_List = ""` ❌ is an empty **string**. An empty list is `[]`
+- `parts[1]`, `parts[2]` are **text**. Wrap them in `int()` before inserting, appending or removing numbers
+- Hand-written `insert` / `remove` loops: the `while` loops never change `i` (infinite) and run past the end of the list. **Python already has `.insert(i, x)` and `.remove(x)`** (USE A BUILT-IN)
+- Changing a list (`.remove`) while looping over it with `for` skips items. Avoid it
+- Style: `snake_case` for variables (`final_list`). `CapitalWords` is reserved for classes
