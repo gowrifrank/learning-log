@@ -257,3 +257,4 @@ for ch in "banana":
 - Write a function (leap year)
 - Finding the percentage
 - Nested Lists
+- Lists
