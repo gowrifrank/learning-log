@@ -234,6 +234,20 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🔥 HackerRank: Lists (command processor)
+| Version | Idea | Notes |
+|---|---|---|
+| Mine ✅ | one function per command + an `if/elif` chain on `parts[0]` | clear structure, like a real command processor |
+| Shorter | call the list methods directly in the `if/elif` (`lst.append(int(parts[1]))`) | the wrappers are optional, since methods change the list in place |
+| Dispatch dict (coming soon) | `{"append": lst.append, ...}`, then look up the command and call it | no long `if/elif` chain, and new commands are one line |
+
+**Insights:**
+- `.split()` gives text, so numbers need `int()` before `insert`, `remove` or `append`.
+- Don't hand-write `insert`/`remove`: the built-ins already handle shifting and edge cases (USE A BUILT-IN).
+- Never change a list (`.remove`) while a `for` loop walks over it, because items get skipped.
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python

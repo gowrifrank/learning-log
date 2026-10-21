@@ -43,6 +43,7 @@
 | 2026-10-16 | Write a function (leap year) | ✅ solved on my phone 📱 (90/110 pts, 20 to ⭐⭐⭐) |
 | 2026-10-17 | Finding the percentage | ✅ (after fixing a leftover loop variable: `name` → `query_name`) |
 | 2026-10-18 | Nested Lists | ✅ using the STEP-comments method (steps 3–5 written myself) |
+| 2026-10-21 | Lists | ✅ (function per command + if/elif dispatch; built-in .insert/.remove + int()) |
 
 ## 🟠 LeetCode
 | Date | Problem | Result |
