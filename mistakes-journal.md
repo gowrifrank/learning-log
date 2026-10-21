@@ -36,6 +36,7 @@
 - [ ] Did I test a **tricky** input (duplicates, uppercase, edge values)?
 - [ ] Function or method? `max(x)` goes around, `x.sort()` goes after the dot
 - [ ] Want the **first** match in a loop? Did I add `break`?
+- [ ] Does every `while` loop change something that will eventually make its condition False?
 - [ ] Does my function **return** (not print)? Did I test the **boundary values** (e.g. exactly 90)?
 
 ---
@@ -260,3 +261,25 @@ for value in nums:
 **Why:** with `nums = [1, 2, 3, 4]`, round 2 has `value = 2`, so `output[1]`, but `output` only has 1 item (`[1]`) → IndexError. **Items vs positions, 8th time.**
 **What I meant:** "the **last** running total so far" = `output[-1]` (negative index from Day 04!).
 **Even simpler:** keep a `total` ACCUMULATOR and append it. Then there's no need to look back into the list or treat the first item specially.
+
+### 2026-10-21: LeetCode 344, Reverse String ❌❌ → ✅
+**Try 1: "Time Limit Exceeded"**
+```python
+while (first < last):
+    ...swap...           # ❌ first and last never change → infinite loop
+```
+**Why:** the loop condition can never become False. The code didn't crash, it just never finished. Same trap as forgetting `count -= 1` (Day 03).
+**Fix:** move the pointers inside the loop: `first += 1`, `last -= 1`.
+
+**Try 2: wrong answer, the list came back unchanged ("double swapping" 😄)**
+```python
+for letter in s:         # ❌ repeats the WHOLE reversal once per letter
+    first = 0
+    last = len(s) - 1
+    while first < last: ...
+```
+**Why:** "Hannah" has 6 letters → reversed 6 times → an even number of reversals = back to the start. (`letter` was never used, which was a hint it wasn't needed.)
+**Fix:** delete the outer `for` loop.
+**Lessons:**
+- Every `while` loop needs something inside it that moves it towards stopping.
+- If a loop variable is never used, ask "do I need this loop at all?"

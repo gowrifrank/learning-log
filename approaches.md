@@ -218,6 +218,22 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🟠 LeetCode 344: Reverse String (in place)
+| Version | Code | Notes |
+|---|---|---|
+| Mine ✅ (TWO POINTERS + temp) | `swap = s[first]` → `s[first] = s[last]` → `s[last] = swap`, then move pointers | the classic swap (it's how you'd write it in C++) |
+| Tuple swap | `s[first], s[last] = s[last], s[first]` | Python evaluates the right side first, so no temp variable is needed |
+| Built-in | `s.reverse()` | in place, one line (like `.sort()`: changes the list, returns None) |
+| Slice assignment | `s[:] = s[::-1]` | `s[:] =` replaces the *contents* of the same list |
+| ❌ Trap | `s = s[::-1]` | only makes the local name `s` point to a NEW list. LeetCode's list is untouched! |
+
+**Insights:**
+- **In place** = change the existing list (the bookshelf), not build a new one. TWO POINTERS does this with O(1) extra memory.
+- Two pointers only needs **half** the list: n/2 swaps.
+- `s = ...` rebinds a *name*; `s[:] = ...` or `s[i] = ...` changes the *list itself*. That's the difference between a new shelf and rearranging the same shelf.
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python
