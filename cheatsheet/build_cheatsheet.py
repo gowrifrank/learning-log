@@ -1,7 +1,8 @@
 """Build the dark Python cheat sheet PDF.
 
 Usage:  python cheatsheet/build_cheatsheet.py
-Reads cheatsheet.src.html + ../progress.md, writes cheatsheet.html and Python-Cheatsheet.pdf
+Reads cheatsheet.src.html + ../progress.md, writes the A4 PDF (Python-Cheatsheet.pdf)
+and the phone PDF (Python-Cheatsheet-Phone.pdf)
 """
 import datetime
 import html
@@ -15,6 +16,25 @@ REPO = HERE.parent
 SRC = HERE / "cheatsheet.src.html"
 OUT_HTML = HERE / "cheatsheet.html"
 OUT_PDF = HERE / "Python-Cheatsheet.pdf"
+OUT_PHONE_HTML = HERE / "cheatsheet-phone.html"
+OUT_PHONE_PDF = HERE / "Python-Cheatsheet-Phone.pdf"
+
+# Phone edition: narrow page, one column, bigger text (same content)
+PHONE_CSS = """<style>
+  @page { size: 95mm 190mm; margin: 0; }
+  body { font-size: 11pt; padding: 6mm 5mm; }
+  .grid, .wr { grid-template-columns: 1fr; }
+  .toc ol { columns: 1; }
+  .cover { min-height: 176mm; padding: 9mm 7mm; }
+  .cover h1 { font-size: 30pt; }
+  .stat { min-width: 0; flex: 1 1 38%; padding: 3mm 4mm; }
+  .sec-head h2 { font-size: 16pt; }
+  pre { font-size: 8.8pt; padding: 2mm 2.5mm; }
+  table { font-size: 8.6pt; }
+  th, td { padding: 1.3mm 1.6mm; }
+  code { font-size: 8.6pt; word-break: break-word; }
+</style>
+</head>"""
 CHROME = pathlib.Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
 
 HACKERRANK_URLS = {
@@ -103,13 +123,15 @@ def build() -> None:
                        "{{UPDATED}}": today, "{{LEETCODE_ROWS}}": lc_rows, "{{HACKERRANK_ROWS}}": hr_rows}.items():
         page = page.replace(key, value)
     OUT_HTML.write_text(page, encoding="utf-8")
+    OUT_PHONE_HTML.write_text(page.replace("</head>", PHONE_CSS, 1), encoding="utf-8")
 
-    with tempfile.TemporaryDirectory() as profile:
-        subprocess.run([str(CHROME), "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
-                        "--generate-pdf-document-outline", f"--user-data-dir={profile}",
-                        f"--print-to-pdf={OUT_PDF}", OUT_HTML.as_uri()],
-                       check=True, capture_output=True, timeout=120)
-    print(f"Built {OUT_PDF.name}: {lessons} lessons, {len(lc)} LeetCode, {len(hr)} HackerRank")
+    for html_file, pdf_file in [(OUT_HTML, OUT_PDF), (OUT_PHONE_HTML, OUT_PHONE_PDF)]:
+        with tempfile.TemporaryDirectory() as profile:
+            subprocess.run([str(CHROME), "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+                            "--generate-pdf-document-outline", f"--user-data-dir={profile}",
+                            f"--print-to-pdf={pdf_file}", html_file.as_uri()],
+                           check=True, capture_output=True, timeout=120)
+    print(f"Built {OUT_PDF.name} + {OUT_PHONE_PDF.name}: {lessons} lessons, {len(lc)} LeetCode, {len(hr)} HackerRank")
 
 
 if __name__ == "__main__":
