@@ -6,7 +6,6 @@
 |---|---|---|
 | 2026-10-21 | `day07.py` Parts 3, 4, bonus (one commit each) | `Day 07: letter counter...` etc. |
 | 2026-10-21 | `day08.py` (one commit per part) | `Day 08: ...` |
-| 2026-10-21 | `leetcode/...` new solution | `LeetCode 344: Reverse String` |
 | 2026-10-21 | `progress.md` | `Update progress` |
 
 
@@ -52,8 +51,9 @@
 | 2026-10-18 | 1929. Concatenation of Array | ✅ Day 2 🔥 (after fixing items vs positions + append) |
 | 2026-10-19 | 1480. Running Sum of 1d Array | ✅ Day 3 🔥 (ACCUMULATOR; fixed `output[value - 1]`) |
 | 2026-10-20 | 1108. Defanging an IP Address | ✅ Day 4 🔥 (own loop, first file in `leetcode/`) |
+| 2026-10-21 | 344. Reverse String | ✅ Day 5 🔥 (two pointers; fixed an infinite loop + double reversal) |
 
-**Queue:** see dated list in [schedule.md](schedule.md). Order: 344 Reverse String → 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
+**Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
 ## 📆 Sunday review (every week)
 Go through everything from the week, about 30–45 min:
