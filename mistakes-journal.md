@@ -324,3 +324,9 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 **Why:** one counter was used for **two lists of different sizes**. The big list moves 2 steps for every 1 step in each small list (and items got skipped too).
 **Fix:** loop over the small list (`range(len(positives))`) and append two items per round (or use `l // 2`).
 **Lesson:** "index out of range" → ask **"which list is this position for, and how long is that list?"**
+
+### 2026-10-22: HackerRank, Word Order (first Medium) ❌ → ✅
+- `for wd in word:` ❌ looped over the **letters** of each word, so it counted letters. `word` is already one whole word → tally it directly. (*"What am I holding?"* a word, not a list of words)
+- `print(counts.items)` ❌ is missing `()` (same trap as `input.split`), and the task wanted `len(counts)`
+- `.items()` gives `(word, count)` pairs; `.values()` gives just the counts
+- `print(x, " ")` prints each on a new line → `print(x, end=" ")` keeps them on one line
