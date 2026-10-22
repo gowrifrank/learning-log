@@ -34,3 +34,40 @@ contact = {
 }
 name = input("Whose number? ")
 print(contact.get(name, "Not Found"))
+
+# Part 03 : Letter Counter
+
+word = input("Word: ").lower()
+counts = {}
+best_letter = None
+best_count = 0
+for ch in word:
+    counts[ch] = counts.get(ch, 0) + 1
+print(counts)
+for letter, count in counts.items():
+    if count > best_count:
+        best_letter = letter
+        best_count = count
+print(f"Most common: {best_letter} ({best_count} times)")
+
+# Part 04 : Grade Book
+
+def grades(score):
+    if score >= 90:
+        return "A"
+    if 89 >= score >= 75:
+        return "B"
+    if score >= 50:
+        return "C"
+    return "F"
+
+scores = {
+    "Gowri": 92,
+    "Atlas": 74,
+    "ASIMO": 58,
+    "Spot": 81
+}
+grade = None
+for name, score in scores.items():
+    grade = grades(score)
+    print(f"{name}: {grade}")
