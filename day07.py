@@ -71,3 +71,23 @@ grade = None
 for name, score in scores.items():
     grade = grades(score)
     print(f"{name}: {grade}")
+
+# BONUS : Two Sum
+
+def two_sum(nums, target):
+    count = 0
+    for i in range(len(nums)):
+        if nums[i] <= target:
+            count += 1
+    for j in range(count -1, 0, -1):
+        for i in range(0, j):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return None
+
+nums = list(map(int, input("Numbers in Increasing Order: ").split()))
+target = int(input("Target: "))
+print(two_sum(nums, target))
+
+
+    
