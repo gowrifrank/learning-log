@@ -314,3 +314,13 @@ for letter, count in counts.items():
 - `break` exits only the inner loop → put the loops in a function and `return [i, j]`
 - `nums[i] < target` missed `0 + 4 = 4`. Fix: `<=`. **Found by testing an edge case (0)**
 - Leftover variables (`highest`, `lowest`, `seen`) that nothing reads: delete them
+
+### 2026-10-22: LeetCode 2149, Rearrange by Sign (first Medium) ❌ → ✅
+```python
+for l in range(len(nums)):          # l = 0..5 (big list)
+    if l % 2 == 0:
+        result.append(positives[l])  # ❌ positives only has 0..2 → IndexError at l = 3
+```
+**Why:** one counter was used for **two lists of different sizes**. The big list moves 2 steps for every 1 step in each small list (and items got skipped too).
+**Fix:** loop over the small list (`range(len(positives))`) and append two items per round (or use `l // 2`).
+**Lesson:** "index out of range" → ask **"which list is this position for, and how long is that list?"**
