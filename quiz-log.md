@@ -10,6 +10,7 @@
 | 2026-10-21 explain-back | 2/2 ✅ | why `int(parts[1])`, why methods change a list in place |
 | 2026-10-21 thinking (Day 07 ties) | 1/1 ✅ | `>` keeps the first winner on a tie, `>=` hands it to the last |
 | 2026-10-21 syntax check | 1/1 ✅ | `.items()` gives (key, value) pairs; dicts use **keys**, not index |
+| 2026-10-22 syntax check | 1/1 ✅ | `list(map(int, "5 10".split()))[1]` → `10`, a number |
 | 2026-10-19 quick check | ½ | positions loop: `range(nums)` → needs `range(len(nums))` |
 | 2026-10-18 quick checks | 3/3 ✅ | append vs index on empty list, nested pair access, `.get()` vs `[]` on a missing key |
 
@@ -132,3 +133,7 @@ for n in [1, 2, 3, 4]:
 - **Q:** In `for letter, count in counts.items():`, what does `.items()` hand the loop each round?
 - **A (mine):** the letter for `letter` and the number for `count`, the mapped pair ✅
 - **Wording fix:** dictionaries have **keys**, not index positions. Each round gives one `(key, value)` pair, e.g. `('a', 3)`, unpacked into the two variables.
+
+## 2026-10-22 syntax check (parsing one line of numbers) 1/1 ✅
+- **Q:** After `nums = list(map(int, input().split()))` with input `5 10`, what is `nums[1]`? Number or text?
+- **A (mine):** `10`, a number ✅ (`map(int, ...)` converted it; position 1 is the second item)

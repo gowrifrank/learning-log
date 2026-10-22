@@ -306,3 +306,11 @@ for letter, count in counts.items():
 - Output was correct, but the `if/elif` grading logic was **re-typed inside the loop** instead of calling the Day 06 `grade()` function. The task was to *reuse* it (DRY: write it once, call it many times).
 - A variable named `grade` would **overwrite** a function named `grade`. Never give a variable the same name as a function.
 - `91 >= score` in the B branch is never needed: a score of 90 or more already returned/stopped at the A branch.
+
+### 2026-10-22: Day 07 bonus, Two Sum (own sorted idea) 🟡 → ✅
+- `range(1, count, -1)` ❌ gave **nothing**: going *down* from 1 never reaches `count`. Backwards = `range(count - 1, -1, -1)` (start high, step -1)
+- A variable (`highest`) set to the **same value every round** never moves. Use the loop's own position (`nums[j]`) instead
+- Inner loop named `value` but it held **positions** → renamed `i` (items vs positions, again)
+- `break` exits only the inner loop → put the loops in a function and `return [i, j]`
+- `nums[i] < target` missed `0 + 4 = 4`. Fix: `<=`. **Found by testing an edge case (0)**
+- Leftover variables (`highest`, `lowest`, `seen`) that nothing reads: delete them
