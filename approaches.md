@@ -248,6 +248,68 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🟠 LeetCode 2149: Rearrange Array Elements by Sign (first Medium)
+| Version | Idea | Notes |
+|---|---|---|
+| Try 1 ❌ | one loop over **all** positions `l`; even → `positives[l]`, odd → `negatives[l]` | IndexError: `l` goes 0–5, the small lists only have 0–2 |
+| Fix A | same loop, but use `positives[l // 2]` / `negatives[l // 2]` | `//` turns 0,1,2,3,4,5 into 0,0,1,1,2,2 |
+| Mine ✅ (Fix B) | loop over the **small** list's positions, append **two** per round | no `if/else` needed, so it's the simplest |
+| Pre-sized (later) | `result = [0] * len(nums)`; positives go to slots 0,2,4… and negatives to 1,3,5… | one pass, two "write pointers" |
+
+**Insight:** when two lists move at **different speeds** (the result grows 2 per step, each input list 1), give each its own counter, or loop over the slower one.
+
+### Fix A in code: keep my first idea, convert the position with `//`
+```python
+for l in range(len(nums)):              # l = 0, 1, 2, 3, 4, 5 (big list)
+    if l % 2 == 0:
+        result.append(positives[l // 2])   # 0//2=0, 2//2=1, 4//2=2
+    else:
+        result.append(negatives[l // 2])   # 1//2=0, 3//2=1, 5//2=2
+```
+| `l` | even/odd | `l // 2` | appends |
+|---|---|---|---|
+| 0 | even | 0 | `positives[0]` = 3 |
+| 1 | odd | 0 | `negatives[0]` = -2 |
+| 2 | even | 1 | `positives[1]` = 1 |
+| 3 | odd | 1 | `negatives[1]` = -5 |
+| 4 | even | 2 | `positives[2]` = 2 |
+| 5 | odd | 2 | `negatives[2]` = -4 |
+
+Works, but needs `if/else` and a maths trick. My version (2 appends per round) says the same thing more plainly.
+
+### Pre-sized with two write pointers: one pass, no extra lists
+Instead of building `positives` and `negatives` first, **make the answer list full-size from the start** and drop each number straight into its slot:
+- Positives always go to the **even** slots: 0, 2, 4…
+- Negatives always go to the **odd** slots: 1, 3, 5…
+```python
+result = [0] * len(nums)     # [0, 0, 0, 0, 0, 0]: 6 empty slots
+pos = 0                      # next free slot for a positive
+neg = 1                      # next free slot for a negative
+for num in nums:             # items are fine here
+    if num > 0:
+        result[pos] = num    # fill the slot (allowed: the slot already exists)
+        pos += 2             # jump to the next even slot
+    else:
+        result[neg] = num
+        neg += 2             # jump to the next odd slot
+return result
+```
+| `num` | goes to | `result` after | `pos` / `neg` after |
+|---|---|---|---|
+| 3 | slot 0 | `[3, 0, 0, 0, 0, 0]` | 2 / 1 |
+| 1 | slot 2 | `[3, 0, 1, 0, 0, 0]` | 4 / 1 |
+| -2 | slot 1 | `[3, -2, 1, 0, 0, 0]` | 4 / 3 |
+| -5 | slot 3 | `[3, -2, 1, -5, 0, 0]` | 4 / 5 |
+| 2 | slot 4 | `[3, -2, 1, -5, 2, 0]` | 6 / 5 |
+| -4 | slot 5 | `[3, -2, 1, -5, 2, -4]` | 6 / 7 |
+
+**Why it's "better":** one loop instead of two, and no helper lists. **Why mine is fine:** at this size the difference doesn't matter, and mine is easier to read.
+**New ideas here:**
+- `[0] * n` makes a list with n slots, so `result[i] = ...` works (compare Day 05: `ans[0] = 5` on an empty list ❌).
+- A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
+
+---
+
 ## 🎯 Two Sum (Day 07 bonus / LeetCode 1)
 | Version | Idea | Speed | Notes |
 |---|---|---|---|
