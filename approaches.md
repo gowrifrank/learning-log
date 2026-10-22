@@ -310,6 +310,22 @@ return result
 
 ---
 
+## 🔥 HackerRank: Word Order (first Medium)
+| Version | Code for the last part | Notes |
+|---|---|---|
+| Mine ✅ | `for letter, count in counts.items(): print(count, end=" ")` | works (HackerRank ignores the extra space at the end) |
+| `.values()` | `for count in counts.values(): print(count, end=" ")` | only takes what's needed, no unused `letter` |
+| join ⭐ | `print(" ".join(map(str, counts.values())))` | one line, no trailing space; `join` needs **strings**, so `map(str, ...)` first |
+| unpack with `*` (coming soon) | `print(*counts.values())` | `*` spreads the list into separate `print` arguments, and `print` puts spaces between them |
+| `Counter` (Day 13) | `from collections import Counter` · `counts = Counter(words)` | the built-in tally sheet |
+
+**Insights:**
+- A dictionary **remembers the order keys were first added**, so "order of first appearance" needs no extra work.
+- Name variables after what they hold: the keys are **words**, so `for word, count in ...` (not `letter`). `i` that's never used → `_`.
+- `map(int, ...)` turns text into numbers; `map(str, ...)` goes the other way (numbers → text, for `join`).
+
+---
+
 ## 🎯 Two Sum (Day 07 bonus / LeetCode 1)
 | Version | Idea | Speed | Notes |
 |---|---|---|---|
