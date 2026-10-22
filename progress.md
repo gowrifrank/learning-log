@@ -5,7 +5,8 @@
 | Commit on | What | Commit message |
 |---|---|---|
 | next lesson | `day08.py` (one commit per part) | `Day 08: ...` |
-| 2026-10-22 | LeetCode 2149 (Medium) + HackerRank Word Order (Medium) | `LeetCode 2149: ...`, `HackerRank Word Order: ...` |
+| 2026-10-22 (home) | HackerRank Word Order (Medium) | `HackerRank Word Order: ...` |
+| 2026-10-23 | LeetCode Medium + HackerRank Medium, then **revise Days 01–07**, then Day 08 | |
 
 > 📈 **From 22 Oct:** weekdays = **LeetCode Medium + HackerRank Medium/Easy**. Easy problems on weekends, holidays and tough days.
 
@@ -54,6 +55,7 @@
 | 2026-10-19 | 1480. Running Sum of 1d Array | ✅ Day 3 🔥 (ACCUMULATOR; fixed `output[value - 1]`) |
 | 2026-10-20 | 1108. Defanging an IP Address | ✅ Day 4 🔥 (own loop, first file in `leetcode/`) |
 | 2026-10-21 | 344. Reverse String | ✅ Day 5 🔥 (two pointers; fixed an infinite loop + double reversal) |
+| 2026-10-22 | 2149. Rearrange Array Elements by Sign | ✅ Day 6 🔥 **first Medium!** (two FILTER lists + take turns; fixed IndexError from mixing big/small list positions) |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
