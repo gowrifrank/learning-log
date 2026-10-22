@@ -8,6 +8,8 @@
 | 2026-10-15 | 1/3 | items vs positions, `.sort()` returns None, chaining on literals |
 | 2026-10-18 🗓 Sunday review | 7/10 | retries + data navigation, parsing, slicing |
 | 2026-10-21 explain-back | 2/2 ✅ | why `int(parts[1])`, why methods change a list in place |
+| 2026-10-21 thinking (Day 07 ties) | 1/1 ✅ | `>` keeps the first winner on a tie, `>=` hands it to the last |
+| 2026-10-21 syntax check | 1/1 ✅ | `.items()` gives (key, value) pairs; dicts use **keys**, not index |
 | 2026-10-19 quick check | ½ | positions loop: `range(nums)` → needs `range(len(nums))` |
 | 2026-10-18 quick checks | 3/3 ✅ | append vs index on empty list, nested pair access, `.get()` vs `[]` on a missing key |
 
@@ -120,3 +122,13 @@ for n in [1, 2, 3, 4]:
 ## 2026-10-21 explain-back (HackerRank Lists) 2/2 ✅
 **1.** Why `int(parts[1])`? → "it's a continuous string" ✅ More precisely: `.split()` always gives **text** (`"5"`), and `int()` turns it into the number `5`.
 **2.** Why does `final_list.append(x)` work without `final_list = ...`? → "it affects the list directly" ✅ The method changes the list **in place** (the same object), so there's nothing to reassign.
+
+## 2026-10-21 thinking question (Day 07 letter counter) 1/1 ✅
+- **Q:** With `"noon"` (`n` and `o` both appear twice), which letter wins, and does `>` vs `>=` matter?
+- **A (mine):** with `>`, `n` wins; with `>=`, `o` wins ✅
+- **Why:** `n` sets the bar at 2. Then `o` has 2: `2 > 2` is False, so it can't take over; `2 >= 2` is True, so it does. A dictionary keeps the order letters were first seen, so `n` comes first.
+
+## 2026-10-21 syntax check (`.items()`) 1/1 ✅
+- **Q:** In `for letter, count in counts.items():`, what does `.items()` hand the loop each round?
+- **A (mine):** the letter for `letter` and the number for `count`, the mapped pair ✅
+- **Wording fix:** dictionaries have **keys**, not index positions. Each round gives one `(key, value)` pair, e.g. `('a', 3)`, unpacked into the two variables.

@@ -291,3 +291,18 @@ for letter in s:         # ❌ repeats the WHOLE reversal once per letter
 - Hand-written `insert` / `remove` loops: the `while` loops never change `i` (infinite) and run past the end of the list. **Python already has `.insert(i, x)` and `.remove(x)`** (USE A BUILT-IN)
 - Changing a list (`.remove`) while looping over it with `for` skips items. Avoid it
 - Style: `snake_case` for variables (`final_list`). `CapitalWords` is reserved for classes
+
+### 2026-10-21: Day 07, Letter counter (BEST SO FAR) 🟡
+```python
+for letter, count in counts.items():
+    if count > best_count:
+        best_letter = letter      # ❌ best_count is never updated → stays 0
+```
+**Why:** every count is `> 0`, so every letter "wins" and the **last** one is left over ("banana" → `n`).
+**Fix:** a BEST SO FAR update changes **both** variables: the winner *and* the score to beat.
+**Lesson:** if a variable is used in a comparison but never changes inside the loop, the comparison never gets harder.
+
+### 2026-10-21: Day 07, Grade book 🟡 output ✅, reuse ❌
+- Output was correct, but the `if/elif` grading logic was **re-typed inside the loop** instead of calling the Day 06 `grade()` function. The task was to *reuse* it (DRY: write it once, call it many times).
+- A variable named `grade` would **overwrite** a function named `grade`. Never give a variable the same name as a function.
+- `91 >= score` in the B branch is never needed: a score of 90 or more already returned/stopped at the A branch.
