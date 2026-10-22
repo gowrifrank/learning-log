@@ -248,6 +248,23 @@ Shortest, but hardest to read. Python's own `calendar.isleap()` uses this one.
 
 ---
 
+## 🎯 Two Sum (Day 07 bonus / LeetCode 1)
+| Version | Idea | Speed | Notes |
+|---|---|---|---|
+| Mine ✅ (sorted input) | count the numbers `<= target`, then `j` walks back from the biggest, `i` looks for its partner in `range(j)` | two loops inside each other (slow on huge lists) | my own idea! Needs **sorted** input and numbers ≥ 0 |
+| Every pair | `for j ...: for i in range(j):` with no counting step | same, two loops | works on **any** order, so it's the simplest correct version |
+| TWO POINTERS (sorted) | `left = 0`, `right = len - 1`; sum too big → `right -= 1`, too small → `left += 1` | one pass | same trick as LeetCode 344 |
+| `seen` dict ⭐ | for each number: `need = target - number`; if `need in seen` → `[seen[need], i]`, else `seen[number] = i` | **one pass, any order** | the LeetCode-standard answer (LOOKUP TABLE pattern) |
+
+**Insights:**
+- `i` and `j` *are* the answer (positions). `nums[i]`, `nums[j]` are only the values.
+- `return` inside nested loops exits **both** loops at once, while `break` exits only the inner one.
+- `range(j)` for the inner loop means a number is never paired with itself (`[3, 3]` case).
+- Edge case found by testing: `0 4 5`, target 4 needs `<=`, not `<`. **Test with 0, duplicates and "no answer".**
+- ⚠️ LeetCode's input is **not sorted**, and sorting it would change the positions. To submit there, use "every pair" or the `seen` dict.
+
+---
+
 ## 🔁 Palindrome (Day 04)
 ### A. Compare with reverse ✅ (USE A BUILT-IN)
 ```python
