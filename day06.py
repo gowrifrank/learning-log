@@ -63,7 +63,7 @@ print(f"The average of all the above {len(ip_scores)} scores is: {avg}")
 def grade(score):
     if score >= 90:
         return "A"
-    if 91 >= score >= 75:
+    if 89 >= score >= 75:
         return "B"
     if score >= 50:
         return "C"
