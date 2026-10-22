@@ -4,9 +4,10 @@
 ## ⏳ Pending commits
 | Commit on | What | Commit message |
 |---|---|---|
-| 2026-10-21 | `day07.py` Parts 3 ✅ + 4 ✅ written (not committed yet) + bonus Two Sum on 2026-10-22, commit all together | `Day 07: letter counter + grade book`, `Day 07 bonus: Two Sum` |
-| 2026-10-21 | `day08.py` (one commit per part) | `Day 08: ...` |
-| 2026-10-21 | `progress.md` | `Update progress` |
+| next lesson | `day08.py` (one commit per part) | `Day 08: ...` |
+| 2026-10-22 | LeetCode 2149 (Medium) + HackerRank Word Order (Medium) | `LeetCode 2149: ...`, `HackerRank Word Order: ...` |
+
+> 📈 **From 22 Oct:** weekdays = **LeetCode Medium + HackerRank Medium/Easy**. Easy problems on weekends, holidays and tough days.
 
 
 > Once something is committed, move it to the **Lessons** table below.
@@ -20,13 +21,13 @@
 | 04 | strings: index, slice, methods, compare | 2026-10-14 | ✅ Part 1 on 2026-10-14, rest + all docs on 2026-10-15 |
 | 05 | lists, sort vs sorted, break | 2026-10-14 | ✅ 2026-10-16 (5 commits, one per part) |
 | 06 | functions, return vs print, break vs return | 2026-10-15 | ✅ 2026-10-17 (6 commits, one per part) |
-| 07 | dictionaries | 2026-10-17 (lesson), Parts 1–2 on 2026-10-18 | 🟡 Parts 1–2 ✅ 2026-10-18 · Parts 3–4 ✅ 2026-10-21 · bonus (Two Sum) 2026-10-22 |
+| 07 | dictionaries | 2026-10-17 (lesson), Parts 1–2 on 2026-10-18 | ✅ Parts 1–2 2026-10-18 · Parts 3–4 2026-10-21 · bonus Two Sum (own sorted-list algorithm) 2026-10-22 |
 
 ## ⏱ Weekly hours (target: 10–12 h on weekdays, weekends = bonus)
 | Week | Dates | Weekday h | Weekend h (bonus) | Topics covered | Backlog |
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
-| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h | 0 | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 | Day 07 parts 3–4, Day 08, HackerRank Lists (no rush, variable pace) |
+| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 1.5 h (so far) | 0 | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅ | Day 08 (no rush, variable pace) |
 
 > ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
 > 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
