@@ -4,8 +4,7 @@
 ## ⏳ Pending commits
 | Commit on | What | Commit message |
 |---|---|---|
-| 2026-10-23 (Fri) | HackerRank Medium | `HackerRank ...` |
-| 2026-10-24/25 (Sat–Sun) | 📆 **Big review:** lessons 01–07, exercise solutions, all LeetCode + HackerRank solutions and their better approaches (weekend: Easy problems) | |
+| 2026-10-24/25 (Sat–Sun) | 📆 **Big review:** follow [lessons/review-weekend-1.md](lessons/review-weekend-1.md) (strings, searching, printing, items vs positions, `map`, dicts) + Easy problems | |
 | after the review | **Day 08: sets & tuples** | `Day 08: ...` |
 
 > 📈 **From 22 Oct:** weekdays = **LeetCode Medium + HackerRank Medium/Easy**. Easy problems on weekends, holidays and tough days.
@@ -28,7 +27,7 @@
 | Week | Dates | Weekday h | Weekend h (bonus) | Topics covered | Backlog |
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
-| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h | 0 | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) | Day 08 (no rush, variable pace) |
+| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h · Fri ≈ 2.5 h | 0 | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) · Fri: LeetCode 2161, HackerRank Merge the Tools | Day 08 (no rush, variable pace) |
 
 > ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
 > 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
@@ -47,6 +46,7 @@
 | 2026-10-18 | Nested Lists | ✅ using the STEP-comments method (steps 3–5 written myself) |
 | 2026-10-21 | Lists | ✅ (function per command + if/elif dispatch; built-in .insert/.remove + int()) |
 | 2026-10-22 | Word Order | ✅ **first Medium** (COUNTING pattern; fixed counting letters instead of words) |
+| 2026-10-23 | Merge the Tools! | ✅ Medium (own window logic first; walkthrough for `ch not in result` + reset per piece) |
 
 ## 🟠 LeetCode
 | Date | Problem | Result |
