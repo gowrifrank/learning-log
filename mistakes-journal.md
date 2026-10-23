@@ -2,7 +2,7 @@
 > Every mistake I've made, why it happened and how I fixed it. Read the **Focus areas** and **Daily checklist** every day before coding.
 
 ## 🎯 Focus areas (my patterns so far)
-0. ⭐ **Navigating data (lists, dicts, parsing input).** My biggest weak spot. Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before every problem until it feels natural.
+0. ⭐ **Navigating data: strings, `map`, dictionaries, searching, parsing and printing.** My biggest weak spot (confirmed 2026-10-23). Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before every problem until it feels natural.
 1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **8 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929, LeetCode 1480...)!
 2. **Off-by-one with `range`.** `range` stops **before** the stop value. Count the items for a small input before submitting.
 3. **`=` replaces, `+=` adds on.** When building a total or a string across a loop, I need `+=`.
@@ -22,6 +22,11 @@
 | `return` vs `print` | 🟡 | `return` only inside `def`. HackerRank main code → `print` |
 | Nested data `[name, score]` | 🟢 got it 10-18 (Nested Lists + quick check ✅) | `pair[0]` = name, `pair[1]` = score |
 | Parsing input | 🟡 | `list(map(int, input().split()))` |
+| `map` both ways | 🔴 | `map(int, texts)` → numbers · `map(str, nums)` → texts (for `join`) · always wrap in `list(...)` to look inside |
+| Searching a string | 🔴 | `x in s` (yes/no) · `s.find(x)` (first position, `-1` if missing) · `s.count(x)` (how many) |
+| Dict lookups | 🟡 | `d[key]` (crashes if missing) · `d.get(key, 0)` (safe) · `key in d` checks **keys** only |
+| Dict loops | 🟡 | `for k in d:` keys · `for v in d.values():` values · `for k, v in d.items():` both |
+| Printing on one line | 🟡 | `print(x, end=" ")` · `" ".join(map(str, nums))` · `print(a, b, sep=", ")` |
 | Naming | 🟡 | name variables after what they hold *right now* (`lowest`, not `second_low`) |
 
 ## ✅ Daily checklist (before I click Run or Submit)
@@ -335,3 +340,10 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `pivot = []` ❌ **overwrote the parameter** `pivot` (the number 10) with an empty list. One name holds one thing → named the list `equals`. (Same trap as `grade = None` vs `def grade`)
 - `if nums < pivot:` ❌ compared the **whole list**, not one number → `nums[i]`. A non-empty list counts as "bigger" than `[]`, so every number went into `more` and the output equalled the input.
 - **Debug clue:** "output = input, unchanged" usually means every item took the **same branch**.
+
+### 2026-10-23: HackerRank, Merge the Tools! (own logic, no hints) ❌ → walkthrough → ✅
+- `factor = len(string) / k` is the **number of pieces**, but it was used as the **piece length**. It only worked because both were 3. Piece length = `k`
+- `string.find(ch) == 0` ❌ asks "does this letter first appear at position 0 of the **whole** string?" The real question: "have I already kept it **in this piece**?" → `if ch not in result:`
+- One shared `output` list sliced with **string** positions → wrong sizes (same lesson as 2149). Fix: a fresh `result = ""` per piece
+- `print(list)` shows `['A', 'B']`. Build a **string** to print `AB`
+- 💡 The window idea (`pos`, `mul`) was right! `range(0, len(string), k)` does that jumping for you
