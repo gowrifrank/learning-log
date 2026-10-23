@@ -330,3 +330,8 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `print(counts.items)` ❌ is missing `()` (same trap as `input.split`), and the task wanted `len(counts)`
 - `.items()` gives `(word, count)` pairs; `.values()` gives just the counts
 - `print(x, " ")` prints each on a new line → `print(x, end=" ")` keeps them on one line
+
+### 2026-10-23: LeetCode 2161, Partition by Pivot ❌ → ✅
+- `pivot = []` ❌ **overwrote the parameter** `pivot` (the number 10) with an empty list. One name holds one thing → named the list `equals`. (Same trap as `grade = None` vs `def grade`)
+- `if nums < pivot:` ❌ compared the **whole list**, not one number → `nums[i]`. A non-empty list counts as "bigger" than `[]`, so every number went into `more` and the output equalled the input.
+- **Debug clue:** "output = input, unchanged" usually means every item took the **same branch**.
