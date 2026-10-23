@@ -50,6 +50,7 @@ HACKERRANK_URLS = {
     "Lists": "python-lists",
     "Tuples": "python-tuples",
     "Word Order": "word-order",
+    "Merge the Tools!": "merge-the-tools",
 }
 
 KEYWORDS = r"def|return|for|in|if|elif|else|while|break|continue|pass|None|True|False|and|or|not|import|from|class|is|del|lambda|try|except|with|as"
