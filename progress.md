@@ -4,8 +4,9 @@
 ## ⏳ Pending commits
 | Commit on | What | Commit message |
 |---|---|---|
-| 2026-10-23 (Fri) | **Day 08: sets & tuples** + LeetCode Medium + HackerRank Medium | `Day 08: ...` |
-| 2026-10-24/25 (Sat–Sun) | 📆 **Review Days 01–08** (weekend: Easy problems) | |
+| 2026-10-23 (Fri) | HackerRank Medium | `HackerRank ...` |
+| 2026-10-24/25 (Sat–Sun) | 📆 **Big review:** lessons 01–07, exercise solutions, all LeetCode + HackerRank solutions and their better approaches (weekend: Easy problems) | |
+| after the review | **Day 08: sets & tuples** | `Day 08: ...` |
 
 > 📈 **From 22 Oct:** weekdays = **LeetCode Medium + HackerRank Medium/Easy**. Easy problems on weekends, holidays and tough days.
 
@@ -56,6 +57,7 @@
 | 2026-10-20 | 1108. Defanging an IP Address | ✅ Day 4 🔥 (own loop, first file in `leetcode/`) |
 | 2026-10-21 | 344. Reverse String | ✅ Day 5 🔥 (two pointers; fixed an infinite loop + double reversal) |
 | 2026-10-22 | 2149. Rearrange Array Elements by Sign | ✅ Day 6 🔥 **first Medium!** (two FILTER lists + take turns; fixed IndexError from mixing big/small list positions) |
+| 2026-10-23 | 2161. Partition Array According to Given Pivot | ✅ Day 7 🔥 Medium (3 FILTER lists + `+`; fixed `pivot = []` overwriting the parameter and `nums` vs `nums[i]`) |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
