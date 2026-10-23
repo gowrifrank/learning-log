@@ -310,6 +310,21 @@ return result
 
 ---
 
+## 🔥 HackerRank: Merge the Tools!
+| Version | Idea | Notes |
+|---|---|---|
+| My first try ❌ | `pos`/`mul` window + `string.find(ch) == 0` + one shared list | window idea ✅; the check and the storage were wrong |
+| Walkthrough version ✅ | `range(0, len(string), k)` + slice + fresh `result = ""` + `if ch not in result` | clear, 7 lines |
+| `dict.fromkeys` trick | `print("".join(dict.fromkeys(piece)))` | a dict keeps **first-seen order** and has no duplicate keys, so it removes repeats in order |
+| `seen` set (Day 08) | keep a `seen = set()` beside `result`, check `ch not in seen` | faster checks on long pieces |
+
+**Insights:**
+- **"Reset per group"**: anything that collects results for ONE group (`result = ""`, `total = 0`) goes **inside** the outer loop.
+- `range(0, n, k)` + `s[start : start + k]` = the "cut into chunks" recipe.
+- `.find()` searches the **whole** string; `in result` searches only **what I've kept**. Pick the container that matches the question.
+
+---
+
 ## 🟠 LeetCode 2161: Partition Array According to Given Pivot
 | Version | Idea | Notes |
 |---|---|---|
