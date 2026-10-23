@@ -310,6 +310,33 @@ return result
 
 ---
 
+## 🟠 LeetCode 2161: Partition Array According to Given Pivot
+| Version | Idea | Notes |
+|---|---|---|
+| Mine ✅ | 3 lists (`less`, `equals`, `more`), 3 separate `if`s, `return less + equals + more` | correct; the `+` join is the neat part |
+| Tidier | `for num in nums:` + `if / elif / else` | items instead of positions (`i` was only used as `nums[i]`); stops checking after the first match |
+| Count the pivots | `equals` → just count them, then `less + [pivot] * count + more` | `[10] * 2` = `[10, 10]` (list repeat, Day 05) |
+| List comprehension (Day 09) | `[n for n in nums if n < pivot] + [n for n in nums if n == pivot] + [n for n in nums if n > pivot]` | one line, but walks the list 3 times |
+
+```python
+# Tidier version
+less, equals, more = [], [], []
+for num in nums:
+    if num < pivot:
+        less.append(num)
+    elif num == pivot:
+        equals.append(num)
+    else:
+        more.append(num)
+return less + equals + more
+```
+**Insights:**
+- Same shape as 2149: **FILTER into groups, then combine**. 2149 combined by *taking turns*, 2161 by *joining end to end*. Spot the "sort into buckets" pattern.
+- ⏱ "Beats 17%" doesn't mean the code is slow: LeetCode timings jump around ±20 ms between runs of the **same** code. All the versions above do the same amount of work (one pass). Judge by **how many times you walk the list**, not by the runtime number.
+- Never give a variable the **same name as a parameter** (`pivot = []` erased the number 10).
+
+---
+
 ## 🔥 HackerRank: Word Order (first Medium)
 | Version | Code for the last part | Notes |
 |---|---|---|
