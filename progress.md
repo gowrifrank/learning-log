@@ -27,7 +27,7 @@
 | Week | Dates | Weekday h | Weekend h (bonus) | Topics covered | Backlog |
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
-| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h · Fri ≈ 2.5 h | 0 | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) · Fri: LeetCode 2161, HackerRank Merge the Tools | Day 08 (no rush, variable pace) |
+| 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h · Fri ≈ 2.5 h | Sat ≈ 0.5 h | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) · Fri: LeetCode 2161, HackerRank Merge the Tools | Day 08 (no rush, variable pace) |
 
 > ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
 > 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
@@ -58,6 +58,7 @@
 | 2026-10-21 | 344. Reverse String | ✅ Day 5 🔥 (two pointers; fixed an infinite loop + double reversal) |
 | 2026-10-22 | 2149. Rearrange Array Elements by Sign | ✅ Day 6 🔥 **first Medium!** (two FILTER lists + take turns; fixed IndexError from mixing big/small list positions) |
 | 2026-10-23 | 2161. Partition Array According to Given Pivot | ✅ Day 7 🔥 Medium (3 FILTER lists + `+`; fixed `pivot = []` overwriting the parameter and `nums` vs `nums[i]`) |
+| 2026-10-24 | 1672. Richest Customer Wealth | ✅ Day 8 🔥 Easy (nested list + BEST SO FAR; fixed `range(list)` and a missing `:`; 0 ms) |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
