@@ -310,6 +310,30 @@ return result
 
 ---
 
+## 🟢 LeetCode 1672: Richest Customer Wealth
+| Version | Inner part | Notes |
+|---|---|---|
+| Mine ✅ | `for i in range(len(temp_acc)): balance += temp_acc[i]`, reset `balance = 0` after each customer | correct; reset in the right place |
+| Items loop | `for money in account: balance += money` | no positions needed, and no `temp_acc` copy |
+| `sum()` ⭐ | `balance = sum(account)` | USE A BUILT-IN: the inner loop becomes one call, and no reset is needed |
+| One line | `return max(sum(account) for account in accounts)` | `max` of all the sums (generator expression, coming with comprehensions, Day 09) |
+
+```python
+# Best readable version
+best = 0
+for account in accounts:
+    wealth = sum(account)       # fresh total per customer, so no reset line needed
+    if wealth > best:
+        best = wealth
+return best
+```
+**Insights:**
+- Nested data: `for account in accounts` → `account` is a **whole list** (`[1, 2, 3]`), not a number. Ask *"what am I holding?"*
+- A value computed fresh each round (`wealth = sum(...)`) can't leak into the next round, so it's safer than a running total you must remember to reset.
+- `range()` needs a **number**. `range(list)` → TypeError, so use `range(len(list))`.
+
+---
+
 ## 🔥 HackerRank: Merge the Tools!
 | Version | Idea | Notes |
 |---|---|---|
