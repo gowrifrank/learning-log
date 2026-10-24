@@ -347,3 +347,8 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - One shared `output` list sliced with **string** positions → wrong sizes (same lesson as 2149). Fix: a fresh `result = ""` per piece
 - `print(list)` shows `['A', 'B']`. Build a **string** to print `AB`
 - 💡 The window idea (`pos`, `mul`) was right! `range(0, len(string), k)` does that jumping for you
+
+### 2026-10-24: LeetCode 1672, Richest Customer Wealth ❌ → ✅
+- `if balance > winner` ❌ missing `:` → SyntaxError (every `if`/`for`/`while`/`def` line ends with `:`)
+- `range(temp_acc)` ❌ `range` needs a **number**, not a list → `range(len(temp_acc))` (2nd time: also on 19 Oct)
+- ✅ Reset `balance = 0` per customer in the right place (yesterday's "reset per group" lesson stuck!)
