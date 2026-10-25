@@ -1,0 +1,4 @@
+# Core engine: Python 3.10+ standard library only (csv, json, sqlite3, re, datetime).
+pypdf>=4.0                    # text extraction from evidence PDFs
+rapidocr-onnxruntime>=1.3     # local OCR for evidence screenshots (no network, no key)
+anthropic>=0.70               # optional Claude API layer (only used when ANTHROPIC_API_KEY is set)

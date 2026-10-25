@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ghost Data Still Exists: Solution Brief</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --bg: #0b0f1a; --panel: #121a2b; --panel2: #18223a; --line: #26324d;
+    --text: #e6ebf5; --muted: #9aa7c2; --cyan: #38e1ff; --violet: #a78bfa; --pink: #ff6bd5;
+    --green: #4ade80; --amber: #fbbf24; --red: #fb7185; --blue: #60a5fa;
+  }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font: 10pt/1.5 "Segoe UI", "Inter", Arial, sans-serif; }
+  body { padding: 14mm 15mm; }
+  h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
+  section { break-inside: auto; margin-bottom: 9mm; }
+  .page-break { break-before: page; }
+  .sec-head { display: flex; align-items: baseline; gap: 10px; border-bottom: 2px solid var(--line);
+    padding-bottom: 6px; margin-bottom: 10px; }
+  .sec-head .num { color: var(--bg); background: var(--c, var(--cyan)); border-radius: 6px; padding: 2px 9px;
+    font-weight: 800; font-size: 11pt; }
+  .sec-head h2 { font-size: 16pt; color: var(--c, var(--cyan)); }
+  h3 { font-size: 11.5pt; color: var(--violet); margin: 10px 0 6px; }
+  p { margin: 5px 0; }
+  .muted { color: var(--muted); }
+  code, .mono { font-family: "Cascadia Code", Consolas, monospace; font-size: 8.8pt; color: var(--cyan);
+    background: #0e1526; padding: 1px 4px; border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 8px; font-size: 9pt; }
+  tr { break-inside: avoid; }
+  .sec-head, h3 { break-after: avoid; }
+  th { text-align: left; background: var(--panel2); color: var(--cyan); font-weight: 700; }
+  th, td { padding: 5px 7px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #0f1626; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--cyan));
+    border-radius: 8px; padding: 9px 12px; margin: 8px 0; break-inside: avoid; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; }
+  .stat b { display: block; font-size: 17pt; color: var(--c, var(--green)); }
+  .stat span { color: var(--muted); font-size: 8.5pt; }
+  ul { margin: 4px 0; padding-left: 18px; } li { margin: 2px 0; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 8.3pt; font-weight: 700;
+    color: var(--bg); background: var(--c, var(--cyan)); }
+  .flow { display: flex; gap: 6px; align-items: stretch; margin: 8px 0; }
+  .flow div { flex: 1; background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--c);
+    border-radius: 8px; padding: 7px; font-size: 8.4pt; }
+  .flow div b { display: block; color: var(--c); font-size: 9.5pt; margin-bottom: 2px; }
+  .cover { min-height: 262mm; display: flex; flex-direction: column; justify-content: space-between;
+    background: radial-gradient(circle at 85% 10%, #1d2b55 0%, transparent 45%),
+                radial-gradient(circle at 10% 90%, #3a1d52 0%, transparent 45%), var(--bg);
+    border: 1px solid var(--line); border-radius: 16px; padding: 18mm 14mm; }
+  .cover h1 { font-size: 34pt; display: inline-block;
+    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cover .sub { font-size: 14pt; color: var(--muted); margin-top: 6px; }
+  .qa { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px;
+    margin: 6px 0; break-inside: avoid; }
+  .qa .q { color: var(--amber); font-weight: 700; }
+  .qa .a { margin-top: 3px; }
+  .footer { color: var(--muted); font-size: 8pt; text-align: center; margin-top: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ COVER -->
+<div class="cover">
+  <div>
+    <span class="pill" style="--c:var(--green)">HackerRank Orchestrate · October 2026</span>
+    <div style="height:14mm"></div>
+    <h1>Ghost Data Still Exists</h1>
+    <div class="sub">An evidence-driven AI agent that proves whether a person's data is really deleted</div>
+    <div style="height:10mm"></div>
+    <div class="grid3">
+      <div class="stat"><b>100%</b><span>status accuracy on the 32 labelled samples</span></div>
+      <div class="stat" style="--c:var(--cyan)"><b>100% / 97.9%</b><span>step precision / recall</span></div>
+      <div class="stat" style="--c:var(--violet)"><b>$0.92</b><span>Claude API cost for all 518 requests</span></div>
+      <div class="stat" style="--c:var(--pink)"><b>7 / 7</b><span>custom evaluation cases passed</span></div>
+      <div class="stat" style="--c:var(--amber)"><b>550 / 550</b><span>rule vs LLM intent agreement</span></div>
+      <div class="stat" style="--c:var(--blue)"><b>~4 s</b><span>full run, O((n·k + m) log m)</span></div>
+    </div>
+  </div>
+  <div>
+    <p style="font-size:11pt"><b>Participant:</b> Gowri Sankar C &nbsp;·&nbsp; <b>Built with:</b> Claude Code (pair
+      programming) &nbsp;·&nbsp; <b>Agent models:</b> Claude Opus 5.5 + local RapidOCR</p>
+    <p class="muted">Contents: 1 The problem · 2 Inputs · 3 How we solve it · 4 The output · 5 Results · 6 Traps and
+      real-world scenarios · 7 Contributions and AI use · 8 Interview cheat sheet</p>
+  </div>
+</div>
+
+<!-- ============================================================ 1 PROBLEM -->
+<section class="page-break" style="--c:var(--cyan)">
+  <div class="sec-head"><span class="num">1</span><h2>The problem, in plain words</h2></div>
+  <p>Northstar Shop (imaginary) told a customer their account was deleted: every dashboard said
+    <b>"Complete"</b>. Weeks later the same customer tried to sign up again and was refused: <i>"This email is already
+    registered."</i> The deletion had removed the main record, but copies of the person's data lived on in many other
+    places, and a sync job had even <b>re-created</b> what was deleted. The company lost <b>$2.4 million</b>.</p>
+  <div class="card" style="--c:var(--violet)">
+    <b>Analogy:</b> you ask a shop to shred your paper file. They shred the main file and say "done", but there are
+    photocopies in other branches, your name in their phone book, your complaint letters in the help-desk folder, your
+    address on the marketing list, and boxes in the archive. An assistant even keeps re-copying from an old copy.
+  </div>
+  <table>
+    <tr><th>Everyday picture</th><th>System in the data</th><th>What policy requires (deletion_rules.csv)</th></tr>
+    <tr><td>The main filing cabinet</td><td>Account database (<code>account_*</code>)</td><td>Delete</td></tr>
+    <tr><td>Photocopies in other branches</td><td>Read, regional, reporting, failover replicas</td><td>Delete every copy</td></tr>
+    <tr><td>The shop's phone book</td><td>Search index (<code>search_*</code>)</td><td>Delete</td></tr>
+    <tr><td>Help-desk folder</td><td>Support messages / attachments</td><td>Redact chats with order context; delete the person's attachments</td></tr>
+    <tr><td>Stats spreadsheet</td><td>Analytics profiles</td><td>Anonymize</td></tr>
+    <tr><td>Marketing list</td><td>Marketing profile, email delivery logs</td><td>Delete / redact</td></tr>
+    <tr><td>Archive boxes</td><td>Backups (<code>backup_*</code>)</td><td>Keep, but block restore</td></tr>
+    <tr><td>The re-copying assistant</td><td>Integration connectors (<code>data_flow_*</code>)</td><td>Disable first</td></tr>
+    <tr><td>Security guard's logbook</td><td>Security audit log, legal holds</td><td>Keep (verify still present)</td></tr>
+    <tr><td>A numbered placeholder</td><td>Account tombstone</td><td>Keep only the internal <code>user_id</code>; remove name, email, phone</td></tr>
+  </table>
+  <h3>What the agent must answer for each of the 518 requests</h3>
+  <ul>
+    <li><b>NOT_APPLICABLE</b>: the person did not ask for deletion (fix my name, send me my data, marketing only...).</li>
+    <li><b>COMPLETE</b>: everything is correctly treated; list the verification checks with the evidence that proves them.</li>
+    <li><b>INCOMPLETE</b>: report what remains, the ordered remediation plan, and the checks that must pass afterwards.</li>
+  </ul>
+  <p class="muted">Real-world context: this is the GDPR / CCPA "right to erasure". Regulators have fined companies when
+    "deleted" data survived in copies (e.g. reported cases involving Amazon Alexa, Morgan Stanley, Deutsche Wohnen).</p>
+</section>
+
+<!-- ============================================================ 2 INPUTS -->
+<section style="--c:var(--green)">
+  <div class="sec-head"><span class="num">2</span><h2>Inputs</h2></div>
+  <table>
+    <tr><th>File</th><th>What it contains</th><th>How the agent uses it</th></tr>
+    <tr><td><code>deletion_requests.csv</code></td><td>518 requests: email, request time, claimed status, audit time, free text (6 languages)</td><td>The cases to answer</td></tr>
+    <tr><td><code>user_identities.csv</code> + <code>user_audit_log.csv</code></td><td>Current identities; 107 email, 107 hash and 92 phone changes</td><td>Every identifier the person ever had</td></tr>
+    <tr><td><code>system_activity.csv</code></td><td>4,011 events (deletes, syncs, exports, restores), mixed with unrelated people</td><td>Workflow reconstruction; claims never prove state</td></tr>
+    <tr><td><code>deletion_rules.csv</code></td><td>15 rules: category → delete / redact / anonymize / retain</td><td>The policy engine's table</td></tr>
+    <tr><td><code>evidence/</code> (94 files)</td><td>24 SQL snapshots, 28 JSON exports, 26 logs in 9 formats, 1 handover note, 4 PDFs, 11 screenshots</td><td>The ground truth at each point in time</td></tr>
+    <tr><td><code>sample_*.csv</code></td><td>32 requests with correct answers</td><td>Evaluation and hypothesis testing</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================ 3 HOW -->
+<section style="--c:var(--violet)">
+  <div class="sec-head"><span class="num">3</span><h2>How we solve it</h2></div>
+  <div class="flow">
+    <div style="--c:var(--cyan)"><b>1 Intent</b>Multilingual rules with negation handling; Claude gives an independent verdict</div>
+    <div style="--c:var(--green)"><b>2 Identity</b>user_id + every old email, phone and SHA-256 hash</div>
+    <div style="--c:var(--violet)"><b>3 Discovery</b>94 files → one list of observations; workflow reconstruction</div>
+    <div style="--c:var(--pink)"><b>4 State</b>Latest evidence at or before audit_at; claims never count</div>
+    <div style="--c:var(--amber)"><b>5 Policy</b>deletion_rules.csv per category</div>
+    <div style="--c:var(--blue)"><b>6 Steps</b>Ordered findings → remediation → verification; validated</div>
+  </div>
+  <h3>Key ideas</h3>
+  <div class="grid2">
+    <div class="card" style="--c:var(--cyan)"><b>One shape for all evidence.</b> SQL (executed in SQLite, primary vs
+      replica tables), JSON, nine log dialects (start/complete events joined by trace id), text, PDF and OCR/vision
+      output all become <i>observations</i>: resource, time, state, identifiers.</div>
+    <div class="card" style="--c:var(--pink)"><b>Evidence beats claims.</b> "SUCCESS", "PARTIAL" and
+      "DELETION_PENDING" are claims. A 404 read-back, a found record or a replica row decides. Explicit observations
+      outrank absence-by-omission.</div>
+    <div class="card" style="--c:var(--violet)"><b>Workflow reconstruction.</b> Deleted accounts (404) and
+      anonymized profiles carry no identifiers. The account event's result mirrors the reported claim (252/252
+      validated), and each workflow's later steps share a <b>seconds-phase fingerprint</b>. Accounts are assigned
+      jointly so one event serves one workflow.</div>
+    <div class="card" style="--c:var(--amber)"><b>Policy-correct ordering.</b> Disable flows and block restores
+      first, then delete / redact / anonymize, then verify. Retained records are verified present, never deleted.
+      COMPLETE verifications are written only when evidence proves them.</div>
+  </div>
+  <h3>Where AI is used (and where it is not)</h3>
+  <table>
+    <tr><th>Component</th><th>Model</th><th>Role</th></tr>
+    <tr><td>Request intent</td><td>Claude Opus 5.5 (14 batched calls)</td><td>Independent second opinion; agreed 550/550 with the rules; settles languages the rules don't know (German test)</td></tr>
+    <tr><td>Screenshots</td><td>Claude vision (11 calls) + local RapidOCR</td><td>Extract record ids, identifiers and visible state; corrected 5 evaluation cases OCR text alone could not judge</td></tr>
+    <tr><td>Everything else</td><td>None (deterministic)</td><td>Reproducible, explainable, free; every decision traceable to evidence</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================ 4 OUTPUT -->
+<section style="--c:var(--pink)">
+  <div class="sec-head"><span class="num">4</span><h2>The final output</h2></div>
+  <p><code>output.csv</code>: 518 rows sorted by case_id with columns <code>case_id, deletion_status, steps_json</code>.
+    Totals: <b>350 INCOMPLETE</b>, <b>158 COMPLETE</b>, <b>10 NOT_APPLICABLE</b>; 3,268 steps.</p>
+  <h3>Example: case_50 (INCOMPLETE)</h3>
+  <p class="muted">Request: "Please treat this message as a request for permanent account deletion..." · claimed NOT_STARTED ·
+    audit 2026-07-14 12:00Z. A screenshot captured 2026-07-13 shows the analytics profile still displaying the email.</p>
+  <table>
+    <tr><th>#</th><th>Phase</th><th>Operation</th><th>Resource</th><th>Evidence</th></tr>
+    <tr><td>1</td><td>FINDING</td><td>REPORT_EXPOSED_PII</td><td>analytics_7438</td><td>evidence_19 (screenshot)</td></tr>
+    <tr><td>2</td><td>REMEDIATION</td><td>ANONYMIZE_RECORD</td><td>analytics_7438</td><td>(future work)</td></tr>
+    <tr><td>3</td><td>VERIFICATION</td><td>VERIFY_RECORD_ABSENT</td><td>account_3270</td><td>(future check)</td></tr>
+    <tr><td>4</td><td>VERIFICATION</td><td>VERIFY_RECORD_PRESENT</td><td>audit_record_5080</td><td>(retained by policy)</td></tr>
+    <tr><td>5</td><td>VERIFICATION</td><td>VERIFY_RECORD_ANONYMIZED</td><td>analytics_7438</td><td>(future check)</td></tr>
+  </table>
+  <h3>Submission package</h3>
+  <table>
+    <tr><th>Upload</th><th>Content</th></tr>
+    <tr><td><code>code.zip</code></td><td>README, code (9 modules), prompts, requirements, evaluation workflow, generated evaluation and usage reports, unit tests. No dataset, cache, venv or secrets.</td></tr>
+    <tr><td><code>output.csv</code></td><td>518 answers; passes every contract check</td></tr>
+    <tr><td><code>log.txt</code></td><td>Turn-by-turn transcript of how the solution was built</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================ 5 RESULTS -->
+<section style="--c:var(--amber)">
+  <div class="sec-head"><span class="num">5</span><h2>Results and evaluation</h2></div>
+  <table>
+    <tr><th>Configuration (32 samples)</th><th>Status</th><th>Precision</th><th>Recall</th><th>F1</th><th>Sequence</th></tr>
+    <tr><td><b>Full system</b></td><td>100%</td><td>100%</td><td>97.9%</td><td>99.0%</td><td>90.6%</td></tr>
+    <tr><td>No LLM / vision</td><td>100%</td><td>100%</td><td>97.9%</td><td>99.0%</td><td>90.6%</td></tr>
+    <tr><td>No LLM, no OCR</td><td>100%</td><td>100%</td><td>97.9%</td><td>99.0%</td><td>90.6%</td></tr>
+    <tr><td>No workflow reconstruction</td><td>100%</td><td>100%</td><td>86.0%</td><td>92.5%</td><td>34.4%</td></tr>
+  </table>
+  <p>4 of 193 expected sample steps are missing. Three reference ids that appear in <b>no</b> participant file
+    (<code>account_004</code>, <code>audit_record_6645</code>, <code>audit_record_5569</code>), verified by an exact
+    search including PDF text and screenshot OCR. The fourth (<code>analytics_901</code>) could only be linked by an
+    unanchored time-window guess, which was deliberately not added to avoid overfitting the samples.</p>
+  <h3>Custom evaluation cases (metamorphic tests)</h3>
+  <table>
+    <tr><th>Case</th><th>Change</th><th>Expected</th><th>Result</th></tr>
+    <tr><td>custom_01 / 02</td><td>Same person writes from current / oldest email</td><td>Identical answer</td><td>PASS</td></tr>
+    <tr><td>custom_03</td><td>Upper-case vs lower-case email</td><td>Identical answer</td><td>PASS</td></tr>
+    <tr><td>custom_04</td><td>"Please do not delete my account..."</td><td>NOT_APPLICABLE</td><td>PASS</td></tr>
+    <tr><td>custom_05</td><td>Audit date moved before the decisive screenshot</td><td>No late evidence; answer changes</td><td>PASS</td></tr>
+    <tr><td>custom_06</td><td>Deletion request in German</td><td>Authorized via LLM</td><td>PASS</td></tr>
+    <tr><td>custom_07</td><td>Spanish marketing-only opt-out</td><td>NOT_APPLICABLE</td><td>PASS</td></tr>
+  </table>
+  <h3>Iterations (failures found → fixes)</h3>
+  <table>
+    <tr><th>#</th><th>Change</th><th>Recall</th><th>Sequence</th></tr>
+    <tr><td>1</td><td>First pipeline</td><td>89.6%</td><td>56.3%</td></tr>
+    <tr><td>2</td><td>Workflow reconstruction (claim↔result mapping, joint assignment, fingerprint)</td><td>95.9%</td><td>75.0%</td></tr>
+    <tr><td>3</td><td>Decoy guard, tie-breaks, bundle absence (regression found)</td><td>94.3%</td><td>71.9%</td></tr>
+    <tr><td>4</td><td>Absence only when no explicit observation exists</td><td>97.9%</td><td>90.6%</td></tr>
+    <tr><td>5–6</td><td>OCR + LLM + vision; proof-only verification; absence only for delete categories</td><td>97.9%</td><td>90.6%</td></tr>
+  </table>
+  <div class="grid3">
+    <div class="stat"><b>25 calls</b><span>120,147 tokens for the full run</span></div>
+    <div class="stat" style="--c:var(--cyan)"><b>232</b><span>tokens per request ($0.0018)</span></div>
+    <div class="stat" style="--c:var(--violet)"><b>0</b><span>contract violations across 518 rows</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ 6 TRAPS + SCENARIOS -->
+<section style="--c:var(--red)">
+  <div class="sec-head"><span class="num">6</span><h2>Traps found and real-world scenarios</h2></div>
+  <table>
+    <tr><th>Trap in the data</th><th>How the agent handles it</th></tr>
+    <tr><td>Statuses that claim more than reality ("COMPLETE", "SUCCESS", "DELETION_PENDING")</td><td>Only point-in-time evidence decides</td></tr>
+    <tr><td>Look-alike emails (<code>g.silva76.jr@</code> vs <code>g.silva76@</code>)</td><td>Exact identifiers only</td></tr>
+    <tr><td>Months-old 404 look-ups pointing at another person's account</td><td>Negative look-ups count only after the request</td></tr>
+    <tr><td>Data filed only under old identifiers (80 cases)</td><td>Search every historical email, phone and hash</td></tr>
+    <tr><td>Copies left in replicas; connectors repopulating deleted records</td><td>Replica-aware state; disable flows first</td></tr>
+    <tr><td>Evidence created after the audit time</td><td>Ignored; inclusive UTC cut-off</td></tr>
+  </table>
+  <table>
+    <tr><th>Scenario raised by Gowri</th><th>Finding / design answer</th></tr>
+    <tr><td>Login identifiers (email, phone, username, social, device)</td><td>Only 4 linkable identifiers exist; all historical values matched; no format variants in the data</td></tr>
+    <tr><td>Other devices still logged in</td><td>Security log shows "Session revoked" before closure; production: revoke tokens before deleting</td></tr>
+    <tr><td>Grace period across IST / PST</td><td>All 10,977 timestamps are UTC; compare instants, never local dates (DST!)</td></tr>
+    <tr><td>Warranty, tax, payment disputes</td><td>Legal holds and security logs retained and verified; tombstones keep only <code>user_id</code></td></tr>
+    <tr><td>Profile changes just before deletion</td><td>80 cases need old identifiers; all covered</td></tr>
+    <tr><td>Pending returns / orders</td><td>Order-context chats redacted, not deleted; DELETION_PENDING treated as present</td></tr>
+    <tr><td>Promotional copies (Black Friday lists)</td><td>Marketing deleted, analytics anonymized, warehouse connectors disabled</td></tr>
+    <tr><td>Data lost in a disaster</td><td>Not a deletion (a breach); missing evidence is never treated as proof</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================ 7 CONTRIBUTIONS -->
+<section style="--c:var(--blue)">
+  <div class="sec-head"><span class="num">7</span><h2>Contributions and how AI was used</h2></div>
+  <div class="grid2">
+    <div class="card" style="--c:var(--green)"><b>Gowri (direction and decisions)</b>
+      <ul>
+        <li>Chose to compete, set the overnight timeline and submission strategy</li>
+        <li>Read the leaderboard and redirected effort to code-zip quality, the most-lost category</li>
+        <li>Decided to add an in-agent AI layer and funded the API key (cost cap: $5, used $0.95)</li>
+        <li>Stress-tested the design with real-world scenarios (section 6), several of which became checks and report content</li>
+        <li>Required plain-language understanding of every part before submission</li>
+      </ul></div>
+    <div class="card" style="--c:var(--violet)"><b>Claude Code (pair programmer)</b>
+      <ul>
+        <li>Reverse-engineered the dataset against the 32 samples, hypothesis by hypothesis</li>
+        <li>Implemented the readers, linking, policy planner, evaluation workflow and reports</li>
+        <li>Ran every experiment and reported failures honestly (e.g. iteration 3 regression)</li>
+        <li>Kept the transcript (<code>log.txt</code>) and kept secrets out of chat, logs and the zip</li>
+      </ul></div>
+  </div>
+  <h3>Honest limitations</h3>
+  <ul>
+    <li>The workflow fingerprint is specific to how this dataset was generated; production systems should use correlation ids.</li>
+    <li>Some accounts deleted in the same window with the same result can still be matched to the wrong workflow.</li>
+    <li>The legal register PDF lists held orders but no resource ids; retention expiry is not enforced (no dates expire in the data).</li>
+  </ul>
+</section>
+
+<!-- ============================================================ 8 INTERVIEW -->
+<section style="--c:var(--amber)">
+  <div class="sec-head"><span class="num">8</span><h2>Interview cheat sheet</h2></div>
+  <div class="card" style="--c:var(--amber)"><b>60-second pitch.</b> "My agent audits deletion requests the way an
+    investigator would. It first checks whether the person really asked for deletion, then finds every identifier
+    they ever used, reads all 94 evidence files into one timeline, and decides each record's state at the audit time
+    from evidence, never from status labels. Deleted accounts and anonymized records have no identifiers left, so I
+    reconstruct the deletion workflow from the activity stream. Then the policy table decides delete, redact,
+    anonymize or keep, and the steps are ordered so nothing can re-create the data. AI is used where interpretation
+    is needed: Claude cross-checks intent and reads screenshots. Decisions stay deterministic. It scores 100% status
+    accuracy on the samples, costs $0.0018 per request, and every number is reproducible with one command."</div>
+  <div class="qa"><div class="q">Why not let the LLM decide everything?</div><div class="a">Reproducibility, cost and
+    explainability. Every decision must cite evidence and give the same answer on every run. I used the LLM where text
+    or images need interpretation, measured it against the rules (550/550 agreement) and cached it.</div></div>
+  <div class="qa"><div class="q">How did you know the answers were right without labels for the 518?</div><div class="a">
+    Accuracy on the 32 labelled samples, contract validation of all 518 rows, independent model comparisons
+    (rules vs LLM, OCR vs vision), an ablation study, and metamorphic custom cases.</div></div>
+  <div class="qa"><div class="q">What was the hardest part?</div><div class="a">Records with no identifiers left. I found
+    that each workflow's events share a seconds-phase pattern and that the account event mirrors the reported claim
+    (validated 252/252), and used them to assign accounts jointly. I'm also clear this is dataset-specific forensics;
+    production needs correlation ids.</div></div>
+  <div class="qa"><div class="q">How did you use AI while building?</div><div class="a">Claude Code was my pair programmer:
+    it analysed the data, proposed hypotheses, wrote the code and ran experiments. I set direction, made the decisions
+    (scope, adding the AI layer, priorities), stress-tested the design with real-world scenarios and reviewed results.
+    The whole process is in log.txt.</div></div>
+  <div class="qa"><div class="q">What would you change for production?</div><div class="a">Correlation ids instead of
+    timing forensics; session and token revocation; retention-expiry scheduling; time-zone normalisation at ingestion;
+    propagation of deletions to third-party processors; automatic re-audits.</div></div>
+  <div class="qa"><div class="q">Complexity and cost?</div><div class="a">O((n·k + m) log m): hash indexes plus
+    time-sorted binary search for activity windows. About 4 s for the full run. 25 model calls, 232 tokens and $0.0018
+    per request, cached for free reruns.</div></div>
+</section>
+
+<div class="footer">Ghost Data Still Exists · solution brief · generated from the project's measured results</div>
+</body>
+</html>
