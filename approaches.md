@@ -310,6 +310,20 @@ return result
 
 ---
 
+## 🟢 LeetCode 412: Fizz Buzz
+| Version | Idea | Notes |
+|---|---|---|
+| Mine ✅ | 4 **exclusive** conditions (`i % 3 == 0 and i % 5 != 0` ...) | order doesn't matter because no two conditions can both be true |
+| Classic | check `i % 15 == 0` **first**, then 3, then 5, else `str(i)` | shorter conditions, but **order matters**: 15 would print "Fizz" if 3 came first |
+| Build the word | `s = ""`; `if i % 3 == 0: s += "Fizz"`; `if i % 5 == 0: s += "Buzz"`; `result.append(s or str(i))` | no 3-and-5 case at all; easy to extend (7 → "Bazz") |
+
+**Insights:**
+- `range` uses commas `range(1, n + 1)`; colons are for slicing `word[1:3]`.
+- The return type says `list[str]` → numbers must become text with `str(i)`.
+- LeetCode gives `n` as an int already (`n: int`); only HackerRank `input()` needs `int(...)`.
+
+---
+
 ## 🟢 LeetCode 1672: Richest Customer Wealth
 | Version | Inner part | Notes |
 |---|---|---|
