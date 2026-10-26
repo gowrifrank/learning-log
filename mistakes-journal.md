@@ -352,3 +352,9 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `if balance > winner` ❌ missing `:` → SyntaxError (every `if`/`for`/`while`/`def` line ends with `:`)
 - `range(temp_acc)` ❌ `range` needs a **number**, not a list → `range(len(temp_acc))` (2nd time: also on 19 Oct)
 - ✅ Reset `balance = 0` per customer in the right place (yesterday's "reset per group" lesson stuck!)
+
+### 2026-10-25: LeetCode 412, Fizz Buzz ❌ → ✅
+- `range(1:n+1)` ❌ → `range(1, n+1)`: `range` takes **commas**, slicing takes colons
+- `elif elif` ❌: a word typed twice → SyntaxError
+- `result.append(i)` ❌ → `str(i)`: the answer is `list[str]`
+- ✅ Nice idea: exclusive conditions (`and i % 5 != 0`) make the order of checks irrelevant
