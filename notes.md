@@ -247,6 +247,25 @@ for ch in "banana":
 - Long form: `if ch in counts: counts[ch] += 1` / `else: counts[ch] = 1`
 - `counts[ch] += 1` on a missing key → **KeyError**. That's why we need `if` or `.get(ch, 0)`.
 
+## 🧩 Tricks from problems (Week 2–3)
+```python
+picked = blocks.pop(0)          # pop GIVES BACK the item: pop(0) = first, pop() = last
+top = float("inf")              # "bigger than any number" (start for a value that only shrinks)
+print("Yes" if ok else "No")    # one-line if/else that picks a value
+int(max("82734"))               # 8: max() works on strings too ("0" < "1" < ... < "9")
+"ab" * 3                        # "ababab": build a huge test string with "1" * 100000
+```
+**FLAG pattern** (one answer per test case)
+```python
+ok = True
+for x in items:
+    if something_is_wrong:
+        ok = False
+        break
+print("Yes" if ok else "No")
+```
+- 📕 Adding / removing / looping drills: [lessons/add-remove-loop-book.md](lessons/add-remove-loop-book.md)
+
 ## 🔥 HackerRank solved
 - Python If-Else
 - Arithmetic Operators
@@ -258,3 +277,6 @@ for ch in "banana":
 - Finding the percentage
 - Nested Lists
 - Lists
+- Word Order
+- Merge the Tools!
+- Piling Up! ⭐⭐⭐⭐
