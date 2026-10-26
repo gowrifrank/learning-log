@@ -3,7 +3,7 @@
 
 ## 🎯 Focus areas (my patterns so far)
 0. ⭐ **Navigating data: strings, `map`, dictionaries, searching, parsing and printing.** My biggest weak spot (confirmed 2026-10-23). Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before every problem until it feels natural.
-1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **8 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929, LeetCode 1480...)!
+1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **9 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929, LeetCode 1480, Piling Up `pop(value)`...)! Drill it with [lessons/add-remove-loop-book.md](lessons/add-remove-loop-book.md) §0.
 2. **Off-by-one with `range`.** `range` stops **before** the stop value. Count the items for a small input before submitting.
 3. **`=` replaces, `+=` adds on.** When building a total or a string across a loop, I need `+=`.
 4. **Text vs numbers.** `input()` gives text, `int()` converts to a number, and `str()` converts back. I can't mix them with `+`.
@@ -16,7 +16,7 @@
 | Skill | Status | Correct form |
 |---|---|---|
 | Grow a list | 🟢 quick check ✅ 10-18 | `x = []` then `x.append(item)`, never `x[0] = item` on an empty list |
-| Items vs positions | 🔴 7 slips | `for item in x:` → use `item`. `for i in range(len(x)):` → use `x[i]` |
+| Items vs positions | 🔴 9 slips | `for item in x:` → use `item`. `for i in range(len(x)):` → use `x[i]` |
 | Function vs method | 🟡 | `sorted(x)`, `len(x)`, `max(x)` (around) · `x.sort()`, `x.append()` (after the dot) |
 | `=` vs `==` | 🟡 | `=` stores, `==` compares |
 | `return` vs `print` | 🟡 | `return` only inside `def`. HackerRank main code → `print` |
@@ -27,6 +27,9 @@
 | Dict lookups | 🟡 | `d[key]` (crashes if missing) · `d.get(key, 0)` (safe) · `key in d` checks **keys** only |
 | Dict loops | 🟡 | `for k in d:` keys · `for v in d.values():` values · `for k, v in d.items():` both |
 | Printing on one line | 🟡 | `print(x, end=" ")` · `" ".join(map(str, nums))` · `print(a, b, sep=", ")` |
+| Position tools vs value tools | 🔴 new 10-26 | `x.pop(i)` `x.insert(i, v)` `del x[i]` take a **position** · `x.remove(v)` `v in x` take a **value** · `x.pop()` = last, `x.pop(0)` = first |
+| `range(number)` not `range(list)` | 🔴 3 slips (10-19, 10-24, 10-26) | `range(len(nums))` or `range(n)` |
+| One answer per test case (FLAG) | 🟡 new 10-26 | `ok = True` → on failure `ok = False; break` → after the loop `print("Yes" if ok else "No")` |
 | Naming | 🟡 | name variables after what they hold *right now* (`lowest`, not `second_low`) |
 
 ## ✅ Daily checklist (before I click Run or Submit)
@@ -358,3 +361,19 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `elif elif` ❌: a word typed twice → SyntaxError
 - `result.append(i)` ❌ → `str(i)`: the answer is `list[str]`
 - ✅ Nice idea: exclusive conditions (`and i % 5 != 0`) make the order of checks irrelevant
+
+### 2026-10-26: LeetCode 1689, Deci-Binary Partitions ✅ (logic first, on paper)
+- 💡 **My greedy idea** (subtract the biggest deci-binary number that fits, repeat) gives the right answer, but listing all deci-binary numbers doubles per digit (2, 4, 8, 16...), and `n` can have 100,000 digits → impossible.
+- **The insight came from tracing my own greedy column by column:** each number takes at most 1 from every column, so the **biggest digit** decides the answer. Code = BEST SO FAR over the characters (5 lines).
+- **Lesson:** when a hand-method works, **trace it on paper and look for what decides the count**. The "pattern" often collapses into one simple rule.
+
+### 2026-10-26: HackerRank, Piling Up! (own idea) ❌❌ → walkthrough → ✅ ⭐⭐⭐⭐
+- `return "No"` / `return "Yes"` ❌ **outside a function** → SyntaxError. HackerRank main code **prints**
+- `range(blocks)` ❌ → `range(len(blocks))` (3rd time `range(list)`)
+- `blocks.pop(blocks[0])` ❌ **pop wants a POSITION**: with a first cube of 4 it removes `blocks[4]`. → `blocks.pop(0)` (first), `blocks.pop()` (last). Then `blocks.pop(1)` ❌ = the **second** cube, not the last
+- `topblock` was saved but **never compared** → the rule ("a cube must not be bigger than the one below") was never checked. Two names for two ideas: `picked` (in my hand) vs `top` (on the pile)
+- `print("No")` inside the loop + `print("Yes")` always after it → printed **both**. Fix: an `ok` **flag**, `break` on failure, one print after the loop
+- `elif ... and blocks[0]:` compared nothing (a number on its own is just "truthy") → plain `else:`
+- 💡 **Right from the start:** pop from the ends and always take the bigger end
+- **Lesson:** before coding, write the **rule** as an `if` in English ("if picked > top → fail"). If that `if` isn't in my code, the rule isn't being checked.
+

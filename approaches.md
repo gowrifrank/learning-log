@@ -16,6 +16,9 @@
 | **GUARD CLAUSE** | Handle bad/empty input first with an early `return` | `average([])` |
 | **DRY** | Don't repeat yourself: compute once, reuse | `is_palindrome` |
 | **USE A BUILT-IN** | Before writing a loop, ask "Does Python already have a tool for this?" | Palindrome `[::-1]`, `sum()`, `max()` |
+| **FLAG** | `ok = True` before a check loop; set `False` + `break` on failure; decide after the loop | Piling Up! |
+| **TAKE FROM BOTH ENDS** | Each step, take from the left or right end (often the bigger one) | Piling Up! |
+| **FIND THE BOTTLENECK** | Instead of simulating step by step, ask "what forces the count?" | 1689 (the biggest digit) |
 
 ## ⚖️ How to judge an approach
 1. **Correct?** Does it handle the tricky inputs (duplicates, uppercase, empty, the smallest and largest values)?
@@ -307,6 +310,33 @@ return result
 **New ideas here:**
 - `[0] * n` makes a list with n slots, so `result[i] = ...` works (compare Day 05: `ans[0] = 5` on an empty list ❌).
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
+
+---
+
+## 🟠 LeetCode 1689: Partitioning Into Minimum Number Of Deci-Binary Numbers
+| Version | Idea | Notes |
+|---|---|---|
+| My paper greedy 💡 | list deci-binary numbers per length, subtract the biggest that fits, repeat | right answer, but the list doubles per digit → impossible for 100,000 digits |
+| Mine ✅ (BEST SO FAR) | loop the characters, keep the biggest `int(ch)` | 5 lines, one pass, O(n) |
+| Early exit | add `if best == 9: return 9` | can't beat 9, so stop early |
+| USE A BUILT-IN | `return int(max(n))` | `max` on a string compares characters, and `"0" < "1" < ... < "9"` |
+
+**Insight (FIND THE BOTTLENECK):** each deci-binary number adds at most 1 to every column, so a column holding 8 needs at least 8 numbers, and 8 is always enough (put a 1 in every column that still needs one). Tracing my own greedy column by column is what revealed it.
+
+---
+
+## 🔥 HackerRank: Piling Up! (4th star ⭐⭐⭐⭐)
+| Version | Idea | Notes |
+|---|---|---|
+| Mine ✅ | `pop(0)` / `pop()` the bigger end; `top` starts at `float("inf")`; `ok` FLAG | clear; `pop(0)` shifts the whole list, so it's slow on huge lists |
+| Two pointers | `left`, `right` positions move inwards instead of popping | nothing is removed, so every step is instant |
+| `collections.deque` | `d.popleft()` / `d.pop()` | a list built for fast removal at BOTH ends (this problem sits in HackerRank's *collections* section) |
+
+**Why the bigger end?** If you leave a big cube for later, it can never sit on top of a smaller one. So the bigger end must go now.
+**New ideas:**
+- `float("inf")` = "bigger than any number", a good start for a top that only shrinks (the mirror of `best = 0` in BEST SO FAR).
+- `print("Yes" if ok else "No")`: a one-line if/else that picks a value.
+- `x.pop()` **gives the item back**: `picked = blocks.pop(0)`.
 
 ---
 
