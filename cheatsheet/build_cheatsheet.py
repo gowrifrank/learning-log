@@ -32,7 +32,7 @@ PHONE_CSS = """<style>
   pre { font-size: 8.8pt; padding: 2mm 2.5mm; }
   table { font-size: 8.6pt; }
   th, td { padding: 1.3mm 1.6mm; }
-  code { font-size: 8.6pt; word-break: break-word; }
+  code { font-size: 8.6pt; overflow-wrap: break-word; }
 </style>
 </head>"""
 CHROME = pathlib.Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
