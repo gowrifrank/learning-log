@@ -1,4 +1,5 @@
 # 🔁 Big Review #1: Sat 24 + Sun 25 Oct 2026
+> ℹ️ Not done on the weekend (hackathon!). These drills are now **warm-ups for [revision-1.md](revision-1.md)**, topics 4, 5, 7 and 8.
 > Goal: make **strings, searching, printing, items vs positions, `map` and dictionaries** feel automatic.
 > These are my own weak spots (said on 23 Oct). Everything here comes from **my** lessons, problems and mistakes.
 
