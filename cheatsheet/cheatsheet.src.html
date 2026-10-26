@@ -371,7 +371,7 @@ i.index[i]            # methods use ( ) not [ ]</pre></div>
     <tr><td><code>x.append(v)</code></td><td>add to the end (the ONLY way to grow an empty list)</td></tr>
     <tr><td><code>x.insert(i, v)</code></td><td>add at position <code>i</code></td></tr>
     <tr><td><code>x.remove(v)</code></td><td>remove the first item equal to <code>v</code> (by <b>value</b>)</td></tr>
-    <tr><td><code>x.pop()</code> / <code>x.pop(i)</code></td><td>remove last / at position (and give it back)</td></tr>
+    <tr><td><code>x.pop()</code> / <code>x.pop(0)</code> / <code>x.pop(i)</code></td><td>remove last / first / at <b>position</b> i, and <b>give it back</b>: <code>picked = x.pop(0)</code>. ❌ <code>x.pop(x[0])</code> uses a value as a position</td></tr>
     <tr><td><code>x[i] = v</code></td><td>replace an EXISTING slot</td></tr>
     <tr><td><code>x.sort()</code> / <code>x.reverse()</code></td><td>change the list itself, return <code>None</code></td></tr>
     <tr><td><code>sorted(x)</code></td><td>NEW sorted list, original unchanged</td></tr>
@@ -558,6 +558,19 @@ while left &lt; right:
         second = x
         break          # first match only
 # guard: if not nums: return 0</pre><p>Runner-Up, Nested Lists, average([])</p></div>
+    <div class="card"><h3 style="margin-top:0">FLAG</h3>
+<pre>ok = True
+for x in items:
+    if x &gt; top:
+        ok = False
+        break
+print("Yes" if ok else "No")</pre><p>Piling Up! (one answer per test case)</p></div>
+    <div class="card"><h3 style="margin-top:0">FIND THE BOTTLENECK</h3>
+<pre>best = 0
+for ch in n:
+    if int(ch) &gt; best:
+        best = int(ch)
+# or: int(max(n))</pre><p>1689: the biggest digit forces the count</p></div>
   </div>
   <table>
     <tr><th>Principle</th><th>Meaning</th></tr>
