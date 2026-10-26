@@ -4,13 +4,20 @@
 ## ⏳ Pending commits
 | Commit on | What | Commit message |
 |---|---|---|
-| 2026-10-24/25 (Sat–Sun) | 📆 **Big review:** follow [lessons/review-weekend-1.md](lessons/review-weekend-1.md) (strings, searching, printing, items vs positions, `map`, dicts) + Easy problems | |
-| after the review | **Day 08: sets & tuples** | `Day 08: ...` |
+| next | 📆 **Revision #1 (Days 01–07 + all problems):** study [lessons/revision-1.md](lessons/revision-1.md), then a long quiz (10–15 questions per topic) logged in quiz-log.md | |
+| after the revision quiz | **Day 08: sets & tuples** | `Day 08: ...` |
 
 > 📈 **From 22 Oct:** weekdays = **LeetCode Medium + HackerRank Medium/Easy**. Easy problems on weekends, holidays and tough days.
 
 
 > Once something is committed, move it to the **Lessons** table below.
+
+## 🌧 Rainy-day bank
+> **Max 1 LeetCode + 1 HackerRank commit per day** (from 26 Oct). Extra solutions wait here and get committed on a later day, e.g. a day with no problem solved. Docs and lessons can be committed any time.
+
+| Solved on | Site | Problem | File |
+|---|---|---|---|
+| 2026-10-26 | LeetCode | 1689. Deci-Binary Partitions (Medium) | `leetcode/2026-10-26_1689_deci_binary_partitions.py` (commit 27 Oct: Fizz Buzz used the 26 Oct slot) |
 
 ## 📘 Lessons
 | Day | Topic | Written | Committed |
@@ -28,6 +35,7 @@
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
 | 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h · Fri ≈ 2.5 h | Sat ≈ 2 h · Sun ≈ 4.5 h (HackerRank Orchestrate hackathon overnight + Fizz Buzz) | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) · Fri: LeetCode 2161, HackerRank Merge the Tools | Day 08 (no rush, variable pace) |
+| 3 | 26 Oct–1 Nov | Mon ≈ 3 h | | Mon: LeetCode 1689 (own greedy on paper → max digit), HackerRank Piling Up! (4th star), contest rules (LeetCode weekly/biweekly), new Add·Remove·Loop book, Revision #1 pack | Day 08 waits for Revision #1 + quiz |
 
 > ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
 > 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
@@ -47,6 +55,7 @@
 | 2026-10-21 | Lists | ✅ (function per command + if/elif dispatch; built-in .insert/.remove + int()) |
 | 2026-10-22 | Word Order | ✅ **first Medium** (COUNTING pattern; fixed counting letters instead of words) |
 | 2026-10-23 | Merge the Tools! | ✅ Medium (own window logic first; walkthrough for `ch not in result` + reset per piece) |
+| 2026-10-26 | Piling Up! | ✅ Medium ⭐⭐⭐⭐ **4th star** (own pop-from-the-ends idea; fixed `pop(value)`, added top check + `ok` flag after a walkthrough) |
 
 ## 🟠 LeetCode
 | Date | Problem | Result |
@@ -60,6 +69,7 @@
 | 2026-10-23 | 2161. Partition Array According to Given Pivot | ✅ Day 7 🔥 Medium (3 FILTER lists + `+`; fixed `pivot = []` overwriting the parameter and `nums` vs `nums[i]`) |
 | 2026-10-24 | 1672. Richest Customer Wealth | ✅ Day 8 🔥 Easy (nested list + BEST SO FAR; fixed `range(list)` and a missing `:`; 0 ms) |
 | 2026-10-25 | 412. Fizz Buzz | ✅ Day 9 🔥 Easy (exclusive conditions; fixed `range(1:n+1)`, `elif elif`, `str(i)`; 0 ms) |
+| 2026-10-26 | 1689. Partitioning Into Minimum Number Of Deci-Binary Numbers | ✅ Day 10 🔥 Medium (own greedy on paper → max digit; BEST SO FAR; 0 ms) |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
@@ -83,7 +93,8 @@ Go through everything from the week, about 30–45 min:
 Full plan: **[schedule.md](schedule.md)**: lessons Day 07–20 before 3 Nov, then a phone-only vacation pack (1 LeetCode + 1 HackerRank + 1 GitHub commit per day).
 
 ## 🎯 Long-term goals
-- ⭐⭐⭐ Next HackerRank Python star
+- ⭐⭐⭐⭐ 4th HackerRank Python star ✅ (26 Oct, 260/400 points) → next: ⭐⭐⭐⭐⭐ gold at 400 points
+- 🏆 LeetCode Weekly 526 (Sun 1 Nov, 8:00 IST): solve Q1 solo, no AI; upsolve together afterwards
 - 🟠 LeetCode: 1 problem every day from 2026-10-17 to 31 Dec 2027 (profile calendar streak). Try the Daily Question when it's Easy.
 - 📄 Turn `notes.md` into a PDF cheat sheet at the end of the course
 - 🟩 2027 GitHub contribution graph art: see [github-art-2027.md](github-art-2027.md)
