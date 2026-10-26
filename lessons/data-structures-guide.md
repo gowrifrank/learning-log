@@ -1,6 +1,7 @@
 # 🗂 Data Structures Guide: Lists, Strings, Dictionaries & Parsing Input
 > ⭐ **My weak spot.** Read this before every HackerRank / LeetCode problem until it feels natural.
 > Golden rule: **always know WHAT you're holding.** Is it a string? A list? A dictionary? A list *inside* a dictionary?
+> 📕 **Adding, removing and looping** (append/pop/insert/remove, dict add/remove, `map`) now has its own drill book: [add-remove-loop-book.md](add-remove-loop-book.md).
 
 ---
 
