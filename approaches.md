@@ -313,6 +313,19 @@ return result
 
 ---
 
+## 🔴 LeetCode 42: Trapping Rain Water (first Hard)
+![rain water](lessons/img/rain_water.png)
+
+| Version | Idea | Work done |
+|---|---|---|
+| Brute force | for every bar, scan the whole list left and right for the tallest | n × n: slow for 20,000 bars |
+| Mine ✅ (two BEST SO FAR rows) | `left_max` walking →, `right_max` walking ←, then `min(...) - height[i]` | 3 passes, O(n), plus 2 extra lists |
+| Two pointers (the famous one) | `left` and `right` move inwards; always move the side with the **shorter** wall, because that wall decides the water there | 1 pass, no extra lists |
+
+**Insight:** "water above bar i = shorter of the two tallest walls − the bar". Once that sentence is clear, the code is just BEST SO FAR twice. **Precompute once, reuse many times** is the general idea, so we don't re-scan for every bar.
+
+---
+
 ## 🟠 LeetCode 1689: Partitioning Into Minimum Number Of Deci-Binary Numbers
 | Version | Idea | Notes |
 |---|---|---|
