@@ -137,3 +137,8 @@ for n in [1, 2, 3, 4]:
 ## 2026-10-22 syntax check (parsing one line of numbers) 1/1 ✅
 - **Q:** After `nums = list(map(int, input().split()))` with input `5 10`, what is `nums[1]`? Number or text?
 - **A (mine):** `10`, a number ✅ (`map(int, ...)` converted it; position 1 is the second item)
+
+## 2026-10-27 warm-up (Add·Remove·Loop book) 2/3
+- **#1** `a = [4, 3, 2]; x = a.pop(); print(x, a)` → `2 [4, 3]` ✅ (`pop()` takes the last and gives it back)
+- **#2** `a = [0] * 3; a[1] = 7; print(a)` → I said `[0, 7]` ❌ → `[0, 7, 0]`. `[0] * 3` makes **three** slots `[0, 0, 0]`; `a[1] = 7` only replaces the middle one
+- **#3** BEST SO FAR with `max(best, h)` over `[3, 0, 5, 1]` → `3 3 5 5` ✅
