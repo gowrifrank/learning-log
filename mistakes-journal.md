@@ -28,7 +28,7 @@
 | Dict loops | 🟡 | `for k in d:` keys · `for v in d.values():` values · `for k, v in d.items():` both |
 | Printing on one line | 🟡 | `print(x, end=" ")` · `" ".join(map(str, nums))` · `print(a, b, sep=", ")` |
 | Position tools vs value tools | 🔴 new 10-26 | `x.pop(i)` `x.insert(i, v)` `del x[i]` take a **position** · `x.remove(v)` `v in x` take a **value** · `x.pop()` = last, `x.pop(0)` = first |
-| `range(number)` not `range(list)` | 🔴 3 slips (10-19, 10-24, 10-26) | `range(len(nums))` or `range(n)` |
+| `range(number)` not `range(list)` | 🔴 4 slips (10-19, 10-24, 10-26, 10-27) | `range(len(nums))` or `range(n)` |
 | One answer per test case (FLAG) | 🟡 new 10-26 | `ok = True` → on failure `ok = False; break` → after the loop `print("Yes" if ok else "No")` |
 | Naming | 🟡 | name variables after what they hold *right now* (`lowest`, not `second_low`) |
 
@@ -376,4 +376,14 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `elif ... and blocks[0]:` compared nothing (a number on its own is just "truthy") → plain `else:`
 - 💡 **Right from the start:** pop from the ends and always take the bigger end
 - **Lesson:** before coding, write the **rule** as an `if` in English ("if picked > top → fail"). If that `if` isn't in my code, the rule isn't being checked.
+
+### 2026-10-27: LeetCode 42, Trapping Rain Water (first Hard) 😵 → picture → blanks → ✅
+- Hand table gave **negative water** (-3, +1, -1...) ❌. Water can never be negative → the walls were wrong. Walls = the **tallest bar anywhere** on each side, **including the bar itself**, not the neighbours
+- What made it click: a **picture** (bars + water + the shorter-wall line) → [lessons/img/rain_water.png](lessons/img/rain_water.png)
+- `[0] * 3` then `a[1] = 7` → I said `[0, 7]` ❌ → `[0, 7, 0]`: replacing keeps the length
+- `[0] * 5` ❌ hard-coded the example's length → `[0] * n` (LeetCode tests every size)
+- `range(height)` ❌ → `range(n)` (**4th** `range(list)`!)
+- Backwards loop started at `0` ❌ → `range(n - 1, -1, -1)`: the last position is `n - 1`
+- `min(left_max, right_max) - height` ❌ whole lists → `min(left_max[i], right_max[i]) - height[i]`. Inside a positions loop, **every list needs its `[i]`** (same slip as 2161 `nums < pivot`)
+- **Lesson:** when the words don't make sense, **draw it**. And for a Hard, one step at a time (print each row) beats writing it all at once.
 
