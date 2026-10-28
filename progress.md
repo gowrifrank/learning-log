@@ -18,7 +18,7 @@
 
 | Solved on | Site | Problem | File |
 |---|---|---|---|
-| 2026-10-27 | LeetCode | 42. Trapping Rain Water (Hard) | `leetcode/2026-10-27_0042_trapping_rain_water.py` (1689 used the 27 Oct slot) |
+| — | — | (empty) | — |
 
 ## 📘 Lessons
 | Day | Topic | Written | Committed |
