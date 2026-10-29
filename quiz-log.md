@@ -142,3 +142,58 @@ for n in [1, 2, 3, 4]:
 - **#1** `a = [4, 3, 2]; x = a.pop(); print(x, a)` → `2 [4, 3]` ✅ (`pop()` takes the last and gives it back)
 - **#2** `a = [0] * 3; a[1] = 7; print(a)` → I said `[0, 7]` ❌ → `[0, 7, 0]`. `[0] * 3` makes **three** slots `[0, 0, 0]`; `a[1] = 7` only replaces the middle one
 - **#3** BEST SO FAR with `max(best, h)` over `[3, 0, 5, 1]` → `3 3 5 5` ✅
+
+## 2026-10-28 warm-up 1.5/3
+- **#1** `nums = [2, 0, 1]; print(nums[nums[0]])` → `1` ✅ (inside first: `nums[0]` = 2, then `nums[2]` = 1)
+- **#2** `"banana"[1:4], "banana".count("ana")` → I said `ana 2` → ½: the slice ✅, but `count` = **1**. `count` doesn't overlap: after the "ana" at 1–3 it continues from position 4 ("na")
+- **#3** `a = [5, 6, 7]; a[0] = a[2]; print(a)` → I said `7 6 7` → ½: the values ✅, but printing a list shows `[7, 6, 7]` (brackets + commas)
+
+## 2026-10-28 Revision #1 quiz: Basics, Types, Built-ins, Operators 8.5/15 (57%) 🟡 → redo
+> Rule: <60% = redo the topic. All misses fall into 4 traps (below), now with ✅/❌ examples in [lessons/python-reference.md](lessons/python-reference.md).
+- **#1** `print("a", "b", 3)` → I said crash ❌ → `a b 3`. Numbers need no quotes; each comma → one space
+- **#2** `f"Age is{age}!"` → `Age is30!` ✅
+- **#3** `input()` type + `n * 2` → str, 55 ✅ (exactly: `'55'`, text repeated)
+- **#4** `"12" + 3` → ½: I said "illegal operation" → **TypeError**; I retyped the values instead of converting: `int("12") + 3` → 15, `"12" + str(3)` → `'123'`
+- **#5** `7 / 7` → 1.0, float ✅
+- **#6** `bool("False"), bool(0), bool(" ")` → True False True ✅
+- **#7** `int(-3.9)`, `int("12.5")` → ½: -3 ✅, but it's **ValueError** (not syntax)
+- **#8** `0.1 + 0.2 == 0.3` → False ✅ (reason: binary can't store 0.1 exactly; rounding is the fix)
+- **#9** int limits → ½: Python no limit ✅, C++ ≈ **2.1 billion** (I said 2.8)
+- **#10** `range(10, 0, -3)`, `range(5, 0)` → ½: `[10, 7, 4, 1]` ✅, but `[]` (empty, NOT a crash)
+- **#11** `x = print("hi"); print(x)` → ½: I said None → screen shows `hi` THEN `None`
+- **#12** `max("Zebra", "apple")`, `sorted("cab")` → 0: `'apple'` (uppercase is smaller) · `['a', 'b', 'c']` (always a list)
+- **#13** `round(2.5)`, `round(3.5)`, `sum([])`, `max([])` → 0: `2` (tie → even), `4`, `0`, ValueError
+- **#14** `7 // 2`, `-7 // 2`, `7 % 2`, `2 ** 3` → ½: `-7 // 2` = **-4** (rounds toward −∞; `//` never gives decimals)
+- **#15** `"ab" * 3`, `[0] * 3`, `[1] + 2` → ½: last one → TypeError
+- **Traps:** (1) empty result ≠ crash · (2) TypeError vs ValueError · (3) what it gives back (`sorted` list, `print` None, `round` ties) · (4) `//` with negatives
+
+## 2026-10-28 Revision #1 quiz RETAKE (new numbers) 13.5/15 (90%) ✅ PASSED
+- **#1** `print("x", 5, "y")` → `x 5 y` ✅
+- **#2** `f"Hi{name}, bye"` → `HiGowri, bye` ✅
+- **#3** `type(n)`, `n + n` → str, `'44'` ✅
+- **#4** `"5" + 2` → TypeError · `int("5") + 2`, `"5" + str(2)` ✅ (converted this time!)
+- **#5** `9 / 3` → 3.0, float ✅
+- **#6** `bool("")`, `bool("0")`, `bool([0])` → False True True ✅
+- **#7** `int(7.8)`, `int("7.8")` → ½: 7 ✅, I said "InputError" → **ValueError** (InputError doesn't exist)
+- **#8** why 0.1 + 0.2 ≠ 0.3 → binary storage ✅ (small fix: it's ordinary decimals like 0.1, not large numbers)
+- **#9** C++ ≈ 2.1 billion, Python unlimited ✅
+- **#10** `range(3, 10, 3)`, `range(8, 2)` → ½: `[3, 6, 9]` ✅, I said `0` → `[]` (an empty LIST: counting up from 8 never reaches 2)
+- **#11** `ok` then `None` ✅
+- **#12** `max("cat", "Dog")`, `sorted("bca")` → `'cat'`, `['a', 'b', 'c']` ✅
+- **#13** → ½: `round(4.5)` 4, `round(5.5)` 6, `round(4.6)` 5 ✅ · `sum([])` → **0** (I said "can't add") · `min([])` → **ValueError**
+- **#14** `9 // 2`, `-9 // 2`, `9 % 2`, `3 ** 2` → 4, -5, 1, 9 ✅ (negative floor right!)
+- **#15** `hihi`, `[1, 1, 1]`, TypeError ✅
+- **Still shaky:** empty cases (`range` that can't reach → `[]`, `sum([])` → 0 vs `min([])` → ValueError), and exact error names
+
+## 2026-10-28 Revision #1 VARIETY quiz (6 formats) 8.4/10 (84%) ✅ PASSED
+- **#1 Fix** `print(age + 1)` → `print(int(age) + 1)` ✅
+- **#2 Fix** f-string spacing → `f"Total: {total}"` ✅
+- **#3 Crash or not** → 0.4: a) `"abc"[5:]` I said IndexError → `''` (SLICES never crash) · b) `"abc"[5]` IndexError ✅ · c) `range(3, 3)` I said `[3]` → `[]` (stop is excluded, so start = stop gives nothing) · d) `max([4])` 4 ✅ · e) `int(" 8 ")` I said ValueError → `8` (spaces at the ends are OK)
+- **#4 Odd one out** → `7 // 1` (int; the rest are float) ✅
+- **#5 True/False** → F, T, F, F ✅ (but `-1 // 3` = **-1**, not -2: -0.33 → one step left → -1)
+- **#6 Write it** last digit / remove last digit of `n = 1234` → I wrote `n.pop()` ❌ (AttributeError: an int has no `.pop()`) → `n % 10` → 4 · `n // 10` → 123
+- **#7 Predict** → `12 33 43` ✅
+- **#8 Match the error** → IndexError, no error, TypeError, ValueError ✅
+- **#9 Blanks** `range(5, 0, -1)` ✅
+- **#10 Blanks** `sep="-"` ✅
+- **Still shaky:** slice `[5:]` vs index `[5]` · `range(a, a)` → `[]` · `int()` allows spaces · digit maths with `% 10` and `// 10`
