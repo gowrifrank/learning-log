@@ -30,6 +30,10 @@
 | Position tools vs value tools | 🔴 new 10-26 | `x.pop(i)` `x.insert(i, v)` `del x[i]` take a **position** · `x.remove(v)` `v in x` take a **value** · `x.pop()` = last, `x.pop(0)` = first |
 | `range(number)` not `range(list)` | 🔴 4 slips (10-19, 10-24, 10-26, 10-27) | `range(len(nums))` or `range(n)` |
 | One answer per test case (FLAG) | 🟡 new 10-26 | `ok = True` → on failure `ok = False; break` → after the loop `print("Yes" if ok else "No")` |
+| Crash or not? | 🟡 variety quiz 10-28: `"abc"[5:]` (slice → `''`), `range(3, 3)` (→ `[]`), `int(" 8 ")` (→ 8) | empty results are answers, not crashes: `[]`, `''`, `-1`, `None`, `0` · numbers in `print` need no quotes |
+| Name the error | 🟡 retake 10-28: TypeError ✅, but "InputError" for `int("7.8")` | wrong **type** (`"12" + 3`, `[1] + 2`) → `TypeError` · right type, bad **content** (`int("12.5")`, `max([])`) → `ValueError` |
+| What does it give back? | 🟢 retake 10-28 (`sorted`, `print`, `round`, `//` all ✅) | `sorted("cab")` → `['a', 'b', 'c']` (list!) · `print()` → `None` (but still prints) · `round(2.5)` → `2` (ties → even) · `-7 // 2` → `-4` |
+| Digit maths | 🔴 new 10-28 | `n % 10` = last digit (1234 → 4) · `n // 10` = drop the last digit (1234 → 123) · ints have no `.pop()` |
 | Naming | 🟡 | name variables after what they hold *right now* (`lowest`, not `second_low`) |
 
 ## ✅ Daily checklist (before I click Run or Submit)
@@ -387,3 +391,26 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `min(left_max, right_max) - height` ❌ whole lists → `min(left_max[i], right_max[i]) - height[i]`. Inside a positions loop, **every list needs its `[i]`** (same slip as 2161 `nums < pivot`)
 - **Lesson:** when the words don't make sense, **draw it**. And for a Hard, one step at a time (print each row) beats writing it all at once.
 
+### 2026-10-28: LeetCode 1920 ✅ first try · HackerRank Find a String 🟡 → ✅
+- 1920: `range(len(nums))` right first time 🎉 (after 4 `range(list)` slips). `nums[nums[i]]` read inside-out
+- Warm-up: `"banana".count("ana")` → **1**, not 2: `count` never overlaps · `print(list)` shows `[7, 6, 7]` with brackets
+- Find a String: `if flag == "True":` ❌. `.find()` returns a **position** or **-1**, never True/False, and `"True"` in quotes is text anyway → `if pos != -1:`
+- `flag = False` straight before `flag = string.find(...)` was dead code (overwritten at once)
+- 💡 Own idea that worked: `find(sub, i, end)` with `end += 1` = a sliding window
+- **Lesson:** before using a method, ask **"what does it give back?"** (see [lessons/python-reference.md](lessons/python-reference.md))
+
+### 2026-10-28: Revision #1 quiz (Basics, Types, Built-ins, Operators) 8.5/15 🟡
+- **What went wrong:** I guessed "crash" for things that just give an empty result (`range(5, 0)` → `[]`), thought numbers in `print` need quotes, used vague error names ("illegal operation", "invalid syntax"), and wasn't sure what `sorted`, `print`, `round` and `max([])` give back.
+- **Why:** I'd only read the reference once, and its "notes / crashes" column was too short to learn from.
+- **Fix:** the reference now has ✅/❌ examples for every tool, a "do NOT crash" list and a "which error is it?" guide. Retry the ❌ questions next session.
+- **Remember:** `-7 // 2` → `-4` (down = toward −∞) · uppercase < lowercase (`'Z'` 90, `'a'` 97) · fix `"12" + 3` by **converting** (`int()` / `str()`), not by retyping
+- **Retake (same day, new numbers): 13.5/15 = 90% ✅.** `//` with negatives, `round` ties, `sorted`, `print` all fixed. Still shaky: empty cases (`range(8, 2)` → `[]`, `sum([])` → `0`, `min([])` → ValueError) and the name ValueError ("InputError" isn't a Python error).
+- **Variety quiz (6 formats): 8.4/10 = 84% ✅.** Misses: slice `[5:]` vs index `[5]` (only the index crashes), `range(3, 3)` → `[]`, `int(" 8 ")` → 8, and `n.pop()` on an int → use `n % 10` / `n // 10`.
+
+### 2026-10-29: LeetCode 1281, Subtract Product and Sum of Digits ❌❌ → ✅
+- `list{n}` ❌ **SyntaxError**: curly braces → function calls always use **round** brackets `list(n)`
+- `list(n)` would still crash: `n` is an **int**, and an int can't be looped over (`TypeError: 'int' object is not iterable`)
+- `list("n")` ❌ **ValueError** `int('n')`: quotes = the **letter** n, not the variable → `str(n)` (the variable turned into text)
+- ✅ `int(number)` on each character: `for` over a string gives **text** characters like `'2'`
+- 💭 I thought strings can't be looped over like lists. They can (since Day 04: `for ch in word`)
+- **Lesson:** read the last line of the error: `int() with base 10: 'n'` shows exactly what `int()` received
