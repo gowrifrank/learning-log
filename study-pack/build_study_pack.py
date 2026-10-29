@@ -24,9 +24,14 @@ OUT_PDF = HERE / "Python-Study-Pack.pdf"
 OUT_PHONE_HTML = HERE / "study-pack-phone.html"
 OUT_PHONE_PDF = HERE / "Python-Study-Pack-Phone.pdf"
 
+# Guides that also get their own PDF (A4 + phone), next to the pack: (file, colour, PDF name).
+# Empty on purpose: everything lives in the one Study Pack (user's choice, 28 Oct).
+STANDALONE = []
+
 # (file, colour, one-line description). Order = order in the PDF. Add new lessons here.
 DOCS = [
     ("lessons/revision-1.md", "green", "Start here: the 9 revision topics, checklists, what to rewrite"),
+    ("lessons/python-reference.md", "blue", "Types, ranges, built-ins: what each takes and gives back"),
     ("lessons/add-remove-loop-book.md", "pink", "Drills: position vs value, add / remove / loop"),
     ("lessons/data-structures-guide.md", "cyan", "What am I holding? Nested data, parsing, printing"),
     ("lessons/problem-solving-method.md", "violet", "The STEP method: solve without panicking"),
@@ -53,12 +58,44 @@ CSS_EXTRA = """<style>
 </head>"""
 
 
+# Phone edition: tables with 4+ columns don't fit 95 mm (Chrome would shrink the WHOLE PDF),
+# so each row becomes a card and every cell shows its column name above it
+PHONE_STACK_CSS = """<style>
+  table.stack thead { display: none; }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack { break-inside: auto; }
+  table.stack tr { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 2.5mm; break-inside: avoid; }
+  table.stack td, table.stack tr:nth-child(even) td { background: none; border: 0; padding: 0.8mm 2.5mm; }
+  table.stack td::before { content: attr(data-label); display: block; font-size: 7pt; font-weight: 700; color: var(--c); text-transform: uppercase; letter-spacing: 0.5px; }
+</style>
+</head>"""
+
+
+def stack_wide_tables(page: str) -> str:
+    """Give 4+ column tables class="stack" and a data-label (its column name) on every cell."""
+    def one(m: re.Match) -> str:
+        table = m.group(0)
+        labels = [re.sub(r"<[^>]+>", "", h).replace('"', "'").strip() for h in re.findall(r"<th[^>]*>(.*?)</th>", table, flags=re.S)]
+        if len(labels) < 4:
+            return table
+
+        def row(r: re.Match) -> str:
+            cells = iter(labels)
+            return re.sub(r"<td([^>]*)>", lambda c: f'<td{c.group(1)} data-label="{next(cells, "")}">', r.group(0))
+
+        table = re.sub(r"<tr>.*?</tr>", row, table, flags=re.S)
+        return table.replace("<table>", '<table class="stack">', 1)
+
+    return re.sub(r"<table>.*?</table>", one, page, flags=re.S)
+
+
 def slug(path: str) -> str:
     return pathlib.Path(path).stem
 
 
-def render(path: str) -> str:
-    """Markdown file -> HTML fragment with ids and links made unique to this doc."""
+def render(path: str, in_pack: set | None = None) -> str:
+    """Markdown file -> HTML fragment with ids and links made unique to this doc.
+    `in_pack` = slugs of docs inside the same PDF (links to them jump inside it; others open on GitHub)."""
     text = (REPO / path).read_text(encoding="utf-8")
     # <details> answers would print collapsed (hidden), so turn them into a visible block at the end
     text = re.sub(r"<details>\s*<summary>(.*?)</summary>", r'\n<div class="answers" markdown="1">\n\n**\1**\n', text, flags=re.S)
@@ -71,7 +108,8 @@ def render(path: str) -> str:
     body = re.sub(r'id="([^"]+)"', rf'id="{me}-\1"', body)
     body = re.sub(r'href="#([^"]+)"', rf'href="#{me}-\1"', body)
 
-    in_pack = {slug(p) for p, _, _ in DOCS}
+    if in_pack is None:
+        in_pack = {slug(p) for p, _, _ in DOCS}
     folder = pathlib.PurePosixPath(path).parent
 
     def fix_link(m: re.Match) -> str:
@@ -126,17 +164,38 @@ def build() -> None:
 <div class="footer">Generated from the markdown files in <code>lessons/</code> · updated {today} · <a href="#top">↑ back to cover</a></div>
 </body>
 </html>"""
-    page = page.replace("</head>", CSS_EXTRA, 1)
-    OUT_HTML.write_text(page, encoding="utf-8")
-    OUT_PHONE_HTML.write_text(page.replace("</head>", PHONE_CSS, 1), encoding="utf-8")
+    write_pdfs(page, OUT_HTML, OUT_PDF, OUT_PHONE_HTML, OUT_PHONE_PDF)
+    print(f"Built {OUT_PDF.name} + {OUT_PHONE_PDF.name}: {len(DOCS)} guides")
+    build_standalone(head, today)
 
-    for html_file, pdf_file in [(OUT_HTML, OUT_PDF), (OUT_PHONE_HTML, OUT_PHONE_PDF)]:
+
+def build_standalone(head: str, today: str) -> None:
+    """One guide = one PDF (A4 + phone)."""
+    for path, colour, name in STANDALONE:
+        html = render(path, in_pack=set())
+        page = f"""{head}</head>
+<body id="top">
+<div class="doc" style="--c:var(--{colour}); break-before: auto">{html}</div>
+<div class="footer">Generated from <code>{path}</code> · updated {today} · <a href="#top">↑ back to top</a></div>
+</body>
+</html>"""
+        write_pdfs(page, HERE / f"{name}.html", HERE / f"{name}.pdf", HERE / f"{name}-Phone.html", HERE / f"{name}-Phone.pdf")
+        print(f"Built {name}.pdf + {name}-Phone.pdf")
+
+
+def write_pdfs(page: str, html_file: pathlib.Path, pdf_file: pathlib.Path,
+               phone_html: pathlib.Path, phone_pdf: pathlib.Path) -> None:
+    page = page.replace("</head>", CSS_EXTRA, 1)
+    html_file.write_text(page, encoding="utf-8")
+    phone = stack_wide_tables(page).replace("</head>", PHONE_CSS, 1).replace("</head>", PHONE_STACK_CSS, 1)
+    phone_html.write_text(phone, encoding="utf-8")
+
+    for src, out in [(html_file, pdf_file), (phone_html, phone_pdf)]:
         with tempfile.TemporaryDirectory() as profile:
             subprocess.run([str(CHROME), "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
                             "--generate-pdf-document-outline", f"--user-data-dir={profile}",
-                            f"--print-to-pdf={pdf_file}", html_file.as_uri()],
+                            f"--print-to-pdf={out}", src.as_uri()],
                            check=True, capture_output=True, timeout=120)
-    print(f"Built {OUT_PDF.name} + {OUT_PHONE_PDF.name}: {len(DOCS)} guides")
 
 
 if __name__ == "__main__":
