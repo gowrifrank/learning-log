@@ -10,5 +10,4 @@ cheatsheet/cheatsheet.html
 cheatsheet/cheatsheet-phone.html
 
 # Generated study pack HTML (the PDFs + markdown sources are committed)
-study-pack/study-pack.html
-study-pack/study-pack-phone.html
+study-pack/*.html
