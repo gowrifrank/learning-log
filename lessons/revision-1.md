@@ -25,18 +25,22 @@
 - **Session C:** Topics 6–8 (functions, dictionaries, parsing and printing) ⭐
 - **Session D:** Topic 9 (patterns, errors, problem solving), then **Day 08** 🎉
 
+📗 **Reference for every topic:** [python-reference.md](python-reference.md): types and their ranges, and for every built-in/method what it takes, what it gives back and when it crashes.
+
 Warm-up drills you already have: [review-weekend-1.md](review-weekend-1.md) (strings, `map`, dicts) and [add-remove-loop-book.md](add-remove-loop-book.md) (add, remove, loop).
 
 ---
 
 ## 1️⃣ Basics: print, variables, input, types, maths (Days 01–02)
-📖 **Read:** [notes.md](../notes.md): *Day 01*, *Day 02*, *Maths operators* · [day01.py](../day01.py), [day02.py](../day02.py)
+📖 **Read:** [python-reference.md](python-reference.md) §1, §6 · [notes.md](../notes.md): *Day 01*, *Day 02*, *Maths operators* · [day01.py](../day01.py), [day02.py](../day02.py)
 **I can…**
 - [ ] explain what a variable is and print several values with commas
 - [ ] say what type `input()` gives, and convert with `int()`, `float()`, `str()`
 - [ ] write an f-string with values inside `{}`, and control spaces exactly
 - [ ] predict `7 / 2`, `7 // 2`, `7 % 2`, `2 ** 3`, and use `% 2 == 0` for "even"
 - [ ] explain why `"12" + 3` crashes and fix it two ways
+- [ ] give the range of `int`, `float`, `bool` and say what `0.1 + 0.2` and `-7 // 2` give
+- [ ] say which values are falsy (and why `bool("False")` is `True`)
 
 🐞 **My mistakes:** missing comma in `print` · f-string spacing `is{age}` · commas in `print` aren't printed
 ✍️ **Rewrite:** HackerRank *Arithmetic Operators* and *Python: Division*
