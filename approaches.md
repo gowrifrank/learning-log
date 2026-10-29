@@ -19,6 +19,7 @@
 | **FLAG** | `ok = True` before a check loop; set `False` + `break` on failure; decide after the loop | Piling Up! |
 | **TAKE FROM BOTH ENDS** | Each step, take from the left or right end (often the bigger one) | Piling Up! |
 | **FIND THE BOTTLENECK** | Instead of simulating step by step, ask "what forces the count?" | 1689 (the biggest digit) |
+| **DIGIT PEEL** | `n % 10` = the last digit, `n // 10` = drop it; repeat `while n > 0` | 1281 |
 
 ## ⚖️ How to judge an approach
 1. **Correct?** Does it handle the tricky inputs (duplicates, uppercase, empty, the smallest and largest values)?
@@ -310,6 +311,48 @@ return result
 **New ideas here:**
 - `[0] * n` makes a list with n slots, so `result[i] = ...` works (compare Day 05: `ans[0] = 5` on an empty list ❌).
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
+
+---
+
+## 🟢 LeetCode 1281: Subtract the Product and Sum of Digits of an Integer
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (string loop) | `for number in str(n):` → `prod = prod * int(number)`, `add += int(number)` | ACCUMULATOR × 2; product starts at **1** (starting at 0 would make every product 0) |
+| DIGIT PEEL (the "maths" way) | `while n > 0:` → `d = n % 10` · `prod *= d` · `total += d` · `n //= 10` | no text at all; works the same in C++ later |
+| USE A BUILT-IN (later) | `digits = list(map(int, str(n)))` → `math.prod(digits) - sum(digits)` | `math.prod` needs `import math` (coming in the modules lesson) |
+
+```python
+# DIGIT PEEL, traced for n = 234
+# round 1: d = 234 % 10 = 4,  n = 234 // 10 = 23
+# round 2: d =  23 % 10 = 3,  n =  23 // 10 = 2
+# round 3: d =   2 % 10 = 2,  n =   2 // 10 = 0  → loop stops (n > 0 is False)
+```
+**Insight:** a string **can** be looped over: `for ch in "234"` gives `'2'`, `'3'`, `'4'`, but each one is **text**, so wrap it in `int()`. Quotes matter: `str(n)` = the variable as text, `"n"` = just the letter n.
+**Best?** Both mine and DIGIT PEEL are one pass over the digits (≤ 6 here). Mine is easier to read; DIGIT PEEL skips the text conversion and is the one interviewers expect.
+
+---
+
+## 🔥 HackerRank: Find a String (overlapping matches)
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (sliding `find`) | `string.find(sub, i, end)` with `end += 1` each round; count when `!= -1` | works; `find` returns a position or -1 |
+| Slice compare (most common) | `if string[i : i + len(sub)] == sub: count += 1` | no method needed, just Day 04 slicing |
+| Tidy range | `for i in range(len(string) - len(sub) + 1):` | stops at the last start where a full match fits |
+| One line (later) | `sum(1 for i in range(len(string)) if string.startswith(sub, i))` | generator expression: coming in a later lesson |
+| ❌ Built-in count | `string.count(sub)` | gives **1** for `"ABCDCDC"`/`"CDC"`: count skips overlaps |
+
+**Insight:** "overlaps included" = check **every** start position yourself (SLIDING WINDOW). Short slices near the end just don't match, so they're harmless.
+
+---
+
+## 🟢 LeetCode 1920: Build Array from Permutation
+| Version | Code | Notes |
+|---|---|---|
+| Mine ✅ | `ans.append(nums[nums[i]])` in a positions loop | first try! |
+| Items loop | `for x in nums: ans.append(nums[x])` | `x` is a value **used as a position**: legal here because the values are 0..n-1 |
+| List comprehension (later) | `return [nums[x] for x in nums]` | one line |
+
+**Insight:** read nested indexing **inside-out**: `nums[nums[0]]` → `nums[0]` first, then use that as the position.
 
 ---
 
