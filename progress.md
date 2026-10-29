@@ -5,7 +5,7 @@
 | Commit on | What | Commit message |
 |---|---|---|
 | 27 Oct | 🟠 **HackerRank The Minion Game** (submit today) · 🔁 retype LeetCode 42 from memory + dig into it (tonight or 28 Oct) | |
-| next | 📆 **Revision #1 (Days 01–07 + all problems):** study [lessons/revision-1.md](lessons/revision-1.md), then a long quiz (10–15 questions per topic) logged in quiz-log.md | |
+| next | 📆 **Revision #1 (Days 01–07 + all problems):** study [lessons/revision-1.md](lessons/revision-1.md), then a long quiz (10–15 questions per topic) logged in quiz-log.md. ✅ Topic 1 passed (retake 90%). ⏭ 29 Oct: 3 empty-case drills, then Topic 2 (conditions) | |
 | after the revision quiz | **Day 08: sets & tuples** | `Day 08: ...` |
 
 > 📈 **From 22 Oct:** weekdays = **LeetCode Medium + HackerRank Medium/Easy**. Easy problems on weekends, holidays and tough days.
@@ -18,7 +18,7 @@
 
 | Solved on | Site | Problem | File |
 |---|---|---|---|
-| — | — | (empty) | — |
+| 2026-10-28 | LeetCode | 1920. Build Array from Permutation (Easy) | `leetcode/2026-10-28_1920_build_array_from_permutation.py` (42 used the 28 Oct slot) |
 
 ## 📘 Lessons
 | Day | Topic | Written | Committed |
@@ -36,7 +36,7 @@
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
 | 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h · Fri ≈ 2.5 h | Sat ≈ 2 h · Sun ≈ 4.5 h (HackerRank Orchestrate hackathon overnight + Fizz Buzz) | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) · Fri: LeetCode 2161, HackerRank Merge the Tools | Day 08 (no rush, variable pace) |
-| 3 | 26 Oct–1 Nov | Mon ≈ 3 h · Tue ≈ 1 h | | Mon: LeetCode 1689 (own greedy on paper → max digit), HackerRank Piling Up! (4th star), contest rules (LeetCode weekly/biweekly), new Add·Remove·Loop book, Revision #1 pack, Study Pack PDFs · Tue: LeetCode 42 (first Hard) | Day 08 waits for Revision #1 + quiz |
+| 3 | 26 Oct–1 Nov | Mon ≈ 3 h · Tue ≈ 1 h · Wed ≈ 3.5 h · Thu ≈ 1 h | | Mon: LeetCode 1689 (own greedy on paper → max digit), HackerRank Piling Up! (4th star), contest rules (LeetCode weekly/biweekly), new Add·Remove·Loop book, Revision #1 pack, Study Pack PDFs · Tue: LeetCode 42 (first Hard) · Wed: LeetCode 1920 (first try!), HackerRank Find a String, Python reference guide (types, ranges, built-ins) + Revision quiz 1 (Basics, Types, Built-ins, Operators) 8.5/15 → reference rewritten with ✅/❌ examples → retake 13.5/15 (90%) ✅ → variety quiz 8.4/10 (84%) ✅ · Thu: LeetCode 1281 (digits: own string loop + DIGIT PEEL alternative), `int()` text rule | Day 08 waits for Revision #1 + quiz |
 
 > ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
 > 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
@@ -57,6 +57,7 @@
 | 2026-10-22 | Word Order | ✅ **first Medium** (COUNTING pattern; fixed counting letters instead of words) |
 | 2026-10-23 | Merge the Tools! | ✅ Medium (own window logic first; walkthrough for `ch not in result` + reset per piece) |
 | 2026-10-26 | Piling Up! | ✅ Medium ⭐⭐⭐⭐ **4th star** (own pop-from-the-ends idea; fixed `pop(value)`, added top check + `ok` flag after a walkthrough) |
+| 2026-10-28 | Find a String | ✅ Easy (**own sliding-window `find()` idea**; fixed `flag == "True"` → `pos != -1`) |
 
 ## 🟠 LeetCode
 | Date | Problem | Result |
@@ -72,6 +73,8 @@
 | 2026-10-25 | 412. Fizz Buzz | ✅ Day 9 🔥 Easy (exclusive conditions; fixed `range(1:n+1)`, `elif elif`, `str(i)`; 0 ms) |
 | 2026-10-26 | 1689. Partitioning Into Minimum Number Of Deci-Binary Numbers | ✅ Day 10 🔥 Medium (own greedy on paper → max digit; BEST SO FAR; 0 ms) |
 | 2026-10-27 | 42. Trapping Rain Water | ✅ Day 11 🔥 🔴 **first Hard!** (picture → fill-in-the-blank steps; left/right BEST SO FAR rows; assembled + pasted, retype later; 13 ms) |
+| 2026-10-28 | 1920. Build Array from Permutation | ✅ Day 12 🔥 Easy (**first try, no hints**; `range(len(nums))` right first time; `nums[nums[i]]` inside-out) |
+| 2026-10-29 | 1281. Subtract the Product and Sum of Digits of an Integer | ✅ Day 13 🔥 Easy (own string loop; fixed `list{n}` → `list("n")` → `str(n)` + `int(number)`; 0 ms) |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
