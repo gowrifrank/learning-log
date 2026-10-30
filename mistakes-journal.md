@@ -414,3 +414,9 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - ✅ `int(number)` on each character: `for` over a string gives **text** characters like `'2'`
 - 💭 I thought strings can't be looped over like lists. They can (since Day 04: `for ch in word`)
 - **Lesson:** read the last line of the error: `int() with base 10: 'n'` shows exactly what `int()` received
+
+### 2026-10-30: LeetCode 1342, Steps to Reduce a Number to Zero 🟡 → ✅
+- Run passed 3/3 ✅, but `num = 0` would have returned **1** ❌ (loop skipped, then the final `steps += 1` still ran). The constraint says `0 <= num`, so 0 is a hidden test → added `if num == 0: return steps` (GUARD CLAUSE)
+- `num = num / 2` ❌ turns 14 into `7.0` (a float) → `num // 2` keeps it an int
+- 💡 Own shortcut that works: `while num > 1` + one extra step for 1 → 0
+- **Lesson:** "Accepted" on **Run** only checks the examples. Before **Submit**, trace the **smallest allowed input** from the constraints (same family as the quiz's empty cases)

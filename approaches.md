@@ -13,7 +13,7 @@
 | **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards) |
 | **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
 | **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
-| **GUARD CLAUSE** | Handle bad/empty input first with an early `return` | `average([])` |
+| **GUARD CLAUSE** | Handle bad/empty input first with an early `return` | `average([])`, 1342 (`num == 0`) |
 | **DRY** | Don't repeat yourself: compute once, reuse | `is_palindrome` |
 | **USE A BUILT-IN** | Before writing a loop, ask "Does Python already have a tool for this?" | Palindrome `[::-1]`, `sum()`, `max()` |
 | **FLAG** | `ok = True` before a check loop; set `False` + `break` on failure; decide after the loop | Piling Up! |
@@ -311,6 +311,23 @@ return result
 **New ideas here:**
 - `[0] * n` makes a list with n slots, so `result[i] = ...` works (compare Day 05: `ans[0] = 5` on an empty list ❌).
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
+
+---
+
+## 🟢 LeetCode 1342: Number of Steps to Reduce a Number to Zero
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (shortcut + GUARD CLAUSE) | `if num == 0: return 0` · `while num > 1:` halve or subtract · then `steps += 1` for the last 1 → 0 | works for every input 0…1,000,000 (tested); the guard is needed because the shortcut assumes num ≥ 1 |
+| Plain loop (simplest) | `while num > 0:` → `num //= 2` if even `else: num -= 1` → `steps += 1` once per round | no special cases: 0 just skips the loop and returns 0 |
+| Binary trick (later) | `b = bin(num)[2:]` → `len(b) + b.count("1") - 1` | every halving removes one binary digit, every subtract removes one `1` → no loop at all |
+
+```python
+# Plain loop, traced for num = 14
+# 14 even → 7 (1) · 7 odd → 6 (2) · 6 even → 3 (3) · 3 odd → 2 (4) · 2 even → 1 (5) · 1 odd → 0 (6)
+# Binary trick: bin(14) = '0b1110' → 4 digits + 3 ones - 1 = 6
+```
+**Insight:** before submitting, test the **smallest allowed input** (here `num = 0`). A shortcut like "+1 at the end" often breaks at the edge.
+**Best?** For learning: the plain loop (one rule, no special cases). Fastest: the binary trick (needs binary numbers, a later topic). Mine is correct, just has one more case to remember.
 
 ---
 
