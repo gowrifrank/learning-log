@@ -36,7 +36,7 @@
 |---|---|---|---|---|---|
 | 1 | 12–18 Oct | — (not tracked) | — | Days 01–06, Day 07 parts 1–2, Sunday review | Day 07 parts 3–4 |
 | 2 | 19–25 Oct | Mon ≈ 1.5 h · Tue ≈ 0.5 h · Wed ≈ 3 h · Thu ≈ 3 h · Fri ≈ 2.5 h | Sat ≈ 2 h · Sun ≈ 4.5 h (HackerRank Orchestrate hackathon overnight + Fizz Buzz) | Mon: 2027 roadmap, LeetCode 1480 · Tue: LeetCode 1108 · Wed: LeetCode 344, HackerRank Lists, cheat sheet, Day 07 parts 3–4 · Thu: Day 07 bonus Two Sum ✅, LeetCode 2149 + HackerRank Word Order (first Mediums) · Fri: LeetCode 2161, HackerRank Merge the Tools | Day 08 (no rush, variable pace) |
-| 3 | 26 Oct–1 Nov | Mon ≈ 3 h · Tue ≈ 1 h · Wed ≈ 3.5 h · Thu ≈ 1 h | | Mon: LeetCode 1689 (own greedy on paper → max digit), HackerRank Piling Up! (4th star), contest rules (LeetCode weekly/biweekly), new Add·Remove·Loop book, Revision #1 pack, Study Pack PDFs · Tue: LeetCode 42 (first Hard) · Wed: LeetCode 1920 (first try!), HackerRank Find a String, Python reference guide (types, ranges, built-ins) + Revision quiz 1 (Basics, Types, Built-ins, Operators) 8.5/15 → reference rewritten with ✅/❌ examples → retake 13.5/15 (90%) ✅ → variety quiz 8.4/10 (84%) ✅ · Thu: LeetCode 1281 (digits: own string loop + DIGIT PEEL alternative), `int()` text rule | Day 08 waits for Revision #1 + quiz |
+| 3 | 26 Oct–1 Nov | Mon ≈ 3 h · Tue ≈ 1 h · Wed ≈ 3.5 h · Thu ≈ 1 h · Fri ≈ 1 h | | Mon: LeetCode 1689 (own greedy on paper → max digit), HackerRank Piling Up! (4th star), contest rules (LeetCode weekly/biweekly), new Add·Remove·Loop book, Revision #1 pack, Study Pack PDFs · Tue: LeetCode 42 (first Hard) · Wed: LeetCode 1920 (first try!), HackerRank Find a String, Python reference guide (types, ranges, built-ins) + Revision quiz 1 (Basics, Types, Built-ins, Operators) 8.5/15 → reference rewritten with ✅/❌ examples → retake 13.5/15 (90%) ✅ → variety quiz 8.4/10 (84%) ✅ · Thu: LeetCode 1281 (digits: own string loop + DIGIT PEEL alternative), `int()` text rule · Fri: LeetCode 1342 (guard clause for 0), Orchestrate 12 Dec confirmed, micro1 Eval Hackathon | Day 08 waits for Revision #1 + quiz |
 
 > ⏱ **Hours are estimated automatically** by Claude from session activity (screenshot clocks, file edits, commit times), so I don't have to note them down. They're rough (±30 min).
 > 🌿 **Variable pace (from 20 Oct):** family comes first. Streaks (LeetCode + GitHub) are the daily minimum; lessons move at whatever pace life allows.
@@ -75,6 +75,7 @@
 | 2026-10-27 | 42. Trapping Rain Water | ✅ Day 11 🔥 🔴 **first Hard!** (picture → fill-in-the-blank steps; left/right BEST SO FAR rows; assembled + pasted, retype later; 13 ms) |
 | 2026-10-28 | 1920. Build Array from Permutation | ✅ Day 12 🔥 Easy (**first try, no hints**; `range(len(nums))` right first time; `nums[nums[i]]` inside-out) |
 | 2026-10-29 | 1281. Subtract the Product and Sum of Digits of an Integer | ✅ Day 13 🔥 Easy (own string loop; fixed `list{n}` → `list("n")` → `str(n)` + `int(number)`; 0 ms) |
+| 2026-10-30 | 1342. Number of Steps to Reduce a Number to Zero | ✅ Day 14 🔥 Easy (own `while num > 1` shortcut; fixed `num = 0` with a GUARD CLAUSE and `/` → `//`; 0 ms) |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
@@ -100,6 +101,8 @@ Full plan: **[schedule.md](schedule.md)**: lessons Day 07–20 before 3 Nov, the
 ## 🎯 Long-term goals
 - ⭐⭐⭐⭐ 4th HackerRank Python star ✅ (26 Oct, 260/400 points) → next: ⭐⭐⭐⭐⭐ gold at 400 points
 - 🏆 LeetCode Weekly 526 (Sun 1 Nov, 8:00 IST): solve Q1 solo, no AI; upsolve together afterwards
+- 🏆 **HackerRank Orchestrate (next edition): Sat 12 Dec 2026, 6 PM IST** (24 h, build an agent). Goal: **top 5%** (last time 55.6, rank 1195/4646). Train the weak parts: AI judge interview (8.7/30), chat transcript (3.7/10), code (14.7/30)
+- 🧪 micro1 Eval Hackathon (HackerRank): open 30 Oct 12:45 PM → 9 Nov 10:45 AM IST, 2 questions (file upload + subjective). Finish **before 3 Nov** (vacation = phone only)
 - 🟠 LeetCode: 1 problem every day from 2026-10-17 to 31 Dec 2027 (profile calendar streak). Try the Daily Question when it's Easy.
 - 📄 Turn `notes.md` into a PDF cheat sheet at the end of the course
 - 🟩 2027 GitHub contribution graph art: see [github-art-2027.md](github-art-2027.md)
