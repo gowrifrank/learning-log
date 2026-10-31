@@ -314,6 +314,26 @@ return result
 
 ---
 
+## 🟢 LeetCode 9: Palindrome Number
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine #1 ✅ (string) | `string = str(x)` → `string == string[::-1]` | Accepted, 7 ms; `-121` fails by itself because `"121-"` ≠ `"-121"` |
+| Mine #2 ✅ (no string, the follow-up) | guard `x < 0` → keep `real = x` → DIGIT PEEL with `rev = rev * 10 + digit` → `real == rev` | Accepted, 21 ms; written first try |
+| Two pointers on the string | `l, r = 0, len(s) - 1` → compare `s[l]`, `s[r]`, move inwards | Day 04 palindrome method 2; stops at the first mismatch |
+| Half reverse (LeetCode's "best") | guard `x < 0` **or** `x % 10 == 0 and x != 0` → `while x > rev:` build rev → `x == rev or x == rev // 10` | only reverses **half** the digits; never builds a number bigger than x (matters in C++, where ints overflow) |
+
+```python
+# The "calculator" trick: rev = rev * 10 + digit, traced for x = 121
+# digit 1 → rev = 0 * 10 + 1  = 1   → x = 12
+# digit 2 → rev = 1 * 10 + 2  = 12  → x = 1
+# digit 1 → rev = 12 * 10 + 1 = 121 → x = 0, stop → 121 == real ✅
+# Half reverse stops in the MIDDLE: x = 1221 → (x 122, rev 1) → (x 12, rev 12) → stop, 12 == 12 ✅
+```
+**Insight:** `x` is chopped to 0 by the loop, so **save a copy first** (`real = x`). And `==` already gives back True/False, so `return string == string[::-1]` is enough.
+**Best?** In Python the string one-liner is clearest. The half reverse is the interview answer (half the work, no overflow). *7 ms vs 21 ms is mostly LeetCode timing noise: both look at each digit once, and slicing runs in fast C code.*
+
+---
+
 ## 🟢 LeetCode 1342: Number of Steps to Reduce a Number to Zero
 | Version | Code idea | Notes |
 |---|---|---|

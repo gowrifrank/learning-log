@@ -420,3 +420,10 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `num = num / 2` ❌ turns 14 into `7.0` (a float) → `num // 2` keeps it an int
 - 💡 Own shortcut that works: `while num > 1` + one extra step for 1 → 0
 - **Lesson:** "Accepted" on **Run** only checks the examples. Before **Submit**, trace the **smallest allowed input** from the constraints (same family as the quiz's empty cases)
+
+### 2026-10-31: LeetCode 9, Palindrome Number 🟡 → ✅✅ (both versions)
+- `reverse(string)` ❌ **NameError**: no built-in called `reverse` → it's `reversed(...)` (and that gives a lazy object)
+- `string.reverse()` ❌ would be **AttributeError**: `.reverse()` is a **list** method; strings can't change → `string[::-1]`
+- `return true` ❌ **NameError** → Python's booleans are **`True` / `False`** (capital first letter)
+- ✅ Bonus without strings, first try: guard `x < 0`, copy `real = x`, `rev = rev * 10 + digit`
+- **Lesson:** strings and lists share slicing, but **not methods**. Check the reference (§3 strings, §4 lists) before calling a method
