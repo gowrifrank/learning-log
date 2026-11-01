@@ -9,7 +9,7 @@
 | **ACCUMULATOR** | Start empty (`0`, `""`, `[]`) and add on every loop round | Sum 1–100, vowel counter, Print Function, even filter |
 | **FILTER** | Loop and keep only the items that pass an `if` | Even filter |
 | **TWO POINTERS** | One position from the front, one from the back, moving towards each other | Palindrome method 2 |
-| **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass) |
+| **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass), 4097 alternative |
 | **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards) |
 | **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
 | **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
@@ -20,6 +20,7 @@
 | **TAKE FROM BOTH ENDS** | Each step, take from the left or right end (often the bigger one) | Piling Up! |
 | **FIND THE BOTTLENECK** | Instead of simulating step by step, ask "what forces the count?" | 1689 (the biggest digit) |
 | **DIGIT PEEL** | `n % 10` = the last digit, `n // 10` = drop it; repeat `while n > 0` | 1281 |
+| **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1) |
 
 ## ⚖️ How to judge an approach
 1. **Correct?** Does it handle the tricky inputs (duplicates, uppercase, empty, the smallest and largest values)?
@@ -313,6 +314,28 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🏆 LeetCode 4097: Minimum Value of Merged Integers (Weekly Contest 526, Q1)
+> My first contest problem, solved solo with no AI and Accepted on the first submit. Q2–Q4 (4098 GCD-Connected Array, 4099 Sort With Locked Indices, 4100 Even XOR Parity path on a tree) are parked until I've learned the tools they need.
+
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | PAIRS loop → `int(str(a) + str(b))` → `append` → `min(values)` | Accepted, 1 ms. Clear and correct. Keeps every merged number in a list |
+| BEST SO FAR (no list) | same loop, but keep only `smallest`; replace it when `val < smallest` | Uses no extra list. Same speed here |
+| f-string + `zip` one-liner | `min(int(f"{a}{b}") for a, b in zip(nums[::2], nums[1::2]))` | `nums[::2]` = the 1st of each pair, `nums[1::2]` = the 2nd; `zip` pairs them up. Short, but harder to read for now |
+| Maths (no strings) | `shift = 10`, then `while shift <= b: shift *= 10` → `a * shift + b` | Moves `a` left by as many digits as `b` has. `b = 0` still works: `a * 10 + 0` |
+
+```python
+# Why "glue as text" works: str(23) + str(55) = "2355" → int("2355") = 2355
+# ❌ Gluing as numbers just adds: 23 + 55 = 78
+# Maths version for a = 23, b = 55: b has 2 digits, so shift = 100 → 23 * 100 + 55 = 2355
+# BEST SO FAR version:
+smallest = None
+for i in range(0, len(nums), 2):
+    val = int(str(nums[i]) + str(nums[i + 1]))
+    if smallest is None or val < smallest:   # first pair, or a new smallest
+        smallest = val
+```
 
 ## 🟢 LeetCode 9: Palindrome Number
 | Version | Code idea | Notes |
