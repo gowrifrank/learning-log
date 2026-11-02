@@ -19,7 +19,7 @@
 | Items vs positions | 🔴 9 slips | `for item in x:` → use `item`. `for i in range(len(x)):` → use `x[i]` |
 | Function vs method | 🟡 | `sorted(x)`, `len(x)`, `max(x)` (around) · `x.sort()`, `x.append()` (after the dot) |
 | `=` vs `==` | 🟡 | `=` stores, `==` compares |
-| `return` vs `print` | 🟡 | `return` only inside `def`. HackerRank main code → `print` |
+| `return` vs `print` | 🟡 slipped again 11-02 (LeetCode 58 → null) | `return` only inside `def`. HackerRank main code → `print` |
 | Nested data `[name, score]` | 🟢 got it 10-18 (Nested Lists + quick check ✅) | `pair[0]` = name, `pair[1]` = score |
 | Parsing input | 🟡 | `list(map(int, input().split()))` |
 | `map` both ways | 🔴 | `map(int, texts)` → numbers · `map(str, nums)` → texts (for `join`) · always wrap in `list(...)` to look inside |
@@ -427,3 +427,8 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `return true` ❌ **NameError** → Python's booleans are **`True` / `False`** (capital first letter)
 - ✅ Bonus without strings, first try: guard `x < 0`, copy `real = x`, `rev = rev * 10 + digit`
 - **Lesson:** strings and lists share slicing, but **not methods**. Check the reference (§3 strings, §4 lists) before calling a method
+
+### 2026-11-02: LeetCode 58, Length of Last Word 🟡 → ✅
+- `print(len(...))` ❌ LeetCode showed **null** → the function returned nothing (`None`). LeetCode reads the **return** value → `return len(...)`. (A repeat of the Day 06 return vs print trap)
+- `array.append(s.split())` ❌ → `[['Hello', 'World']]`, **one** item holding a whole list, so `len(array[-1])` counted **words** (2), not letters → `array = s.split()`
+- **Lesson:** `.append(x)` always adds **one** item, even when `x` is a list. Before using `[-1]`, ask "what am I holding?"
