@@ -20,6 +20,7 @@
 | **TAKE FROM BOTH ENDS** | Each step, take from the left or right end (often the bigger one) | Piling Up! |
 | **FIND THE BOTTLENECK** | Instead of simulating step by step, ask "what forces the count?" | 1689 (the biggest digit) |
 | **DIGIT PEEL** | `n % 10` = the last digit, `n // 10` = drop it; repeat `while n > 0` | 1281 |
+| **WALK FROM THE END** | Start at `len(s) - 1` and move left with `i -= 1`; stop as soon as you have the answer | 58 (best version) |
 | **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1) |
 
 ## ⚖️ How to judge an approach
@@ -314,6 +315,31 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟢 LeetCode 58: Length of Last Word
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | `array = s.split()` → `array[-1]` → `len(...)` | Correct. Lines `array = []` and `strlen = ""` aren't needed: the next lines replace them anyway |
+| One-liner | `return len(s.split()[-1])` | Same idea in one line |
+| `rstrip` + `split(" ")` | `len(s.rstrip().split(" ")[-1])` | ⚠️ `split(" ")` keeps empty pieces: `"a  b".split(" ")` → `['a', '', 'b']`. That's why you `rstrip()` first |
+| Best: WALK FROM THE END | skip the trailing spaces from the right, then count letters until the next space | Never builds a list. It only looks at the end of the string, so it's fast even for a huge string |
+
+```python
+# split() vs append: what am I holding?
+s.split()                   # ['Hello', 'World']        a list of words
+array.append(s.split())     # [['Hello', 'World']]      ❌ ONE item, a list inside a list
+array = s.split()           # ['Hello', 'World']        ✅
+
+# Best version: WALK FROM THE END
+i = len(s) - 1
+while s[i] == " ":          # 1) skip the spaces at the end
+    i -= 1
+length = 0
+while i >= 0 and s[i] != " ":   # 2) count letters until a space (or the start)
+    length += 1
+    i -= 1
+return length
+```
 
 ## 🏆 LeetCode 4097: Minimum Value of Merged Integers (Weekly Contest 526, Q1)
 > My first contest problem, solved solo with no AI and Accepted on the first submit. Q2–Q4 (4098 GCD-Connected Array, 4099 Sort With Locked Indices, 4100 Even XOR Parity path on a tree) are parked until I've learned the tools they need.
