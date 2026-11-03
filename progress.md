@@ -18,7 +18,7 @@
 
 | Solved on | Site | Problem | File |
 |---|---|---|---|
-| 2026-10-28 | LeetCode | 1920. Build Array from Permutation (Easy) | `leetcode/2026-10-28_1920_build_array_from_permutation.py` (42 used the 28 Oct slot) |
+| — | — | *(empty: 1920 was committed from the bank on 3 Nov, a train day)* | |
 
 ## 📘 Lessons
 | Day | Topic | Written | Committed |
