@@ -18,7 +18,7 @@
 
 | Solved on | Site | Problem | File |
 |---|---|---|---|
-| — | — | *(empty: 1920 was committed from the bank on 3 Nov, a train day)* | |
+| — | — | *(empty: 1470 was committed from the bank on 6 Nov)* | |
 
 ## 📘 Lessons
 | Day | Topic | Written | Committed |
@@ -81,6 +81,7 @@
 | 2026-11-01 | 4097. Minimum Value of Merged Integers | ✅ Day 16 🔥 Easy · 🏆 **Weekly Contest 526 Q1, my first contest: solo, no AI, Accepted first try** (PAIRS step-2 loop + glue as text; 1 ms). Q2–Q4 parked for later |
 | 2026-11-02 | 58. Length of Last Word | ✅ Day 17 🔥 Easy (own `split()` → `[-1]` → `len`; fixed `print` → `return` (null) and `append` list-in-list) |
 | 2026-11-05 | 2011. Final Value of Variable After Performing Operations | ✅ 🔥 Easy (**own code, first try**; ACCUMULATOR with `+= 1` / `-= 1`; 0 ms) |
+| 2026-11-05 | 1470. Shuffle the Array | ✅ Easy (own PAIRS loop; fixed `range(0, j * 2)` → IndexError → `range(n)`). Committed 6 Nov; **LeetCode Submit on 6 Nov after 05:30 IST** for that day's streak |
 
 **Queue:** see dated list in [schedule.md](schedule.md). Order: 1672 Richest Customer Wealth → 412 Fizz Buzz → 1342 Steps to Zero → 9 Palindrome Number → 58 Length of Last Word → 1512 Good Pairs → 1 Two Sum → 1920 Build Array from Permutation → 771 Jewels and Stones
 
