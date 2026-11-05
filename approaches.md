@@ -21,7 +21,7 @@
 | **FIND THE BOTTLENECK** | Instead of simulating step by step, ask "what forces the count?" | 1689 (the biggest digit) |
 | **DIGIT PEEL** | `n % 10` = the last digit, `n // 10` = drop it; repeat `while n > 0` | 1281 |
 | **WALK FROM THE END** | Start at `len(s) - 1` and move left with `i -= 1`; stop as soon as you have the answer | 58 (best version) |
-| **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1) |
+| **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1), 1470 |
 
 ## ⚖️ How to judge an approach
 1. **Correct?** Does it handle the tricky inputs (duplicates, uppercase, empty, the smallest and largest values)?
@@ -315,6 +315,19 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟢 LeetCode 1470: Shuffle the Array
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | `for i in range(n):` → `append(nums[i])` → `append(nums[n + i])` | PAIRS: the x sits at `i`, its partner y sits at `i + n`. Fixed `range(0, j * 2)`, which ran 6 rounds and caused an IndexError |
+| `zip` the halves | `for x, y in zip(nums[:n], nums[n:]): result += [x, y]` | `nums[:n]` = all the x's, `nums[n:]` = all the y's; `zip` pairs them up |
+| Slice assignment | `result = [0] * (2 * n)` → `result[::2] = nums[:n]` → `result[1::2] = nums[n:]` | Fills the even positions with x's and the odd ones with y's. No loop at all, but tricky to read |
+
+```python
+# Why range(n), not range(2 * n)? Each round adds TWO numbers.
+# n = 3 → 3 rounds × 2 appends = 6 numbers ✅
+# range(6) → round i = 3 asks for nums[3 + 3] = nums[6] → IndexError (the last position is 5)
+```
 
 ## 🟢 LeetCode 2011: Final Value of Variable After Performing Operations
 | Version | Code idea | Notes |
