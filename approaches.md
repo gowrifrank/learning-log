@@ -6,7 +6,7 @@
 ## 🧰 Pattern library (so far)
 | Pattern | Idea | Where I used it |
 |---|---|---|
-| **ACCUMULATOR** | Start empty (`0`, `""`, `[]`) and add on every loop round | Sum 1–100, vowel counter, Print Function, even filter |
+| **ACCUMULATOR** | Start empty (`0`, `""`, `[]`) and add on every loop round | Sum 1–100, vowel counter, Print Function, even filter, 2011 |
 | **FILTER** | Loop and keep only the items that pass an `if` | Even filter |
 | **TWO POINTERS** | One position from the front, one from the back, moving towards each other | Palindrome method 2 |
 | **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass), 4097 alternative |
@@ -315,6 +315,22 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟢 LeetCode 2011: Final Value of Variable After Performing Operations
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | ACCUMULATOR: `x = 0`, then `if op == "++X" or op == "X++": x += 1` `else: x -= 1` | First try, 0 ms. Spells out both plus forms, so it's very clear |
+| `in` check | `if "+" in op:` | Shorter: any instruction with a `+` is a plus. No need to list both forms |
+| Middle character | `x += 1 if op[1] == "+" else -1` | Every instruction is 3 characters, and the middle one (`op[1]`) is always a sign |
+| One-liner | `return sum(1 if "+" in op else -1 for op in operations)` | Turns each instruction into +1 or −1, then `sum()` adds them up |
+| Count the signs | `t = "".join(operations)` → `(t.count("+") - t.count("-")) // 2` | Each instruction has **two** signs, so divide by 2. Clever, but harder to explain |
+
+**Best for now:** the `in` check. It's short, clear and hard to get wrong.
+
+```python
+# "Conditional expression": a tiny if/else that gives back a value
+step = 1 if "+" in op else -1      # read it as: step is 1 if there's a "+", otherwise -1
+```
 
 ## 🟢 LeetCode 58: Length of Last Word
 | Version | Code idea | Notes |
