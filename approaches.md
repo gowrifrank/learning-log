@@ -14,7 +14,7 @@
 | **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
 | **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
 | **GUARD CLAUSE** | Handle bad/empty input first with an early `return` | `average([])`, 1342 (`num == 0`) |
-| **DRY** | Don't repeat yourself: compute once, reuse | `is_palindrome` |
+| **DRY** | Don't repeat yourself: compute once, reuse | `is_palindrome`, 1431 (`max` once) |
 | **USE A BUILT-IN** | Before writing a loop, ask "Does Python already have a tool for this?" | Palindrome `[::-1]`, `sum()`, `max()` |
 | **FLAG** | `ok = True` before a check loop; set `False` + `break` on failure; decide after the loop | Piling Up! |
 | **TAKE FROM BOTH ENDS** | Each step, take from the left or right end (often the bigger one) | Piling Up! |
@@ -315,6 +315,21 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟢 LeetCode 1431: Kids With the Greatest Number of Candies
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | loop → `if candy + extraCandies >= max(candies):` → `append(True)` else `append(False)` | First try, 0 ms. But `max(candies)` is recalculated in **every** round: 100 kids = 100 scans of the list |
+| Max once (DRY) | `biggest = max(candies)` **before** the loop, then compare with `biggest` | Same answer, and the list is scanned once instead of n times |
+| Append the comparison | `result.append(candy + extraCandies >= biggest)` | A comparison already **is** `True` or `False`, so no `if/else` is needed |
+| Best: one-liner | `return [c + extraCandies >= biggest for c in candies]` | A list comprehension (coming in a later lesson): builds the whole list in one line |
+
+```python
+# A comparison gives back a bool by itself:
+5 + 3 >= 5      # True
+1 + 3 >= 5      # False
+# so:  if cond: append(True) else: append(False)   ==   append(cond)
+```
 
 ## 🟢 LeetCode 1470: Shuffle the Array
 | Version | Code idea | Notes |
