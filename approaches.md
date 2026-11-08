@@ -316,6 +316,20 @@ return result
 
 ---
 
+## 🟢 LeetCode 1678: Goal Parser Interpretation
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | `command = command.replace("()", "o")` → `command = command.replace("(al)", "al")` → return | Clear and correct. Saves each new string back, because strings can't change |
+| Chained | `return command.replace("()", "o").replace("(al)", "al")` | The same two swaps in one line: the second `.replace()` works on the result of the first |
+| Loop and look ahead | walk with `i`: `"G"` → add `G`, move 1 · `"("` + `")"` → add `o`, move 2 · otherwise add `al`, move 4 | How you'd do it without `.replace()`: look at `command[i]` and the next character. Good practice for `while` + indexes |
+
+```python
+# Strings can't change: .replace() gives back a NEW string
+s = "G()"
+s.replace("()", "o")        # ❌ the result is thrown away; s is still "G()"
+s = s.replace("()", "o")    # ✅ s is now "Go"
+```
+
 ## 🟢 LeetCode 1431: Kids With the Greatest Number of Candies
 | Version | Code idea | Notes |
 |---|---|---|
