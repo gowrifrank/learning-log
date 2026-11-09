@@ -10,7 +10,7 @@
 | **FILTER** | Loop and keep only the items that pass an `if` | Even filter |
 | **TWO POINTERS** | One position from the front, one from the back, moving towards each other | Palindrome method 2 |
 | **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass), 4097 alternative |
-| **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards) |
+| **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards), 1832 (`return False` at the first missing letter) |
 | **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
 | **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
 | **GUARD CLAUSE** | Handle bad/empty input first with an early `return` | `average([])`, 1342 (`num == 0`) |
@@ -315,6 +315,23 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟢 LeetCode 1832: Check if the Sentence Is Pangram
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ | loop over `"abc...z"` → `if letter not in sentence: return False` → after the loop `return True` | **Flipped the question**: instead of "which letters does the sentence have?", ask "is any letter missing?". One missing letter is enough to answer, so EARLY EXIT. `return True` sits **after** the loop, because only a full loop with no misses proves it |
+| Built-in alphabet | `import string` → loop over `string.ascii_lowercase` | Same as mine, but Python already has the 26 letters, so you can't make a typo (USE A BUILT-IN) |
+| `all()` | `return all(letter in sentence for letter in letters)` | `all()` is True only when **every** check is True, and it stops at the first False (the same EARLY EXIT, built in) |
+| Best: set (Day 08) | `return len(set(sentence)) == 26` | A **set** keeps only one copy of each item. The sentence is only lowercase letters, so 26 different ones = every letter |
+
+```python
+# Where does "return True" go?
+for letter in letters:
+    if letter not in sentence:
+        return False
+    return True      # ❌ inside the loop: stops after checking only "a"
+return True          # ✅ after the loop: reached only if nothing was missing
+```
 
 ## 🟢 LeetCode 1678: Goal Parser Interpretation
 | Version | Code idea | Notes |
