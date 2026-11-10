@@ -9,7 +9,7 @@
 | **ACCUMULATOR** | Start empty (`0`, `""`, `[]`) and add on every loop round | Sum 1–100, vowel counter, Print Function, even filter, 2011 |
 | **FILTER** | Loop and keep only the items that pass an `if` | Even filter |
 | **TWO POINTERS** | One position from the front, one from the back, moving towards each other | Palindrome method 2 |
-| **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass), 4097 alternative |
+| **BEST SO FAR** | Keep a variable holding the best value seen yet, and update it when something beats it | Second-highest (single pass), 4097 alternative, 2114 |
 | **EARLY EXIT** | `break` as soon as you have the answer, so no wasted rounds | Second-highest (sorted, backwards), 1832 (`return False` at the first missing letter) |
 | **NEIGHBOUR COMPARE** | In sorted data, compare each item with the one next to it | Second-highest (my idea) |
 | **FLATTEN WITH ELIF** | Replace nested `if` inside `else` with an `elif` chain | Python If-Else |
@@ -315,6 +315,19 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟢 LeetCode 2114: Maximum Number of Words Found in Sentences
+| Version | Code idea | Notes |
+|---|---|---|
+| STEP skeleton ✅ (given by Claude, 🔁 redo solo) | `best = 0` → loop → `count = len(sentence.split())` → `if count > best: best = count` → `return best` after the loop | BEST SO FAR: the same shape as finding the biggest number, but each "number" is a word count |
+| `max()` built-in | `return max(len(s.split()) for s in sentences)` | USE A BUILT-IN: `max()` does the BEST SO FAR loop for you |
+| Count the spaces | `return max(s.count(" ") + 1 for s in sentences)` | The problem promises exactly one space between words, so words = spaces + 1. It doesn't build a list of words, so it's a little faster |
+
+```python
+# split() works on ONE string, not on a list
+"i love tea".split()        # ['i', 'love', 'tea']
+["i love", "tea"].split()   # ❌ AttributeError: 'list' object has no attribute 'split'
+```
 
 ## 🟢 LeetCode 1832: Check if the Sentence Is Pangram
 | Version | Code idea | Notes |
