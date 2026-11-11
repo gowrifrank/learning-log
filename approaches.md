@@ -316,6 +316,19 @@ return result
 
 ---
 
+## 🟢 LeetCode 1816: Truncate Sentence
+| Version | Code idea | Notes |
+|---|---|---|
+| STEP skeleton ✅ (given by Claude, 🔁 redo solo) | `words = s.split()` → `first_k = words[:k]` → `return " ".join(first_k)` | SPLIT → SLICE → JOIN: turn text into a list, cut the list, turn it back into text |
+| One-liner | `return " ".join(s.split()[:k])` | The same three steps chained, read from the inside out |
+| Count spaces | walk through `s`; count spaces; when the count reaches `k`, `return s[:i]`; after the loop, `return s` | No list at all: the k-th space is exactly where the answer ends (EARLY EXIT) |
+
+```python
+# join is split backwards: the GLUE comes first, the LIST goes inside
+"a b c".split()              # ['a', 'b', 'c']
+" ".join(['a', 'b', 'c'])    # 'a b c'
+```
+
 ## 🟢 LeetCode 2114: Maximum Number of Words Found in Sentences
 | Version | Code idea | Notes |
 |---|---|---|
