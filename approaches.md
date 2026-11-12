@@ -316,6 +316,20 @@ return result
 
 ---
 
+## 🟢 LeetCode 1365: How Many Numbers Are Smaller Than the Current Number
+| Version | Code idea | Notes |
+|---|---|---|
+| Loop in a loop ✅ (given by Claude, 🔁 redo solo) | for each `x`: `count = 0` → for each `y`: `if y < x: count += 1` → `append(count)` | Simple and clear. But it does n × n comparisons: 500 numbers = 250,000 checks |
+| Sort + `index` | `s = sorted(nums)` → `[s.index(x) for x in nums]` | In sorted order, a number's **first position** = how many numbers are smaller than it. Shorter, and fine at this size |
+| Best: counting array | count how many times each value 0–100 appears, add the counts up as you go, then read off the answer for each number | No comparisons at all. The trick works because the values are small (0–100) |
+
+```python
+# Sorted order tells you "how many are smaller"
+s = sorted([8, 1, 2, 2, 3])   # [1, 2, 2, 3, 8]
+s.index(3)                     # 3: three numbers (1, 2, 2) are smaller than 3
+s.index(2)                     # 1: index() finds the FIRST 2, so only the 1 counts
+```
+
 ## 🟢 LeetCode 1816: Truncate Sentence
 | Version | Code idea | Notes |
 |---|---|---|
