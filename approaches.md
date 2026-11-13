@@ -316,6 +316,22 @@ return result
 
 ---
 
+## 🟢 LeetCode 1528: Shuffle String
+| Version | Code idea | Notes |
+|---|---|---|
+| Pre-sized list ✅ (given by Claude, 🔁 redo solo) | `result = [""] * len(s)` → `result[indices[i]] = s[i]` → `"".join(result)` | Make empty slots first, then drop each letter straight into its slot. One pass. The same idea as the pre-sized list in 2149 |
+| Search for each slot | for each slot `j`: find which `i` has `indices[i] == j` → take `s[i]` | Works, but it searches the list once per slot (n × n) |
+| Sort the pairs | `"".join(c for _, c in sorted(zip(indices, s)))` | Pair each slot number with its letter, sort by slot number, keep the letters. Uses `zip` (coming later) |
+
+```python
+# Strings can't be changed by position, but lists can
+word = "abc"
+word[0] = "z"            # ❌ TypeError: 'str' object does not support item assignment
+letters = ["a", "b", "c"]
+letters[0] = "z"         # ✅ ['z', 'b', 'c']
+"".join(letters)         # 'zbc'
+```
+
 ## 🟢 LeetCode 1365: How Many Numbers Are Smaller Than the Current Number
 | Version | Code idea | Notes |
 |---|---|---|
