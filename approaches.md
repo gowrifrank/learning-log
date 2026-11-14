@@ -316,6 +316,22 @@ return result
 
 ---
 
+## 🟢 LeetCode 1295: Find Numbers with Even Number of Digits
+| Version | Code idea | Notes |
+|---|---|---|
+| Text length ✅ (given by Claude, 🔁 redo solo) | `if len(str(num)) % 2 == 0: count += 1` | Turn the number into text and its length is the number of digits. COUNTING + an even check with `% 2` |
+| DIGIT PEEL | `while num > 0: num //= 10; digits += 1` → check `digits % 2 == 0` | No text at all: chop off one digit at a time and count the chops (the same idea as 1281) |
+| Know the ranges | even digits = `10–99`, `1000–9999` or `100000` | Works only because the problem limits numbers to 1–100,000. Fast, but a "trick" answer |
+
+```python
+# Two ways to count digits
+len(str(7896))      # 4: as text, then its length
+n, d = 7896, 0
+while n > 0:
+    n //= 10        # 789 → 78 → 7 → 0
+    d += 1          # d ends at 4
+```
+
 ## 🟢 LeetCode 1528: Shuffle String
 | Version | Code idea | Notes |
 |---|---|---|
