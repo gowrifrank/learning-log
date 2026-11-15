@@ -316,6 +316,21 @@ return result
 
 ---
 
+## 🟢 LeetCode 2160: Minimum Sum of Four Digit Number After Splitting Digits
+| Version | Code idea | Notes |
+|---|---|---|
+| Sort + glue text ✅ (given by Claude, 🔁 redo solo) | `d = sorted(str(num))` → `int(d[0] + d[2]) + int(d[1] + d[3])` | Two 2-digit numbers always beat a 3+1 split. The tens place counts 10×, so the two **smallest** digits go there |
+| Sort + maths | `d = sorted(int(c) for c in str(num))` → `(d[0] + d[1]) * 10 + d[2] + d[3]` | The same idea written as place values: tens digits × 10, plus the ones digits |
+| Try every split | try every order of the 4 digits and every cut, keep the smallest sum | Brute force (BEST SO FAR). Fine for 4 digits, and a good way to **check** the clever answer |
+
+```python
+# Adding text glues it, adding numbers sums it
+"2" + "3"          # '23'
+int("2" + "3")     # 23
+2 + 3              # 5
+sorted("2932")     # ['2', '2', '3', '9']: sorted() on text gives a list of characters
+```
+
 ## 🟢 LeetCode 1295: Find Numbers with Even Number of Digits
 | Version | Code idea | Notes |
 |---|---|---|
