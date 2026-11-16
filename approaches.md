@@ -316,6 +316,20 @@ return result
 
 ---
 
+## 🔥 HackerRank: String Split and Join
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (16 Nov, first try) | `line = line.split(" ")` → `line = "-".join(line)` → `return line` | Right first time. Tip: call the list `words`, because after `split` it isn't a "line" any more |
+| One-liner | `return "-".join(line.split())` | The same SPLIT → JOIN chained. `split()` with no argument also copes with double spaces |
+| Best for this task: `replace` | `return line.replace(" ", "-")` | Swap every space for a hyphen directly. No list needed (USE A BUILT-IN, as in 1678) |
+
+```python
+# split + join = take apart, then glue back with NEW glue
+"a b c".split()                # ['a', 'b', 'c']
+"-".join(["a", "b", "c"])      # 'a-b-c'
+"a b c".replace(" ", "-")      # 'a-b-c' (the same result in one step)
+```
+
 ## 🟢 LeetCode 2160: Minimum Sum of Four Digit Number After Splitting Digits
 | Version | Code idea | Notes |
 |---|---|---|
