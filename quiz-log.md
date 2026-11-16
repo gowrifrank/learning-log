@@ -13,6 +13,7 @@
 | 2026-10-22 syntax check | 1/1 ✅ | `list(map(int, "5 10".split()))[1]` → `10`, a number |
 | 2026-10-19 quick check | ½ | positions loop: `range(nums)` → needs `range(len(nums))` |
 | 2026-10-18 quick checks | 3/3 ✅ | append vs index on empty list, nested pair access, `.get()` vs `[]` on a missing key |
+| 2026-11-16 warm-up (back from vacation) | 1.5/4 | `.split()` value, `break` stops the loop, positions loop (skipped), `" ".join` (skipped) |
 
 ## 🔁 To retry on Sunday
 - [ ] 2026-10-15 Q1: items vs positions with a list literal (❌ again on 10-18, retry next Sunday)
@@ -24,6 +25,9 @@
 - [ ] 2026-10-18 Q8a: what does `.split()` give? (a LIST of strings)
 - [ ] 2026-10-18 Q9: `pass` + loop variable after the loop
 - [ ] 2026-10-19 QC: write a loop over POSITIONS of a list (`range(len(x))`, not `range(x)`)
+- [ ] 2026-11-16 Q3: positions loop again (skipped): `for i in range(len(nums)): print(i)`
+- [ ] 2026-11-16 quick: `" ".join(["hi", "there"])` → `'hi there'` (skipped)
+- [x] 2026-11-16 Q2: `break` stops the whole loop → prints only 3 (✅ fixes the 10-16 ½)
 
 ---
 
@@ -197,3 +201,10 @@ for n in [1, 2, 3, 4]:
 - **#9 Blanks** `range(5, 0, -1)` ✅
 - **#10 Blanks** `sep="-"` ✅
 - **Still shaky:** slice `[5:]` vs index `[5]` · `range(a, a)` → `[]` · `int()` allows spaces · digit maths with `% 10` and `// 10`
+
+## 2026-11-16 Warm-up (back from vacation) 1.5/4
+- **Q1** `"red green blue".split()` → I said "list" → ½: the type is right ✅, but say the value too: `['red', 'green', 'blue']`, a list of 3 strings
+- **Q2** `break` inside `if` → "breaks the loop, only 3 is printed" ✅ `break` ignores the `if` and stops the nearest **loop**
+- **Q3** positions loop → skipped ❌ → `for i in range(len(nums)): print(i)` prints 0 1 2 (letters vs positions, focus area #1)
+- **Quick** `" ".join(["hi", "there"])` → skipped ❌ → `'hi there'`: the glue goes first, the list goes inside
+- **Still shaky:** positions loops (`range(len(...))`), and `join` (new from 1816)

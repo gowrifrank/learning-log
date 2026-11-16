@@ -3,7 +3,7 @@
 
 ## 🎯 Focus areas (my patterns so far)
 0. ⭐ **Navigating data: strings, `map`, dictionaries, searching, parsing and printing.** My biggest weak spot (confirmed 2026-10-23). Read [lessons/data-structures-guide.md](lessons/data-structures-guide.md) before every problem until it feels natural.
-1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **9 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929, LeetCode 1480, Piling Up `pop(value)`...)! Drill it with [lessons/add-remove-loop-book.md](lessons/add-remove-loop-book.md) §0.
+1. **Letters vs positions in loops.** I keep mixing up `for ch in word` (gives letters) and `for i in range(len(word))` (gives positions). This has happened **10 times** (palindrome, vowel counter, even filter, quiz Q1 twice, LeetCode 1929, LeetCode 1480, Piling Up `pop(value)`, 2114 redo...)! Drill it with [lessons/add-remove-loop-book.md](lessons/add-remove-loop-book.md) §0.
 2. **Off-by-one with `range`.** `range` stops **before** the stop value. Count the items for a small input before submitting.
 3. **`=` replaces, `+=` adds on.** When building a total or a string across a loop, I need `+=`.
 4. **Text vs numbers.** `input()` gives text, `int()` converts to a number, and `str()` converts back. I can't mix them with `+`.
@@ -432,3 +432,10 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `print(len(...))` ❌ LeetCode showed **null** → the function returned nothing (`None`). LeetCode reads the **return** value → `return len(...)`. (A repeat of the Day 06 return vs print trap)
 - `array.append(s.split())` ❌ → `[['Hello', 'World']]`, **one** item holding a whole list, so `len(array[-1])` counted **words** (2), not letters → `array = s.split()`
 - **Lesson:** `.append(x)` always adds **one** item, even when `x` is a list. Before using `[-1]`, ask "what am I holding?"
+
+### 2026-11-16: LeetCode 2114 redo (solo), Maximum Words in Sentences 🟡
+- `for sentence in range(len(sentences))` ❌ **AttributeError: 'int' object has no attribute 'count'** → `range(len(...))` gives **positions** (0, 1, 2), so `sentence` was a number, not text. Focus area #1 again (10th time) → `for sentence in sentences:` gives the sentences themselves
+- `sentence.count(" ")` counts **spaces**, so it's one short → words = spaces **+ 1**
+- 💡 Own idea: count the spaces + 1 instead of `len(split())` ✅ valid, because the problem promises single spaces
+- **Lesson:** read the error's type name. `'int' object has no attribute ...` = "I'm holding a number, but I thought I had text" → check what the loop gives
+

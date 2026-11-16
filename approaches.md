@@ -393,7 +393,8 @@ s.index(2)                     # 1: index() finds the FIRST 2, so only the 1 cou
 ## 🟢 LeetCode 2114: Maximum Number of Words Found in Sentences
 | Version | Code idea | Notes |
 |---|---|---|
-| STEP skeleton ✅ (given by Claude, 🔁 redo solo) | `best = 0` → loop → `count = len(sentence.split())` → `if count > best: best = count` → `return best` after the loop | BEST SO FAR: the same shape as finding the biggest number, but each "number" is a word count |
+| **Mine, solo redo ✅ (16 Nov)** | `count = sentence.count(" ")` → BEST SO FAR on the spaces → `return best + 1` | My own idea: words = spaces + 1, and the `+ 1` goes **once** at the end, because adding 1 to every count doesn't change which one is biggest. 0 ms |
+| STEP skeleton ✅ (given by Claude on 10 Nov) | `best = 0` → loop → `count = len(sentence.split())` → `if count > best: best = count` → `return best` after the loop | BEST SO FAR: the same shape as finding the biggest number, but each "number" is a word count |
 | `max()` built-in | `return max(len(s.split()) for s in sentences)` | USE A BUILT-IN: `max()` does the BEST SO FAR loop for you |
 | Count the spaces | `return max(s.count(" ") + 1 for s in sentences)` | The problem promises exactly one space between words, so words = spaces + 1. It doesn't build a list of words, so it's a little faster |
 
