@@ -444,3 +444,7 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - ✅ Chose `split()` (no argument) on purpose, so the extra spaces vanish
 - **Lesson:** to reverse, it's always `[::-1]` (two colons). With one colon, `-1` means "stop before the last item"
 
+### 2026-11-17: HackerRank Mutations 🟡 → ✅
+- `list[position] = character` ❌ `list` is Python's **built-in name** (the thing that makes lists), not my variable → `stringlist[position]`. It would crash with `TypeError: 'type' object does not support item assignment`
+- **Lesson:** never use built-in names (`list`, `str`, `dict`, `max`, `sum`, `input`) as variable names, and always use the name of **my own** variable
+

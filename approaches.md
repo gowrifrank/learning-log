@@ -316,6 +316,14 @@ return result
 
 ---
 
+## 🔥 HackerRank: Mutations
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (17 Nov): list | `list(string)` → change `[position]` → `"".join(...)` | CONVERT → CHANGE → CONVERT BACK. Strings are **immutable**, lists are **mutable**. The problem text showed this way |
+| Slices (🧠 my challenge) | (part **before** `position`) + `character` + (part **after** `position`) | One line, no list. *Fill in my own version here once I've solved it* |
+
+**Words:** **iterable** = anything a `for` loop can walk through (str, list, tuple, set, dict, range). **Immutable** = can't be changed after it's made (str, tuple, int). **Mutable** = can be changed in place (list, dict, set).
+
 ## 🟠 LeetCode 151: Reverse Words in a String (Medium)
 | Version | Code idea | Notes |
 |---|---|---|
