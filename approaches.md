@@ -316,6 +316,21 @@ return result
 
 ---
 
+## 🟠 LeetCode 151: Reverse Words in a String (Medium)
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (17 Nov) | `words = s.split()` → `words[::-1]` → `" ".join(...)` | `split()` with **no argument** throws away every extra space, so the hard part of this Medium disappears. 0 ms |
+| One-liner | `return " ".join(s.split()[::-1])` | The same three steps chained, read from the inside out |
+| `reversed()` | `return " ".join(reversed(s.split()))` | `reversed()` walks the list backwards without making a reversed copy first |
+| By hand (interview version) | WALK FROM THE END: skip spaces, find where each word starts, cut it out with a slice, collect the words | What an interviewer asks for when they say "no `split`". The same idea as 58 Length of Last Word, repeated for every word |
+
+```python
+# A slice has 3 slots: [start : stop : step]
+w = ['a', 'b', 'c', 'd']
+w[4:-1]     # []: start 4, stop 3, but the step is +1 (forward), so it can never get there
+w[::-1]     # ['d', 'c', 'b', 'a']: step -1 = walk backwards over everything
+```
+
 ## 🔥 HackerRank: String Split and Join
 | Version | Code idea | Notes |
 |---|---|---|

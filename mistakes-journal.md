@@ -439,3 +439,8 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - 💡 Own idea: count the spaces + 1 instead of `len(split())` ✅ valid, because the problem promises single spaces
 - **Lesson:** read the error's type name. `'int' object has no attribute ...` = "I'm holding a number, but I thought I had text" → check what the loop gives
 
+### 2026-11-17: LeetCode 151, Reverse Words in a String (Medium) 🟡 → ✅
+- `newstr[len(newstr):-1]` ❌ gave `[]`, so the answer was `""` → a slice is `[start : stop : step]`. My `-1` landed in the **stop** slot, and the step stayed `+1` (forward): "start at 4 and walk forward to 3" is impossible → empty. The direction goes in the **third** slot → `newstr[::-1]`
+- ✅ Chose `split()` (no argument) on purpose, so the extra spaces vanish
+- **Lesson:** to reverse, it's always `[::-1]` (two colons). With one colon, `-1` means "stop before the last item"
+
