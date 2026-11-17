@@ -102,7 +102,7 @@ print(sum(marks["Gowri"]) / len(marks["Gowri"])) # average of Gowri's marks
 
 ## ✍️ Exercise: `day07.py`
 1. **Robot profile:** make a dictionary for your favourite robot (name, maker, year, height). Print each pair with `.items()`, add a `"price"`, change the `year`, and delete one key.
-2. **Phone book:** a dictionary of 3 names → numbers. Ask the user for a name and print the number, or `"Not found"` if it's missing (use `.get()` or `in`, with **no crash**).
+2. **Phone book:** a dictionary of 3 names → numbers (**made-up** names and numbers only: this repo is public). Ask the user for a name and print the number, or `"Not found"` if it's missing (use `.get()` or `in`, with **no crash**).
 3. **Letter counter:** ask for a word and count each letter with the COUNTING pattern. Then print the **most common letter**. *(Hint: loop over `.items()` and keep the BEST SO FAR, like second-highest!)*
 4. **Grade book:** `scores = {"Gowri": 92, "Atlas": 74, "ASIMO": 58, "Spot": 81}`. **Reuse your Day 06 `grade()` function** to print each name with their grade: `Gowri: A`.
 
