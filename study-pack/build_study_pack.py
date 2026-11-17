@@ -38,6 +38,7 @@ DOCS = [
     ("lessons/review-weekend-1.md", "lime", "Predict-the-output drills: strings, map, dicts"),
     ("lessons/day06-functions.md", "amber", "Day 06 lesson: functions"),
     ("lessons/day07-dictionaries.md", "orange", "Day 07 lesson: dictionaries"),
+    ("lessons/day08-sets-tuples.md", "cyan", "Day 08 lesson: tuples & sets"),
 ]
 
 CSS_EXTRA = """<style>
