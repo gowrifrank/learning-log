@@ -18,6 +18,7 @@
 | Grow a list | 🟢 quick check ✅ 10-18 | `x = []` then `x.append(item)`, never `x[0] = item` on an empty list |
 | Items vs positions | 🔴 9 slips | `for item in x:` → use `item`. `for i in range(len(x)):` → use `x[i]` |
 | Function vs method | 🟡 | `sorted(x)`, `len(x)`, `max(x)` (around) · `x.sort()`, `x.append()` (after the dot) |
+| Gives back vs changes itself | 🔴 new 11-18 (1561: `sorted(piles)` thrown away) | `x = sorted(x)` (gives back, catch it!) · `x.sort()` (changes x, returns `None`, so never `x = x.sort()`) |
 | `=` vs `==` | 🟡 | `=` stores, `==` compares |
 | `return` vs `print` | 🟡 slipped again 11-02 (LeetCode 58 → null) | `return` only inside `def`. HackerRank main code → `print` |
 | Nested data `[name, score]` | 🟢 got it 10-18 (Nested Lists + quick check ✅) | `pair[0]` = name, `pair[1]` = score |
@@ -447,4 +448,10 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 ### 2026-11-17: HackerRank Mutations 🟡 → ✅
 - `list[position] = character` ❌ `list` is Python's **built-in name** (the thing that makes lists), not my variable → `stringlist[position]`. It would crash with `TypeError: 'type' object does not support item assignment`
 - **Lesson:** never use built-in names (`list`, `str`, `dict`, `max`, `sum`, `input`) as variable names, and always use the name of **my own** variable
+
+### 2026-11-18: LeetCode 1561, Maximum Number of Coins (Medium) 🟡 → ✅
+- `sorted(piles)` on its own line ❌ did nothing: `sorted()` **returns a new list**, and I didn't catch it, so `piles` stayed unsorted (Case 1 and Case 3 wrong) → `piles.sort()` (changes the list itself) or `piles = sorted(piles)`
+- `indicator += 1` ❌ took positions 3, 4, 5 → 4 + 5 + 6 = 15, expected 18 → `+= 2` skips Alice's pile each round
+- ❓ Misread the rules: thought Alice just takes 9, 8, 7 and I get what's left. But **I** choose each group of 3, and "**maximum**" means find the *best* grouping → greedy
+- **Lesson:** gives back vs changes itself: `sorted(x)`, `x.upper()`, `x.replace()` **give back** (catch with `=`); `x.sort()`, `x.append()` **change x** (and return `None`). Debug tip: `print(x)` right after the line to see if it really changed
 

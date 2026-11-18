@@ -22,6 +22,8 @@
 | **DIGIT PEEL** | `n % 10` = the last digit, `n // 10` = drop it; repeat `while n > 0` | 1281 |
 | **WALK FROM THE END** | Start at `len(s) - 1` and move left with `i -= 1`; stop as soon as you have the answer | 58 (best version) |
 | **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1), 1470 |
+| **GREEDY** | At every step, make the choice that's best right now (often after sorting) | 1561 (give Bob the smallest, take the pile just below Alice's), 1689 |
+| **SORT FIRST** | Sorting puts the small and big items in known places, so the pattern becomes positions | 1561, 2160 |
 
 ## ⚖️ How to judge an approach
 1. **Correct?** Does it handle the tricky inputs (duplicates, uppercase, empty, the smallest and largest values)?
@@ -315,6 +317,23 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟠 LeetCode 1561: Maximum Number of Coins You Can Get (Medium)
+| Version | Code idea | Notes |
+|---|---|---|
+| Mine ✅ (18 Nov) | `piles.sort()` → start at position `n = len // 3` → `while` n rounds: add `piles[indicator]`, `indicator += 2` | Own code after finding the pattern on paper. 74 ms. Walks **up** (4 → 6 → 8); the story goes down (8 → 6 → 4), but it's the same piles |
+| `for` + `range` with a step | `for i in range(n, len(piles), 2): total += piles[i]` | Same jumps, but `range` does the counting for me, so there's no `count` or `rangef` |
+| Slice one-liner | `piles.sort()` then `return sum(piles[len(piles)//3::2])` | `[start::2]` = from position n to the end, every 2nd item. USE A BUILT-IN: `sum()` |
+| From the top (the story's order) | sort, then take `piles[-2]`, `piles[-4]`, ... n times | Same answer. It follows the game literally: Alice takes the top and I take the one below it |
+
+**Insight (GREEDY):** *I* make the groups of 3, so I can't just let Alice take 9, 8, 7 (that gives me 6 + 5 + 4 = 15, legal but not the max). Bob always takes the smallest pile in a group, so give him the n smallest. Alice always takes the biggest, so I can never have the 9, but I can make sure my pile is the **8** right below it. Doing the best thing at every step is called a **greedy** strategy. The word "**maximum**" in the question is the clue that there are many legal answers and I need the best one.
+
+```python
+nums = [3, 1, 2]
+sorted(nums)        # returns a NEW sorted list... thrown away, nums is still [3, 1, 2]
+nums = sorted(nums) # ✅ catch the result
+nums.sort()         # ✅ or sort the list itself (in place, returns None)
+```
 
 ## 🔥 HackerRank: Mutations
 | Version | Code idea | Notes |
