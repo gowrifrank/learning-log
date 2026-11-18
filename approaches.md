@@ -23,6 +23,7 @@
 | **WALK FROM THE END** | Start at `len(s) - 1` and move left with `i -= 1`; stop as soon as you have the answer | 58 (best version) |
 | **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1), 1470 |
 | **GREEDY** | At every step, make the choice that's best right now (often after sorting) | 1561 (give Bob the smallest, take the pile just below Alice's), 1689 |
+| **COUNT EACH SPOT'S SHARE** | Instead of listing every piece, work out how much each position adds and sum those | The Minion Game (pieces from position i = `len - i`) |
 | **SORT FIRST** | Sorting puts the small and big items in known places, so the pattern becomes positions | 1561, 2160 |
 
 ## ⚖️ How to judge an approach
@@ -317,6 +318,23 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🔥 HackerRank: The Minion Game (Medium)
+| Version | Code idea | Notes |
+|---|---|---|
+| Build every piece (brute force) ❌ | two loops make every substring, then count how often each appears | Matches HackerRank's picture, but far too slow for 1,000,000 letters (millions of millions of pieces) |
+| Mine ✅ (18 Nov) | `multiplier = len(string)`, loop the positions, add `multiplier` to Kevin (vowel) or Stuart, then `multiplier -= 1` | My own countdown: the multiplier **is** "letters left". About 0.1 s for 1,000,000 letters |
+| `len - i` | `points = len(string) - i` inside `for i in range(len(string))` | Same thing without the extra variable |
+| `enumerate` | `for i, ch in enumerate(string):` gives the position **and** the letter together | Removes the `string[i]` look-up. New tool, coming soon |
+
+**Insight (COUNT EACH SPOT'S SHARE):** HackerRank counts **by piece** ("`ANA` appears twice"). I count **by starting spot** ("3 pieces start at this A"). It's the same ticks, read in the other direction, and each spot's share is just "letters from here to the end". When counting things one by one is too slow, ask "**how much does each position add?**"
+
+```python
+# The `or` trap
+ch = "B"
+ch != 'a' or 'e'        # Python reads (ch != 'a') or ('e') → 'e' counts as True → ALWAYS True
+ch not in "AEIOU"       # ✅ "is not a vowel"
+```
 
 ## 🟠 LeetCode 1561: Maximum Number of Coins You Can Get (Medium)
 | Version | Code idea | Notes |

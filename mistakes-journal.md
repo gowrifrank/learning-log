@@ -18,6 +18,7 @@
 | Grow a list | 🟢 quick check ✅ 10-18 | `x = []` then `x.append(item)`, never `x[0] = item` on an empty list |
 | Items vs positions | 🔴 9 slips | `for item in x:` → use `item`. `for i in range(len(x)):` → use `x[i]` |
 | Function vs method | 🟡 | `sorted(x)`, `len(x)`, `max(x)` (around) · `x.sort()`, `x.append()` (after the dot) |
+| The `or` trap | 🔴 new 11-18 (Minion Game) | `x == 'a' or x == 'e'` (full question on each side) · better: `x in "aeiou"` · never `x != 'a' or 'e'` (always True) |
 | Gives back vs changes itself | 🔴 new 11-18 (1561: `sorted(piles)` thrown away) | `x = sorted(x)` (gives back, catch it!) · `x.sort()` (changes x, returns `None`, so never `x = x.sort()`) |
 | `=` vs `==` | 🟡 | `=` stores, `==` compares |
 | `return` vs `print` | 🟡 slipped again 11-02 (LeetCode 58 → null) | `return` only inside `def`. HackerRank main code → `print` |
@@ -454,4 +455,12 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - `indicator += 1` ❌ took positions 3, 4, 5 → 4 + 5 + 6 = 15, expected 18 → `+= 2` skips Alice's pile each round
 - ❓ Misread the rules: thought Alice just takes 9, 8, 7 and I get what's left. But **I** choose each group of 3, and "**maximum**" means find the *best* grouping → greedy
 - **Lesson:** gives back vs changes itself: `sorted(x)`, `x.upper()`, `x.replace()` **give back** (catch with `=`); `x.sort()`, `x.append()` **change x** (and return `None`). Debug tip: `print(x)` right after the line to see if it really changed
+
+### 2026-11-18: HackerRank The Minion Game (Medium) 😵 → paper → ✅
+- 😵 Paper step: "pieces starting at position i" didn't click; HackerRank's picture (grouped by piece) looked like permutations → a 3-letter word (`CAT`) + a tick table showed both ways count the same pieces. **Who** scores = the first letter, **how much** = letters left
+- `array.append(string)` ❌ put the whole word in as **one** item (`['BANANA']`), so `array[1]` → IndexError → a string already works by position: `string[i]`
+- `array.lower()` ❌ AttributeError: `.lower()` is a string tool, not a list tool (and not needed: the input is uppercase)
+- `if x != 'a' or 'e' or 'i' ...` ❌ always True: Python reads `(x != 'a') or 'e'`, and `'e'` on its own counts as True → `x not in "AEIOU"`
+- 💡 Own idea: `multiplier` counting down from `len(string)` = letters left
+- **Lesson:** each side of `or` must be a **full** question. For "one of these?", use `in`
 
