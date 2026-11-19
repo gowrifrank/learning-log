@@ -104,6 +104,8 @@ def render(path: str, in_pack: set | None = None) -> str:
     text = re.sub(r"^(\s*)- \[ \] ", r"\1- ☐ ", text, flags=re.M)
     text = re.sub(r"^(\s*)- \[x\] ", r"\1- ☑ ", text, flags=re.M | re.I)
     body = markdown.markdown(text, extensions=["tables", "fenced_code", "toc", "sane_lists", "md_in_html"])
+    # A "|" inside a table cell must be written "\|" in markdown; drop the backslash so the PDF shows `a | b`
+    body = re.sub(r"<t([dh])([^>]*)>(.*?)</t\1>", lambda m: f"<t{m.group(1)}{m.group(2)}>{m.group(3).replace(chr(92) + '|', '|')}</t{m.group(1)}>", body, flags=re.S)
 
     me = slug(path)
     body = re.sub(r'id="([^"]+)"', rf'id="{me}-\1"', body)
