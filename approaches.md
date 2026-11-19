@@ -24,6 +24,8 @@
 | **PAIRS** | `range(0, len(nums), 2)` visits every 2nd position; use `nums[i]` and `nums[i + 1]` together | 4097 (Weekly 526 Q1), 1470 |
 | **GREEDY** | At every step, make the choice that's best right now (often after sorting) | 1561 (give Bob the smallest, take the pile just below Alice's), 1689 |
 | **COUNT EACH SPOT'S SHARE** | Instead of listing every piece, work out how much each position adds and sum those | The Minion Game (pieces from position i = `len - i`) |
+| **FIND THE START** | Only begin work where something starts (e.g. `num - 1` missing), so nothing is counted twice | 128 |
+| **SET FOR FAST `in`** | Turn the list into a set when you'll ask "is x there?" many times | 128, 1832 |
 | **SORT FIRST** | Sorting puts the small and big items in known places, so the pattern becomes positions | 1561, 2160 |
 
 ## ⚖️ How to judge an approach
@@ -318,6 +320,16 @@ return result
 - A **write pointer** is a position that jumps forward by its own rule (`+= 2`), separate from the loop. It's like TWO POINTERS from LeetCode 344, but used for *writing* instead of *swapping*.
 
 ---
+
+## 🟠 LeetCode 128: Longest Consecutive Sequence (Medium)
+| Version | Code idea | Notes |
+|---|---|---|
+| My first try ❌ | `set(nums)`, start at `min(nums)`, count up while the next number is in the set | Right counting idea, wrong start: only the run from the smallest number is checked. `[1, 2, 10, 11, 12]` → 2 (answer 3). `min([])` crashes |
+| Given ✅ (19 Nov, off day) | loop the **set**; only if `num - 1 not in newset` (a start), walk up with `while`; BEST SO FAR | Each run is walked once, from its start → O(n). 🔁 Redo solo |
+| Sort first | `sorted(set(nums))`, then NEIGHBOUR COMPARE: if `x == previous + 1` grow the run, else restart at 1 | Easier to picture, but sorting breaks the "O(n)" rule (it's O(n log n)). Still accepted in practice |
+| Check every number as a start ❌ | walk up from **every** number, no start rule | Right answer, but runs get counted again and again → too slow for 100,000 numbers |
+
+**Insight (FIND THE START):** a number starts a run when **the number before it is missing**, like being first in a queue when nobody stands in front of you. Checking that first means each run is counted once. A set makes the "is it there?" check instant. **A set has no order**, and small numbers only look sorted by luck (`{1, 2, 3, 100, 4, 200}`).
 
 ## 🔥 HackerRank: The Minion Game (Medium)
 | Version | Code idea | Notes |

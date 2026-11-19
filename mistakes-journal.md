@@ -464,3 +464,11 @@ for l in range(len(nums)):          # l = 0..5 (big list)
 - 💡 Own idea: `multiplier` counting down from `len(string)` = letters left
 - **Lesson:** each side of `or` must be a **full** question. For "one of these?", use `in`
 
+### 2026-11-19: LeetCode 128, Longest Consecutive Sequence (Medium) 🟡 → code given (off day)
+- `min.nums` ❌ AttributeError: 'builtin_function_or_method' object has no attribute 'nums' → `min(nums)`: functions go **around**, a dot means "a tool of this thing"
+- Started only at `min(nums)` ❌ passes the 3 examples by luck, but `[1, 2, 10, 11, 12]` → 2 (answer 3) → any number can start a run: **start rule** `num - 1 not in newset`
+- `for item in nums:` used only to repeat (`item` unused) → "keep going while ..." is a `while`
+- `print(count)` ❌ → `return` (focus area #7 again)
+- ❓ Asked: does `set()` sort? **No.** Small numbers only look sorted; `sorted(set(x))` if order is needed
+- **Lesson:** passing the examples isn't proof. Invent a case where the answer is somewhere else (here, a longer run that doesn't start at the smallest number)
+
